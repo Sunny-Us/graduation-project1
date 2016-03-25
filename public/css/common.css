@@ -1,0 +1,82 @@
+body {
+  margin:0;
+  padding:0;
+  background:#EDEFED;
+  font: 14px "微软雅黑", Helvetica, Arial, sans-serif;
+}
+nav.navbar{
+	z-index:99;
+}
+.navbar-right li{
+	padding:0 15px;
+	line-height: 60px;
+	font-size: 14px;
+	background-color:rgba(0,0,0,0);
+	cursor: pointer;
+}
+.input-group{
+	padding-bottom: 30px;
+	width:100%;
+}
+.input-group .correct{
+	color:#6AC62E;
+}
+.input-group .correct{
+	color:#FFA500;
+}
+.input-group-addon{
+	width:80px;
+}
+#login .btn,#sigin .btn{
+	width: 100%;
+	text-align: center;
+}
+footer.footer{
+	padding: 50px 0;
+	height:300px;
+	background-image: url('../images/footer.png');
+	background-color:#2b2d2e;
+	color:#fff;
+}
+.contact{
+	margin-top:10px;
+}
+.contact p{
+	margin:0;
+}
+.footer-container{
+	margin: 0 auto;
+}
+.info h3,.find h3{
+	font-size: 18px;
+}
+.info ul,.find ul{
+	list-style: none;
+	padding-left: 0;
+}
+@media(min-width:1100px){
+	.footer-container{
+		width:1045px;
+	}
+	.main-container{
+		width:1045px;
+	}
+}
+@media(min-width:768px)and (max-width:1099px){
+	.footer-container{
+		width:745px;
+	}
+	.main-container{
+		width:745px;
+	}
+}
+#content{
+	margin:25px 0;
+}
+.main-container{
+	box-sizing: border-box;
+	padding:0 25px;
+	box-shadow: 2px 2px 2px #DDD;
+	height:200px;
+	background: #fff;
+}

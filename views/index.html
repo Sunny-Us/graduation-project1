@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block title %}ziroom{% endblock %}
+{% block link %}
+  {% parent %}
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+{% endblock %}
+{% block header %}
+  <div class="mycarousel">
+    {% parent %}
+    {% block carousel %}
+      <div id="carousel-example-generic" class="carousel slide" datd-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img src="images/big-pic.jpg" alt="first">
+          </div>
+          <div class="item">
+            <img src="images/big-pic.jpg" alt="second">
+          </div>
+          <div class="item">
+            <img src="images/big-pic.jpg" alt="thrid">
+          </div>
+        </div>
+        <div class="headlines">
+          <h2>欢迎使用</h2>
+          <p>ziroom会给您提供独一无二的家政服务</p>
+        </div>
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+      </div>
+    {% endblock %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div id="content clearfix">
+    <div class="main-container container-fluid">
+      <div class="col-md-3 col-sm-6 server clear-server">
+        <img src="../images/image.jpg" />
+        <div class="caption">保洁预约</div>
+        <p>保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约</p>
+      </div>
+      <div class="col-md-3 col-sm-6 server maintain-server">
+        <img src="../images/image.jpg" />
+        <div class="caption">日常维修</div>
+        <p>保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约</p>
+      </div>
+      <div class="col-md-3 col-sm-6 server recyc-server">
+        <img src="../images/image.jpg" />
+        <div class="caption">废物回收</div>
+        <p>保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约</p>
+      </div>
+      <div class="col-md-3 col-sm-6 server pay-server">
+        <img src="../images/image.jpg" />
+        <div class="caption">缴费</div>
+        <p>保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
