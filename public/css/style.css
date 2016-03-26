@@ -72,6 +72,19 @@ a {
 .headlines p{
 	font-size: 20px;
 }
+.server img{
+	width:100%;
+}
+
+.main-title .main-tit{
+	text-align: center;
+	font-weight: 600;
+}
+.main-title .mian-describe{
+	text-align: center;
+	margin-bottom: 40px;
+	font-size: 16px;
+}
 
 
 
