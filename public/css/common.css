@@ -75,7 +75,5 @@ footer.footer{
 }
 .main-container{
 	box-sizing: border-box;
-	padding:0 25px;
-	box-shadow: 2px 2px 2px #DDD;
-	background: #fff;
+	color:#565A5C;
 }
