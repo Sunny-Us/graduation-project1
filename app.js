@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var test = require('./routes/test');
 var users = require('./routes/users');
 var zone = require('./routes/personal_zone');
+var zone = require('./routes/server_detail');
 
 var app = express();
 

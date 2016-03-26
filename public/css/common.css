@@ -88,7 +88,6 @@ footer.footer{
 .main-container{
 	min-height:500px;
 	box-sizing: border-box;
-<<<<<<< HEAD
 	padding:25px;
 	box-shadow: 2px 2px 2px #DDD;
 	background: #fff;
@@ -145,7 +144,4 @@ footer.footer{
 
 /*右侧导航栏end*/
 /*reset bootstrap end*/
-=======
-	color:#565A5C;
-}
->>>>>>> 1528f659913fa58db6b2966d57fc0c21bb654f5a
+
