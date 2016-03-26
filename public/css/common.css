@@ -1,6 +1,7 @@
 *{
 	margin:0;
 	padding: 0;
+	box-sizing:border-box;
 }
 .clearfix {
   *zoom: 1;
@@ -83,7 +84,7 @@ footer.footer{
 	}
 }
 .content{
-	margin:25px 0;
+	width:100%;
 	position: relative;
 }
 .main-container{
@@ -91,7 +92,7 @@ footer.footer{
 	box-sizing: border-box;
 	padding:25px;
 	box-shadow: 2px 2px 2px #DDD;
-	background: #fff;
+	background: transparent;
 	margin-bottom:20px;
 }
 
@@ -111,7 +112,7 @@ footer.footer{
 	margin-right: 0;
 }
 .right-tab-content{
-	border:1px solid #dddddd;
+	border-left:2px solid #dddddd;
 }
 .nav-tabs > li.left-nav-active > a.link, 
 .nav-tabs > li.left-nav-active > a:hover,
@@ -119,14 +120,14 @@ footer.footer{
 .nav-tabs > li.left-nav-active > a:active,
 .nav-tabs > li.left-nav-active > a {
     color:#FFA000;
-    border: 1px solid #dddddd;
-    border-right-color: #ffffff;
+    /*border: 1px solid #dddddd;*/
+    /*border-right-color: #ffffff;*/
     cursor: default;
 }
 .nav-tabs > li.left-nav > a {
     margin-right: 2px;
     line-height: 1.42857143;
-    border: 1px solid transparent;
+    /*border: 1px solid transparent;*/
 }
 .nav > li.left-nav > a {
     position: relative;
@@ -142,6 +143,7 @@ footer.footer{
 /*左侧导航栏 end*/
 /*右侧导航栏 start*/
 .right-tab-content{
+	background: #ffffff;
 	height:500px;
 	border-radius:0 4px 4px 4px;
 }
@@ -151,8 +153,17 @@ footer.footer{
 
 /*右侧导航栏end*/
 /*reset bootstrap end*/
-/*=======
-	color:#565A5C;
+
+/*底部向日葵 start*/
+.bottom-flower{
+	position: absolute;
+	bottom:0;
+	background-color: #EDEFED;
+	background: url('../images/sunflower1.png')
 }
->>>>>>> 1528f659913fa58db6b2966d57fc0c21bb654f5a
-*/
+
+/*底部向日葵 end*/
+
+/*上部白云 start*/
+
+/*上部白云 end*/
