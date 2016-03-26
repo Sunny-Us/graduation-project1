@@ -82,8 +82,9 @@ footer.footer{
 		width:745px;
 	}
 }
-#content{
-	margin:25px 0;
+.content{
+	width:100%;
+	position: relative;
 }
 .main-container{
 	min-height:500px;
@@ -145,3 +146,10 @@ footer.footer{
 /*右侧导航栏end*/
 /*reset bootstrap end*/
 
+/*底部向日葵 start*/
+.bottom-flower{
+	position: absolute;
+	bottom:0;
+	background-color: #EDEFED;
+	background: url('../images/sunflower1.png')
+}
