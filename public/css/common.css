@@ -2,6 +2,14 @@
 	margin:0;
 	padding: 0;
 }
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:after {
+  display: table;
+  clear: both;
+  content: " ";
+}
 body {
   margin:0;
   padding:0;
@@ -78,9 +86,61 @@ footer.footer{
 	margin:25px 0;
 }
 .main-container{
+	min-height:500px;
 	box-sizing: border-box;
-	padding:0 25px;
+	padding:25px;
 	box-shadow: 2px 2px 2px #DDD;
-	height:200px;
 	background: #fff;
+	margin-bottom:20px;
 }
+
+
+
+/*reset bootstrap  start*/
+
+/*左侧导航栏 start*/
+.left-nav-tabs{
+	border-bottom: transparent;
+	position: relative;
+	right: -18px;
+	z-index: 22;
+	margin-right: 0;
+}
+.right-tab-content{
+	border:1px solid #dddddd;
+}
+.nav-tabs > li.left-nav-active > a.link, 
+.nav-tabs > li.left-nav-active > a:hover,
+.nav-tabs > li.left-nav-active > a:focus,
+.nav-tabs > li.left-nav-active > a:active,
+.nav-tabs > li.left-nav-active > a {
+    color: #ffffff;
+    background-color: #FFA000;
+    border: 1px solid #dddddd;
+    border-right-color: #ffffff;
+    cursor: default;
+}
+.nav-tabs > li.left-nav > a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+.nav > li.left-nav > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    color:#FFA000;
+    width: 100%;
+}
+/*左侧导航栏 end*/
+/*右侧导航栏 start*/
+.right-tab-content{
+	height:500px;
+}
+
+
+
+
+/*右侧导航栏end*/
+/*reset bootstrap end*/
