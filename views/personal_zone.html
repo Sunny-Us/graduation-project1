@@ -36,24 +36,26 @@
 
 
 {% block content %}
- 
-<div class="main-container container-fluid">
-  <div class="row-fulid">
-    <div class="col-lg-2">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
-          <li role="presentation" class="left-nav-active active"><a href="#personal_info" aria-controls="personal_info" role="tab" data-toggle="tab">个人信息</a></li>
-          <li role="presentation" class="left-nav"><a href="#orders" aria-controls="messages" role="tab" data-toggle="tab">我的订单</a></li>
-          <li role="presentation" class="left-nav"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">账户余额</a></li>
-        </ul>
+ <div class="content">
+   <div class="main-container container-fluid">
+    <div class="row">
+      <div class="col-lg-2 left-nav-wrapper">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
+            <li role="presentation" class="left-nav-active active"><a href="#personal_info" aria-controls="personal_info" role="tab" data-toggle="tab">个人信息</a></li>
+            <li role="presentation" class="left-nav"><a href="#orders" aria-controls="messages" role="tab" data-toggle="tab">我的订单</a></li>
+            <li role="presentation" class="left-nav"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">账户余额</a></li>
+          </ul>
+      </div>  
+      <div class="col-lg-10 right-tab-content">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="personal_info">1111</div>
+            <div role="tabpanel" class="tab-pane" id="orders">222</div>
+            <div role="tabpanel" class="tab-pane" id="account">333</div>
+          </div>
+      </div>
     </div>  
-    <div class="col-lg-10 right-tab-content">
-      <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active" id="personal_info">1111</div>
-          <div role="tabpanel" class="tab-pane" id="orders">222</div>
-          <div role="tabpanel" class="tab-pane" id="account">333</div>
-        </div>
-    </div>
-  </div>  
-</div>
+  </div>
+ </div>
+
 {% endblock %}
