@@ -1,59 +1,63 @@
 {% extends 'layout.html' %}
 
-{% block title %}ziroom | 个人空间{% endblock %}
+{% block title %}ziroom | 服务详情{% endblock %}
 {% block link %}
-  {% parent %}
-  <link rel="stylesheet" type="text/css" href="css/pages.css">
+{% parent %}
+<link rel="stylesheet" type="text/css" href="css/style.css">
 {% endblock %}
 {% block header %}
-  <div class="default-nav">
-    {% block navbar %}
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-default">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-            <a href="#" class="navbar-brand">
-              <img src="images/logo-orange.png" alt="ziroom">
-            </a>
-          </div>
-        <div class="collapse navbar-collapse" id="navbar-default">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="signin" data-toggle="modal" data-target="#sigin">注册</li>
-            <li class="login" data-toggle="modal" data-target="#login">登录</li>
-          </ul>
-        </div>
+<div class="default-nav">
+  {% block navbar %}
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-default">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="#" class="navbar-brand">
+          <img src="images/logo-orange.png" alt="ziroom">
+        </a>
       </div>
-    </nav>
-    {% endblock %}
-  </div>
+      <div class="collapse navbar-collapse" id="navbar-default">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="signin" data-toggle="modal" data-target="#sigin">注册</li>
+          <li class="login" data-toggle="modal" data-target="#login">登录</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% endblock %}
+</div>
 {% endblock %}
 
 
 
 {% block content %}
- 
-<div class="main-container container-fluid">
-  <div class="row-fulid">
-    <div class="col-lg-2">
+<div class="content clearfix">
+  <div class="main-container container-fluid">
+    <div class="row-fulid">
+      <div class="col-lg-2">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
-          <li role="presentation" class="left-nav-active active"><a href="#personal_info" aria-controls="personal_info" role="tab" data-toggle="tab">个人信息</a></li>
-          <li role="presentation" class="left-nav"><a href="#orders" aria-controls="messages" role="tab" data-toggle="tab">我的订单</a></li>
+          <li role="presentation" class="left-nav-active active"><a href="#personal_info" aria-controls="personal_info" role="tab" data-toggle="tab">保洁预约</a></li>
+          <li role="presentation" class="left-nav"><a href="#orders" aria-controls="messages" role="tab" data-toggle="tab"></a></li>
           <li role="presentation" class="left-nav"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">账户余额</a></li>
         </ul>
-    </div>  
-    <div class="col-lg-10 right-tab-content">
-      <div class="tab-content">
+      </div>  
+      <div class="col-lg-10 right-tab-content">
+        <div class="tab-content">
           <div role="tabpanel" class="tab-pane fade in active" id="personal_info">1111</div>
           <div role="tabpanel" class="tab-pane" id="orders">222</div>
           <div role="tabpanel" class="tab-pane" id="account">333</div>
         </div>
-    </div>
-  </div>  
+      </div>
+    </div>  
+  </div>
+  <div class="bottom-flower">
+
+  </div>
 </div>
 {% endblock %}
