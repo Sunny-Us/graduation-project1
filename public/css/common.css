@@ -153,7 +153,7 @@ footer.footer{
 /*右侧导航栏 start*/
 .right-tab-content{
 	background: #ffffff;
-	height:500px;
+	min-height:500px;
 	border-radius:0 4px 4px 4px;
 }
 
