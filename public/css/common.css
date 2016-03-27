@@ -94,6 +94,7 @@ footer.footer{
 	box-shadow: 2px 2px 2px #DDD;
 	margin-bottom:20px;
 	background: #fff;
+	padding-bottom: 150px;
 }
 .main-container-index{
 	background: #EDEFED;
@@ -157,16 +158,13 @@ footer.footer{
 	border-radius:0 4px 4px 4px;
 }
 
-
-
-
 /*右侧导航栏end*/
 /*reset bootstrap end*/
 
 /*底部向日葵 start*/
 .bottom-flower{
 	width:100%;
-	height:200px;
+	height:160px;
 	position: absolute;
 	bottom:0;
 	background-color: #EDEFED;

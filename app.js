@@ -9,7 +9,7 @@ var routes = require('./routes/index');
 var test = require('./routes/test');
 var users = require('./routes/users');
 var zone = require('./routes/personal_zone');
-var serverDetail = require('./routes/server_detail');
+var serviceDetail = require('./routes/service_detail');
 
 var app = express();
 
@@ -35,7 +35,7 @@ app.use('/', routes);
 app.use('/test', test);
 app.use('/users', users);
 app.use('/zone',zone);
-app.use('/serverDetail',serverDetail);
+app.use('/serviceDetail',serviceDetail);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
