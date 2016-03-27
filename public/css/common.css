@@ -94,6 +94,7 @@ footer.footer{
 	box-shadow: 2px 2px 2px #DDD;
 	margin-bottom:20px;
 	background: #fff;
+	padding-bottom: 150px;
 }
 .main-container-index{
 	background: #EDEFED;
@@ -153,12 +154,9 @@ footer.footer{
 /*右侧导航栏 start*/
 .right-tab-content{
 	background: #ffffff;
-	height:500px;
+	min-height:500px;
 	border-radius:0 4px 4px 4px;
 }
-
-
-
 
 /*右侧导航栏end*/
 /*reset bootstrap end*/
@@ -166,7 +164,7 @@ footer.footer{
 /*底部向日葵 start*/
 .bottom-flower{
 	width:100%;
-	height:200px;
+	height:160px;
 	position: absolute;
 	bottom:0;
 	background-color: #EDEFED;

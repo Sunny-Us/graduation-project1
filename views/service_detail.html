@@ -1,0 +1,152 @@
+{% extends 'layout.html' %}
+
+{% block title %}ziroom | 服务详情{% endblock %}
+{% block link %}
+  {% parent %}
+<link rel="stylesheet" type="text/css" href="css/style.css">
+{% endblock %}
+{% block header %}
+<div class="default-nav">
+  {% block navbar %}
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-default">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="#" class="navbar-brand">
+          <img src="images/logo-orange.png" alt="ziroom">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-default">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="signin" data-toggle="modal" data-target="#sigin">注册</li>
+          <li class="login" data-toggle="modal" data-target="#login">登录</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% endblock %}
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="content clearfix">
+  <div class="cloud">
+    <img src="images/cloud1.png" class="cloud1">
+    <img src="images/cloud2.png" class="cloud2">
+    <img src="images/cloud3.png" class="cloud3">
+  </div>
+  <div class="main-container container-fluid">
+    <div class="row-fulid clearfix">
+      <div class="col-lg-2">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
+          <li role="presentation" class="left-nav-active active"><a href="#personal_info" aria-controls="personal_info" role="tab" data-toggle="tab">保洁预约</a></li>
+          <li role="presentation" class="left-nav"><a href="#orders" aria-controls="messages" role="tab" data-toggle="tab">日常维修</a></li>
+          <li role="presentation" class="left-nav"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">废物回收</a></li>
+          <li role="presentation" class="left-nav"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">缴费</a></li>
+        </ul>
+      </div>  
+      <div class="col-lg-10 right-tab-content clearfix">
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane fade in active" id="personal_info">
+            <div class="page-header">
+              <h2>保洁预约<small>——质量三天不满意，无条件返工</small></h2>
+            </div>
+            <!-- <p>服务项目选择：</p> -->
+            <form class="form-horizontal clearfix">
+              <div class="form-group">
+                <label for="service-options" class="col-sm-2 control-label">服务项目选择<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <select id="service-options" class="form-control">
+                    <option>日常保洁</option>
+                    <option>深度保洁</option>
+                    <option>开荒保洁</option>
+                    <option>消杀保洁</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">详细说明</label>
+                <div class="col-sm-10">
+                  <p class="form-control-static">适用于家具表面的日常精品保洁，预计打扫1个小时</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">价格</label>
+                <div class="col-sm-10">
+                  <p class="form-control-static orange">￥60</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="service-data" class="col-sm-2 control-label">上门服务日期<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input id="service-data" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="service-time" class="col-sm-2 control-label">上门服务时间<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <select id="service-time" class="form-control">
+                    <option>上午 (09:00-12:00)</option>
+                    <option>下午 (14:00-17:00)</option>
+                    <option>晚上 (18:00-20:00)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="service-phone" class="col-sm-2 control-label">联系电话<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input id="service-phone" class="form-control"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="service-address" class="col-sm-2 control-label">地址<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <textarea id="service-address" class="form-control" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="service-need" class="col-sm-2 control-label">特殊需求</label>
+                <div class="col-sm-10">
+                  <textarea id="service-need" class="form-control" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="over-right">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    使用账号余额：￥<span>0.00</span>
+                  </label>
+                </div>
+                <div class="real-money">实付金额：￥<span>0.00</span></div>
+                <button class="btn btn-warning">提交订单</button>
+              </div>
+
+            </form>
+            
+
+            
+          </div>
+          <div role="tabpanel" class="tab-pane" id="orders">222</div>
+          <div role="tabpanel" class="tab-pane" id="account">333</div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  <div class="bottom-flower">
+  </div>
+</div>
+{% endblock %}
+{% block footer %}
+  {% parent %}
+  {% block script %}
+    {% parent %}
+    <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.zh-CN.min.js"></script>
+  {% endblock %}
+{% endblock %}
