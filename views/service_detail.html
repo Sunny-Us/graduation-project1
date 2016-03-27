@@ -4,6 +4,7 @@
 {% block link %}
   {% parent %}
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-datepicker3.css">
 {% endblock %}
 {% block header %}
 <div class="default-nav">
@@ -45,22 +46,22 @@
       <div class="col-lg-2">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
-          <li role="presentation" class="left-nav-active active"><a href="#personal_info" aria-controls="personal_info" role="tab" data-toggle="tab">保洁预约</a></li>
-          <li role="presentation" class="left-nav"><a href="#orders" aria-controls="messages" role="tab" data-toggle="tab">日常维修</a></li>
-          <li role="presentation" class="left-nav"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">废物回收</a></li>
-          <li role="presentation" class="left-nav"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">缴费</a></li>
+          <li role="presentation" class="left-nav-active active"><a href="#clean" aria-controls="clean" role="tab" data-toggle="tab">保洁预约</a></li>
+          <li role="presentation" class="left-nav"><a href="#maintain" aria-controls="maintain" role="tab" data-toggle="tab">日常维修</a></li>
+          <li role="presentation" class="left-nav"><a href="#recyc" aria-controls="recyc" role="tab" data-toggle="tab">废物回收</a></li>
+          <li role="presentation" class="left-nav"><a href="#pay" aria-controls="pay" role="tab" data-toggle="tab">缴费</a></li>
         </ul>
       </div>  
       <div class="col-lg-10 right-tab-content clearfix">
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active" id="personal_info">
+          <div role="tabpanel" class="tab-pane fade in active" id="clean">
             <div class="page-header">
               <h2>保洁预约<small>——质量三天不满意，无条件返工</small></h2>
             </div>
             <!-- <p>服务项目选择：</p> -->
             <form class="form-horizontal clearfix">
               <div class="form-group">
-                <label for="service-options" class="col-sm-2 control-label">服务项目选择<span class="importent">*</span></label>
+                <label for="service-options" class="col-sm-2 control-label">保洁项目选择<span class="importent">*</span></label>
                 <div class="col-sm-10">
                   <select id="service-options" class="form-control">
                     <option>日常保洁</option>
@@ -85,7 +86,7 @@
               <div class="form-group">
                 <label for="service-data" class="col-sm-2 control-label">上门服务日期<span class="importent">*</span></label>
                 <div class="col-sm-10">
-                  <input id="service-data" class="form-control" />
+                  <input id="service-data"data-date-format="yyyy-mm-dd" class="form-control" />
                 </div>
               </div>
               <div class="form-group">
@@ -126,14 +127,93 @@
                 <div class="real-money">实付金额：￥<span>0.00</span></div>
                 <button class="btn btn-warning">提交订单</button>
               </div>
-
-            </form>
-            
-
-            
+            </form>      
           </div>
-          <div role="tabpanel" class="tab-pane" id="orders">222</div>
-          <div role="tabpanel" class="tab-pane" id="account">333</div>
+          <div role="tabpanel" class="tab-pane" id="maintain">
+            <div class="page-header">
+              <h2>日常维修<small>——便捷、及时、专业，为生活保驾护航</small></h2>
+            </div>
+            <!-- <p>服务项目选择：</p> -->
+            <form class="form-horizontal clearfix">
+              <div class="form-group">
+                <label for="maintain-options" class="col-sm-2 control-label">维修项目选择<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <select id="maintain-options" class="form-control">
+                    <option>水暖维修</option>
+                    <option>电器维修</option>
+                    <option>锁类维修</option>
+                    <option>电路维修</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">详细说明</label>
+                <div class="col-sm-10">
+                  <p class="form-control-static">水管爆裂漏水不出水问题，及暖气片漏水不热等问题</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">价格</label>
+                <div class="col-sm-10">
+                  <p class="form-control-static orange">￥30（仅基本价格）</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="maintain-data" class="col-sm-2 control-label">上门服务日期<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input id="maintain-data"data-date-format="yyyy-mm-dd" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="maintain-time" class="col-sm-2 control-label">上门服务时间<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <select id="maintain-time" class="form-control">
+                    <option>上午 (09:00-12:00)</option>
+                    <option>下午 (14:00-17:00)</option>
+                    <option>晚上 (18:00-20:00)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="maintain-phone" class="col-sm-2 control-label">联系电话<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input id="maintain-phone" class="form-control"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="maintain-address" class="col-sm-2 control-label">地址<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <textarea id="maintain-address" class="form-control" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="maintain-need" class="col-sm-2 control-label">特殊需求</label>
+                <div class="col-sm-10">
+                  <textarea id="maintain-need" class="form-control" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="over-right">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    使用账号余额：￥<span>0.00</span>
+                  </label>
+                </div>
+                <div class="real-money">实付金额：￥<span>0.00</span></div>
+                <button class="btn btn-warning">提交订单</button>
+              </div>
+            </form>  
+          </div>
+          <div role="tabpanel" class="tab-pane" id="recyc">
+            <div class="page-header">
+              <h2>废物回收<small>——变废为宝，为环保贡献力量</small></h2>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="pay">
+            <div class="page-header">
+              <h2>缴费<small>——水费、电费、燃气费，一触即交</small></h2>
+            </div>
+          </div>
         </div>
       </div>
     </div>  
@@ -146,7 +226,8 @@
   {% parent %}
   {% block script %}
     {% parent %}
-    <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="js/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script type="text/javascript" src="js/vendor/datepicker.js"></script>
   {% endblock %}
 {% endblock %}
