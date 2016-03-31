@@ -3,7 +3,7 @@
 {% block title %}ziroom | 个人空间{% endblock %}
 {% block link %}
 {% parent %}
-<link rel="stylesheet" type="text/css" href="css/pages.css">
+<link rel="stylesheet" type="text/css" href="css/zone.css">
 <link rel="stylesheet" type="text/css" href="third-party/upload_img/cropper/cropper.min.css">
 <link rel="stylesheet" type="text/css" href="third-party/upload_img/sitelogo/sitelogo.css">
 {% endblock %}
@@ -59,8 +59,7 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="personal_info">
               <div>
-
-                <!-- Nav tabs -->
+                <!-- 个人信息 tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                   <li role="presentation" class="active"><a href="#basc_info" aria-controls="home" role="tab" data-toggle="tab">基本资料</a></li>
                   <li role="presentation"><a href="#change_psd" aria-controls="profile" role="tab" data-toggle="tab">修改密码</a></li>
@@ -124,14 +123,138 @@
                       </div>
                     </div>
                     <!-- 修改头像modal end -->
-                    
+
+                    <form class="form-horizontal clearfix">
+                        <div class="form-group">
+                          <label class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">昵称：</label>
+                          <div class="col-sm-10 col-xs-10 col-md-6 col-lg-6">
+                            <input type="text" class="info-input">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">性别：</label>
+                          <div class="col-sm-10 col-xs-10 col-md-6 col-lg-6">
+                            <input id="gender" type="radio" name="gender" value="male">先生
+                            <input id="gender1" type="radio" name="gender" value="female">女士
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="service-data" class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">联系方式：<span class="important">*</span></label>
+                          <div class="col-sm-10 col-xs-10 col-md-6 col-lg-6">
+                            <input id="" class="info-input" type="text" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="service-time" class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">居住地址:<span class="important">*</span></label>
+                          <div class="col-sm-10 col-xs-10 col-md-6 col-lg-6">
+                            <input class="info-input" type="text">
+                          </div>
+                        </div>
+                       
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                          <button type="submit" class="btn btn-warning" id="submit_baseInfo">修改信息</button>
+                        </div>
+                    </form>
                   </div>
-
-
-
-
                   <div role="tabpanel" class="tab-pane" id="change_psd">
-                    
+                    <form class="form-horizontal clearfix">
+                        <div class="form-group">
+                          <label class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">原密码：</label>
+                          <div class="col-sm-10 col-xs-10 col-md-6 col-lg-6">
+                            <input type="text" class="info-input">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="service-data" class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">新密码：</label>
+                          <div class="col-sm-10 col-xs-10 col-md-6 col-lg-6">
+                            <input id="" class="info-input" type="text" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="service-time" class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">重新输入密码:</label>
+                          <div class="col-sm-10 col-xs-10 col-md-6 col-lg-6">
+                            <input class="info-input" type="text">
+                          </div>
+                        </div>
+                       
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                          <button type="submit" class="btn btn-warning" id="submit_psd">修改密码</button>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div role="tabpanel" class="tab-pane" id="orders">
+               <div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#ordering" aria-controls="home" role="tab" data-toggle="tab">正在进行订单</a></li>
+                  <li role="presentation"><a href="#ordered" aria-controls="profile" role="tab" data-toggle="tab">历史订单</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="ordering">
+                    <ul class="clearfix">
+                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
+                        <div class="row-fluid">
+                            <section class="order-item">
+                              <span class="order-name">马桶维修</span>
+                              <span class="order-state">已下单...</span>  <span class="order-time">预约时间：03月29号  9:00-18:00 </span>
+                              <!-- <span class="order-people">上门师傅：姚素娟</span> -->
+                            </section>   
+                        </div>
+                      </li>
+                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
+                        <div class="row-fluid">
+                            <section class="order-item">
+                              <span class="order-name">马桶维修</span>
+                              <span class="order-state">已受理...</span>  <span class="order-time">预约时间：03月29号  9:00-18:00 </span><span class="order-people">上门师傅：姚素娟</span>
+                            </section>   
+                        </div>
+                      </li>
+                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
+                        <div class="row-fluid">
+                            <section class="order-item">
+                              <span class="order-name">马桶维修</span>
+                              <span class="order-state">进行中...</span>  <span class="order-time">预约时间：03月29号  9:00-18:00 </span><span class="order-people">上门师傅：姚素娟</span>
+                            </section>   
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="ordered">
+                    <ul class="clearfix">
+                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
+                        <div class="row-fluid">
+                            <section class="ordered-item">
+                              <span class="ordered-name">马桶维修</span>
+                              <span class="ordered-state">已结束</span>  <span class="ordered-time">预约时间：03月29号  9:00-18:00 </span>
+                              <span class="ordered-people">上门师傅：姚素娟</span>
+                            </section>   
+                        </div>
+                      </li>
+                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
+                        <div class="row-fluid">
+                            <section class="ordered-item">
+                              <span class="ordered-name">马桶维修</span>
+                              <span class="ordered-state">已结束</span>  <span class="ordered-time">预约时间：03月29号  9:00-18:00 </span><span class="ordered-people">上门师傅：姚素娟</span>
+                            </section>   
+                        </div>
+                      </li>
+                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
+                        <div class="row-fluid">
+                            <section class="ordered-item">
+                              <span class="ordered-name">马桶维修</span>
+                              <span class="ordered-state">已结束</span>  <span class="ordered-time">预约时间：03月29号  9:00-18:00 </span><span class="ordered-people">上门师傅：姚素娟</span>
+                            </section>   
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
 
@@ -142,15 +265,12 @@
 
 
 
+            <div role="tabpanel" class="tab-pane" id="account">
+                  <div class="balance">
+                    您的账户余额为9.9元
 
-
-
-
-
-
-
-            <div role="tabpanel" class="tab-pane" id="orders">222</div>
-            <div role="tabpanel" class="tab-pane" id="account">333</div>
+                  </div> 
+            </div>
           </div>
       </div>
     </div>  

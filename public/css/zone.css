@@ -1,0 +1,73 @@
+/*更改头像 start*/
+
+#crop-avatar{
+	padding:15px 20px;
+	
+}
+
+.avatar-view{
+	margin:0 auto;
+}
+/*更改头像 end*/
+/*base info start */
+.info-input{
+	width: 100%;
+	line-height: 30px;
+	padding:3px 5px;
+}
+#submit_baseInfo,#submit_psd{
+	float: right;
+}
+#change_psd{
+	padding:15px 20px;
+}
+.important{
+	color: red;
+}
+/*base info end*/
+
+/*正在进行中的订单 start*/
+.order-name,
+.ordered-name{
+	color:#FFA000;
+	margin-left: 10px;
+}
+.order-state,
+.ordered-state{
+	color:#70a92b;
+	margin-left: 20px;
+}
+.ordered-state{
+	color:#ff0000;
+	margin-left: 20px;
+}
+.order-time,
+.order-people,
+.ordered-time,
+.ordered-people{
+	margin-left: 20px;
+}
+.order-item,.ordered-item{
+	border-bottom: 1px solid #eeeeee;
+	margin:15px 0 0 0;
+	padding-bottom: 5px;
+}
+.order-list{
+	margin-left: 15px;
+}
+.order-list:hover{
+	background-color:#eeeeee;
+}
+/*正在进行中的订单 end*/
+
+/*账户余额 start*/
+
+.balance{
+	width: 90%;
+	margin:0 auto;
+	text-align: center;
+	padding-top:50px;
+	font-size:25px;
+}
+
+/*账户余额end*/
