@@ -1,0 +1,98 @@
+{% extends 'layout.html' %}
+
+{% block title %}ziroom | 订单详情{% endblock %}
+{% block link %}
+{% parent %}
+<link rel="stylesheet" type="text/css" href="css/zone.css">
+<link rel="stylesheet" type="text/css" href="third-party/upload_img/cropper/cropper.min.css">
+<link rel="stylesheet" type="text/css" href="third-party/upload_img/sitelogo/sitelogo.css">
+{% endblock %}
+{% block header %}
+<div class="default-nav">
+  {% block navbar %}
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-default">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="#" class="navbar-brand">
+          <img src="images/logo-orange.png" alt="ziroom">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-default">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="signin" data-toggle="modal" data-target="#sigin">注册</li>
+          <li class="login" data-toggle="modal" data-target="#login">登录</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% endblock %}
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="content clearfix">
+  <div class="cloud">
+    <img src="images/cloud1.png" class="cloud1">
+    <img src="images/cloud2.png" class="cloud2">
+    <img src="images/cloud3.png" class="cloud3">
+  </div>
+  <div class="main-container container-fluid">
+    <div class="bread-nav">
+      <a href="javascript:;" class="bread-nav-item">我的账单</a><em></em>
+      <a href="javascript:;" class="bread-nav-item">正在进行中的订单</a><em></em>
+      <a href="javascript:;" class="bread-nav-item-active">马桶维修</a>
+    </div>
+    <div class="container-fluid order-state-wrap">
+      <div class="row-fluid order-state clearfix">
+        <div class="circle-icon circle-icon-active" id="take_order"></div>
+        <div class="line-icon line-icon-active"></div>
+        <div class="circle-icon" id="accepted"></div>
+        <div class="line-icon"></div>
+        <div class="circle-icon" id="ongoing"></div>
+        <div class="line-icon"></div>
+        <div class="circle-icon" id="order_finished"></div>
+      </div>
+      <div class="row-fluid clearfix service-person-info">
+        <div class="col-lg-4">
+          <img src="images/service_person.png" class="service-person-img">
+          <section class="service-person-name">(服务人员姓名)</section>
+          <section class="service-times">服务次数：505次</section>
+          <section class="service-score">
+            评价得分：
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </section>
+          <section class="service-tel">
+            联系电话：18612345678
+          </section>
+        </div>
+        <div class="col-lg-8">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-flower">
+  </div>
+ </div>
+{% endblock %}
+{% block footer %}
+  {% parent %}
+  {% block script%}
+    {% parent %}
+    <script type="text/javascript" src="third-party/upload_img/cropper/cropper.min.js"></script>
+    <script type="text/javascript" src="third-party/upload_img/sitelogo/sitelogo.js"></script>
+  {% endblock %}
+{% endblock%}
