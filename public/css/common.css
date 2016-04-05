@@ -40,7 +40,7 @@ nav.navbar{
 .input-group-addon{
 	width:80px;
 }
-#login .btn,#sigin .btn{
+#signup .btn,#signin .btn{
 	width: 100%;
 	text-align: center;
 }
