@@ -15,6 +15,7 @@
     "swig": "^1.4.2"
   },
   "devDependencies": {
-    "node-dev": "^3.1.0"
+    "node-dev": "^3.1.0",
+    "validate": "^3.0.1"
   }
 }
