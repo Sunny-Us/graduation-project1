@@ -86,7 +86,12 @@ em{
 
 
 /*账单详情页 star*/
-
+.service-info-left{
+	border-right: 1px solid #ddd;
+	box-shadow: 1px 1px 2px #ddd;
+	padding-top: 15px;
+	padding-bottom:15px;
+}
 a.bread-nav-item{
 	color:#bdbdbd;
 	text-decoration: none;
@@ -155,6 +160,52 @@ a.bread-nav-item-active{
 
 .service-person-img{
 	float: left;
+}
+.service-person-indetail{
+	float: left;
+}
+.star-icon-active{
+	background:url(../images/star_icon_active.png);
+}
+.star-icon{
+	background: url(../images/star_icon.png);
+}
+.star-icon-active,.star-icon{
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+}
+.service-info-right{
+	padding:30px;
+}
+.service-info-right section{
+	padding:5px 10px;
+}
+.evaluate-btn,
+.evaluated-btn,
+.delete-order-btn,
+.modify-order-btn{
+	color: #fff;
+	display: block;
+	float: right;
+	width: 100px;
+	text-align: center;
+	border-radius:3px;
+	border:1px solid #bdbdbd;
+	padding: 3px; 
+}
+.delete-order-btn{
+	background: #ff0000;
+}
+.modify-order-btn{
+	background: #8dd35f;
+}
+.evaluate-btn{
+	background:#FFA000;
+}
+.evaluated-btn{
+	background:#bdbdbd; 
+	cursor: default;
 }
 /*账单详情页 end*/
 
