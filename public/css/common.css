@@ -27,6 +27,17 @@ nav.navbar{
 	background-color:rgba(0,0,0,0);
 	cursor: pointer;
 }
+.navbar-right img.image_url{
+	cursor: pointer;
+	margin:5px 0;
+	width:40px;
+	height:40px;
+	border-radius: 50%;
+}
+.navbar-right span{
+	cursor: pointer;
+	margin-left: 10px;
+}
 .input-group{
 	padding-bottom: 30px;
 	width:100%;
