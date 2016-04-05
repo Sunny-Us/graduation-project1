@@ -1,0 +1,162 @@
+em{
+	display: inline-block;
+	/*display:block;
+	float: left;*/
+    background:  url(../images/pt_item.png) no-repeat scroll 3px 10px;
+    line-height: 200px;
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+}
+
+
+/*更改头像 start*/
+
+#crop-avatar{
+	padding:15px 20px;
+	
+}
+
+.avatar-view{
+	margin:0 auto;
+}
+/*更改头像 end*/
+/*base info start */
+.info-input{
+	width: 100%;
+	line-height: 30px;
+	padding:3px 5px;
+}
+#submit_baseInfo,#submit_psd{
+	float: right;
+}
+#change_psd{
+	padding:15px 20px;
+}
+.important{
+	color: red;
+}
+/*base info end*/
+
+/*正在进行中的订单 start*/
+.order-name,
+.ordered-name{
+	color:#FFA000;
+	margin-left: 10px;
+}
+.order-state-wrap,
+.ordered-state{
+	color:#70a92b;
+	margin-left: 20px;
+}
+.ordered-state{
+	color:#ff0000;
+	margin-left: 20px;
+}
+.order-time,
+.order-people,
+.ordered-time,
+.ordered-people{
+	margin-left: 20px;
+}
+.order-item,.ordered-item{
+	border-bottom: 1px solid #eeeeee;
+	margin:15px 0 0 0;
+	padding-bottom: 5px;
+}
+.order-list{
+	margin-left: 15px;
+}
+.order-list:hover{
+	background-color:#eeeeee;
+}
+/*正在进行中的订单 end*/
+
+/*账户余额 start*/
+
+.balance{
+	width: 90%;
+	margin:0 auto;
+	text-align: center;
+	padding-top:50px;
+	font-size:25px;
+}
+
+/*账户余额end*/
+
+
+/*账单详情页 star*/
+
+a.bread-nav-item{
+	color:#bdbdbd;
+	text-decoration: none;
+}
+a.bread-nav-item:hover,
+a.bread-nav-item-active{
+	color:#FFA000;
+}
+
+.circle-icon{
+	width: 16px;
+	height: 16px;
+	border-radius: 8px;
+	border:1px solid #bdbdbd;
+	float: left;
+}
+.circle-icon-active{
+	border:1px solid #FFA000;
+}
+.line-icon{
+	width: 90px;
+	border-bottom:1px solid #bdbdbd;
+	float: left;
+	margin-top: 7px;
+}
+.line-icon-active{
+	border-bottom:1px solid #FFA000;
+}
+.order-state{
+	padding-top: 20px;
+	width: 40%;
+	min-width: 345px;
+	margin:0 auto;
+}
+
+#take_order:before{
+	content:"已下单";
+}
+.circle-icon-active#take_order:before{
+	color:#FFA000;
+}
+#accepted:before{
+	content:"已受理";
+}
+#ongoing:before{
+	content:"进行中";
+}
+#order_finished:before{
+	content:"已完成";
+}
+#take_order:before,
+#accepted:before,
+#ongoing:before,
+#order_finished:before{
+	display: block;
+    width: 50px;
+    position: relative;
+    top: 20px;
+    left: -12px;
+    color:#bdbdbd;
+}
+
+.service-person-info{
+	padding-top: 35px;
+}
+
+.service-person-img{
+	float: left;
+}
+/*账单详情页 end*/
+
+
+
