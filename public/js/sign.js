@@ -93,6 +93,13 @@ $(function(){
 					}
 				}
 			},
+			role: {
+                validators: {
+                    notEmpty: {
+                        message: '角色不能为空'
+                    }
+                }
+            }
 		}
 
 	})
@@ -107,17 +114,40 @@ $(function(){
 					"password":$.md5($.trim($('#password').val()))
 				},
 				type:"post",
-				success:function(data){
+				success:function(data, textStatus, request){
 					if(data.result){
-						
 						alert('登录成功！');
+						console.log(data.user.token);
+						$.cookie('key',data.user.token);
+						$.ajax({
+							url:"http://123.125.130.103:8081/service",
+							data:{
+								"method":"query",
+								"type":"category",
+								"id":0,
+								'token':$.cookie('key')
+							},
+							type:"post",
+							statusCode: {
+							    403: function() {
+							      location.href = "";
+							    }
+							},
+							success:function(data){
+
+								console.log("success",data);
+							},
+							error:function(data){
+								console.log("error",data);
+							}
+						});
 					}else if(data.code==1){
 						alert('用户名或密码错误！');
 					}
 				},
-				error:function(data){
-					console.log('error',data);
-				}
+				error: function (request, textStatus, errorThrown) {
+			        alert(request.getAllResponseHeaders());
+			   }
 			});
 		}
 	});
@@ -168,19 +198,5 @@ $(function(){
 			})
 		}
 	});
-	$.ajax({
-		url:"http://123.125.130.103:8081/service",
-		data:{
-			"method":"query",
-			"type":"category",
-			"id":0
-		},
-		type:"post",
-		success:function(data){
-			console.log("success",data);
-		},
-		error:function(data){
-			console.log("error",data);
-		}
-	})
+
 });

@@ -291,3 +291,9 @@ footer.footer{
 	top: 10px;
 }
 /*上部白云 end*/
+/*
+登录处的验证格式
+ */
+.has-feedback label ~ .form-control-feedback {
+    top: 0; 
+}

@@ -99,6 +99,21 @@
 				<div class="modal-body">
 					<form class="form-horizontal" id="signinForm">
 						<div class="form-group">
+                            <label class="col-sm-2 control-label">角色</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-6 radio">
+                                    <label>
+                                        <input type="radio" name="role" value="user" /> 用户
+                                    </label>
+                                </div>
+                                <div class="col-sm-6 radio">
+                                    <label>
+                                        <input type="radio" name="role" value="worker" /> 家政人员
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+						<div class="form-group">
 							<label for="username" class="col-sm-2 control-label">用户名</label>
 						    <div class="col-sm-10">
 						      <input type="text" class="form-control" id="username" placeholder="用户名" name="username">
@@ -154,6 +169,7 @@
 	</footer>
 	{% block script%}
 	<script type="text/javascript" src="js/vendor/jquery-2.1.3.js"></script>
+	<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>
 	<script type="text/javascript" src="js/vendor/bootstrap.js"></script>
 	<script type="text/javascript" src="js/vendor/jquery.md5.js"></script>
 	<script type="text/javascript" src="js/sign.js"></script>
