@@ -8,4 +8,22 @@ $(function(){
 		});
 		
 	});
+	console.log("111111111");
+	//已完成订单待评价
+	$(".to-evaluate span").each(function(){
+		var object=$(".to-evaluate span");
+		var length=object.length;
+		var index=$(this).index();
+		$(this).on("click",function(){
+			console.log(index);
+			var i=0;
+			for(i=0;i<=index;i++){
+				object.eq(i).addClass("star-icon-active");
+			}
+			for(i;i<length;i++){
+				object.eq(i).removeClass('star-icon-active');
+			}
+		});
+		
+	})
 });
