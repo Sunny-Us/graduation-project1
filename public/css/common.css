@@ -34,9 +34,13 @@ nav.navbar{
 	height:40px;
 	border-radius: 50%;
 }
-.navbar-right span{
+.navbar-right a{
 	cursor: pointer;
 	margin-left: 10px;
+	color:#fff;
+}
+.navbar-right a:hover{
+	text-decoration: none;
 }
 .input-group{
 	padding-bottom: 30px;
