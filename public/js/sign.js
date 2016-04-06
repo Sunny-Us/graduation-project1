@@ -118,7 +118,11 @@ $(function(){
 					if(data.result){
 						alert('登录成功！');
 						console.log(data.user.token);
+						$('#signin').modal('hide')
 						$.cookie('key',data.user.token);
+						$('#navbar-default ul').hide();
+						$('#navbar-default div').show();
+						location.href="/zone";
 						$.ajax({
 							url:"http://123.125.130.103:8081/service",
 							data:{
