@@ -122,7 +122,9 @@ $(function(){
 						$.cookie('key',data.user.token);
 						$('#navbar-default ul').hide();
 						$('#navbar-default div').show();
-						location.href="/zone";
+						$('#navbar-default > div > img').attr('src',data.user.image_url);
+						$('#navbar-default > div > a').html(data.user.name);
+						$('#navbar-default > div > a').attr('href','/zone#'+data.user.id);
 						$.ajax({
 							url:"http://123.125.130.103:8081/service",
 							data:{
