@@ -1,39 +1,17 @@
-{% extends 'layout.html' %}
-
-{% block title %}ziroom{% endblock %}
-
-{% block header %}
-  <div class="default-nav">
-    {% block navbar %}
-    <nav class="navbar navbar-default">
-  	    <div class="container-fluid">
-	  	  	<div class="navbar-header">
-	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-default">
-		            <span class="sr-only">Toggle navigation</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-	            </button>
-	  	  		<a href="#" class="navbar-brand">
-	  	  			<img src="images/logo-orange.png" alt="ziroom">
-	  	  		</a>
-	  	  	</div>
-  	  	<div class="collapse navbar-collapse" id="navbar-default">
-  	  		<ul class="nav navbar-nav navbar-right">
-  	  			<li class="signin" data-toggle="modal" data-target="#sigin">注册</li>
-  	  			<li class="login" data-toggle="modal" data-target="#login">登录</li>
-  	  		</ul>
-  	  	</div>
-  	  </div>
-  	</nav>
-    {% endblock %}
-  </div>
-{% endblock %}
-
-{% block content %}
-  <div id="content">
-    <div class="main-container container-fluid">
-      内容
-    </div>
-  </div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <h1>{{ pagename|title }}</h1>
+  <ul>
+    {% for author in authors %}
+    <li{% if loop.first %} class="first"{% endif %}>
+    {{ author }}
+  </li>
+  {% endfor %}
+</ul>
+</body>
+</html>
