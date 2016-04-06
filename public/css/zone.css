@@ -207,6 +207,9 @@ a.bread-nav-item-active{
 	background:#bdbdbd; 
 	cursor: default;
 }
+.to-evaluate span{
+	cursor: pointer;
+}
 /*账单详情页 end*/
 
 
