@@ -126,7 +126,7 @@
 
                     <form class="form-horizontal clearfix">
                         <div class="form-group">
-                          <label class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">昵称：</label>
+                          <label class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">姓名：</label>
                           <div class="col-sm-10 col-xs-10 col-md-6 col-lg-6">
                             <input type="text" class="info-input">
                           </div>
@@ -265,11 +265,6 @@
 
               </div>
             </div>
-
-
-
-
-
             <div role="tabpanel" class="tab-pane" id="account">
                   <div class="balance">
                     您的账户余额为9.9元
@@ -290,5 +285,21 @@
     {% parent %}
     <script type="text/javascript" src="third-party/upload_img/cropper/cropper.min.js"></script>
     <script type="text/javascript" src="third-party/upload_img/sitelogo/sitelogo.js"></script>
+    <script type="text/javascript">
+    $(function(){
+      function initial(){
+        console.log("11111");
+        $.ajax({
+          url:"http://123.125.130.103:8081/user/user",
+          type:"post",
+          data:{"method":"query"},
+          success:function(data){
+            console.log(data);
+          }
+        });
+        initial();
+      }
+    });
+    </script>
   {% endblock %}
 {% endblock%}
