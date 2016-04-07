@@ -48,7 +48,7 @@
           <div class="caption">
             <h3>保洁预约</h3>
             <p>保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约</p>
-            <p><a href="#" class="btn btn-warning" role="button">预约</a></p>
+            <p><a href="/serviceDetail" class="btn btn-warning" role="button">预约</a></p>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
           <div class="caption">
             <h3>日常维修</h3>
             <p>日常维修日常维修日常维修日常维修日常维修日常维修日常维修日常维修日维修</p>
-            <p><a href="#" class="btn btn-warning" role="button">预约</a></p>
+            <p><a href="/serviceDetail" class="btn btn-warning" role="button">预约</a></p>
           </div>
         </div>
       </div>
@@ -68,10 +68,30 @@
           <div class="caption">
             <h3>废物回收</h3>
             <p>废物回收废物回收废物回收废物回收废物回收废物回收废物回收废物回回收</p>
-            <p><a href="#" class="btn btn-warning" role="button">预约</a></p>
+            <p><a href="/serviceDetail" class="btn btn-warning" role="button">预约</a></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 {% endblock %}
+{% block footer %}
+  {% parent %}
+  {% block script%}
+    {% parent %}
+    <script type="text/javascript">
+      $(function(){
+        $.ajax({
+          url:"http://127.0.0.1:8081/service",
+          type:"GET",
+          success:function(data){
+            console.log("service_type",data);
+          },
+          error:function(data){
+            console.log("error");
+          }
+        });
+      });
+    </script>
+  {% endblock %}
+{% endblock%}

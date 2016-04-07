@@ -107,7 +107,7 @@ $(function(){
 		event.preventDefault();
 		if($('#signinForm .glyphicon-remove').length==0){
 			$.ajax({
-				url:"http://123.125.130.103:8081/user/signin",
+				url:"http://127.0.0.1:8081/user/signin",
 				data:{
 					"method":"signin",
 					"username":$.trim($('#username').val()),
@@ -118,7 +118,7 @@ $(function(){
 					if(data.result){
 						alert('登录成功！');
 						console.log(data.user.token);
-						$('#signin').modal('hide')
+						$('#signin').modal('hide');
 						$.cookie('key',data.user.token);
 						$('#navbar-default ul').hide();
 						$('#navbar-default div').show();
@@ -126,7 +126,7 @@ $(function(){
 						$('#navbar-default > div > a').html(data.user.name);
 						$('#navbar-default > div > a').attr('href','/zone#'+data.user.id);
 						$.ajax({
-							url:"http://123.125.130.103:8081/service",
+							url:"http://127.0.0.1:8081/service",
 							data:{
 								"method":"query",
 								"type":"category",
@@ -151,15 +151,15 @@ $(function(){
 						alert('用户名或密码错误！');
 					}
 				},
-				error: function (request, textStatus, errorThrown) {
-			        alert(request.getAllResponseHeaders());
+				error: function (data) {
+			        alert(data);
 			   }
 			});
 		}
 	});
 	$('#inputusername').on('blur',function(){
 		$.ajax({
-			url:"http://123.125.130.103:8081/user/signup",
+			url:"http://127.0.0.1:8081/user/signup",
 			data:{
 				"method":"check_user",
 				"username":$.trim($('#inputusername').val())
@@ -177,32 +177,36 @@ $(function(){
 			}
 		});
 	})
-	$('#signup-btn').on('click',function(){
-		var metric = {
+	$('#signup-btn').on('click',function(event){
+		event.preventDefault();
+		var ajaxDate={ 
 			"name":$.trim($("#inputname").val()),
 			"email":$.trim($("#inputusername").val()),
 			"phone":$.trim($("#inputphone").val()),
 			"password":$.md5($.trim($("#inputpsd").val())),
+			"address":$.trim($("#inputaddress").val()),
 			"status":1
 		}
 		if($('#signupForm .glyphicon-remove').length==0){
 			$.ajax({
-				url:"http://123.125.130.103:8081/user/signup",
+				url:"http://127.0.0.1:8081/user/signup",
+				type:"POST",
 				contentType:"application/x-www-form-urlencoded",
 				data:{
 					"method":"signup",
-					"data":metric
+					"data": JSON.stringify(ajaxDate)
 				},
-				type:"post",
 				success:function(data){
 					if(data.result){
 						alert('注册成功！');
+						$('#signin').modal('hide');
 					}else{
 						alert("error");
 					}
 				}
 			})
 		}
+
 	});
 
 });
