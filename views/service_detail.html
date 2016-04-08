@@ -46,9 +46,6 @@
       <div class="col-lg-2">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
-          <li role="presentation" class="left-nav-active active"><a href="#clean" aria-controls="clean" role="tab" data-toggle="tab">保洁预约</a></li>
-          <li role="presentation" class="left-nav"><a href="#maintain" aria-controls="maintain" role="tab" data-toggle="tab">日常维修</a></li>
-          <li role="presentation" class="left-nav"><a href="#recyc" aria-controls="recyc" role="tab" data-toggle="tab">废物回收</a></li>
         </ul>
       </div>  
       <div class="col-lg-10 right-tab-content clearfix">
@@ -223,5 +220,27 @@
     <script type="text/javascript" src="js/vendor/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="js/vendor/bootstrap-datepicker.zh-CN.min.js"></script>
     <script type="text/javascript" src="js/vendor/datepicker.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        var id = window.location.href.split('#').pop();
+        $.ajax({
+          url:'http://127.0.0.1:8081/service',
+          post:"GET",
+          success:function(data){
+            for (var i=0,len=data.data.length;i<len;i++){
+              $('<li role="presentation" class="'+(i==id?'left-nav-active active':'left-nav')+'"><a href="#service'+data.data[i].id+'" role="tab" data-toggle="tab">'+data.data[i].name+'</a></li>').appendTo($('ul.left-nav-tabs'));
+            }  
+          },
+          error:function(data){
+            console.log("error");
+          }
+        });
+        $.ajax({
+          url:'http://127.0.0.1:8081/service?method=query',
+          post:"POST",
+          
+        });
+      })
+    </script>
   {% endblock %}
 {% endblock %}

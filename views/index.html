@@ -42,36 +42,6 @@
         <h2 class="main-tit">服&nbsp;务</h2>
         <p class="mian-describe">您的舒适是我们最大的幸福</p>
       </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="thumbnail">
-          <img src="../images/image-service.jpg" />
-          <div class="caption">
-            <h3>保洁预约</h3>
-            <p>保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约保洁预约</p>
-            <p><a href="/serviceDetail" class="btn btn-warning" role="button">预约</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="thumbnail">
-          <img src="../images/image-maintain.jpg" />
-          <div class="caption">
-            <h3>日常维修</h3>
-            <p>日常维修日常维修日常维修日常维修日常维修日常维修日常维修日常维修日维修</p>
-            <p><a href="/serviceDetail" class="btn btn-warning" role="button">预约</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="thumbnail">
-          <img src="../images/image-recyc.jpg" />
-          <div class="caption">
-            <h3>废物回收</h3>
-            <p>废物回收废物回收废物回收废物回收废物回收废物回收废物回收废物回回收</p>
-            <p><a href="/serviceDetail" class="btn btn-warning" role="button">预约</a></p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 {% endblock %}
@@ -85,7 +55,20 @@
           url:"http://127.0.0.1:8081/service",
           type:"GET",
           success:function(data){
-            console.log("service_type",data);
+            console.log("service_type",data,data.data.length);
+            for (var i=0,len=data.data.length;i<len;i++){
+              $('<div class="col-md-4 col-sm-6">'+
+                  '<div class="thumbnail">'+
+                    '<img src="'+data.data[i].image_url+'" />'+
+                    '<div class="caption">'+
+                      '<h3>'+data.data[i].name+'</h3>'+
+                      '<p>'+data.data[i].comment+'</p>'+
+                      '<p><a href="/serviceDetail#'+i+'" class="btn btn-warning" role="button">预约</a></p>'+
+                    '</div>'+
+                  '</div>'+
+                '</div>').appendTo($('.service'));
+            }
+            
           },
           error:function(data){
             console.log("error");
