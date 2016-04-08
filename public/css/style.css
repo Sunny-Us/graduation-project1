@@ -16,7 +16,11 @@ a {
 .navbar-transparent .navbar-toggle .icon-bar{
 	background-color: #888;
 }
-
+.navbar-transparent .navbar-right a{
+	cursor: pointer;
+	margin-left: 10px;
+	color:#fff;
+}
 #carousel-example-generic{
 	height:600px;
 	width: 100%;

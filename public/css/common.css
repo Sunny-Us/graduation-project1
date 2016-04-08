@@ -34,10 +34,10 @@ nav.navbar{
 	height:40px;
 	border-radius: 50%;
 }
-.navbar-right a{
+.navbar-default .navbar-right a{
 	cursor: pointer;
 	margin-left: 10px;
-	color:#fff;
+	color:#000;
 }
 .navbar-right a:hover{
 	text-decoration: none;

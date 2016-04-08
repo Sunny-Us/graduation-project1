@@ -104,7 +104,7 @@ $(function(){
 
 	})
 	$('#signin-btn').on('click',function(event){
-		event.preventDefault();
+		$('#signinForm').bootstrapValidator('validate');
 		if($('#signinForm .glyphicon-remove').length==0){
 			$.ajax({
 				url:"http://127.0.0.1:8081/user/signin",
@@ -117,14 +117,15 @@ $(function(){
 				success:function(data, textStatus, request){
 					if(data.result){
 						alert('登录成功！');
-						console.log(data.user.token);
 						$('#signin').modal('hide');
 						$.cookie('key',data.user.token);
+						$.cookie('uid',data.user.id);
+						$.cookie('uname',data.user.name);
+						$.cookie('image_url',data.user.image_url);
 						$('#navbar-default ul').hide();
 						$('#navbar-default div').show();
 						$('#navbar-default > div > img').attr('src',data.user.image_url);
-						$('#navbar-default > div > a').html(data.user.name);
-						$('#navbar-default > div > a').attr('href','/zone#'+data.user.id);
+						$('#navbar-default > div > .name').html(data.user.name).attr('href','/zone#'+data.user.id);
 						$.ajax({
 							url:"http://127.0.0.1:8081/service",
 							data:{
@@ -177,8 +178,8 @@ $(function(){
 			}
 		});
 	})
-	$('#signup-btn').on('click',function(event){
-		event.preventDefault();
+	$('#signup-btn').on('click',function(){
+		$('#signupForm').bootstrapValidator('validate');
 		var ajaxDate={ 
 			"name":$.trim($("#inputname").val()),
 			"email":$.trim($("#inputusername").val()),
@@ -199,14 +200,24 @@ $(function(){
 				success:function(data){
 					if(data.result){
 						alert('注册成功！');
-						$('#signin').modal('hide');
+						$('#signup').modal('hide');
 					}else{
 						alert("error");
 					}
 				}
 			})
 		}
-
 	});
-
+	if($.cookie('key')!='null'){
+		$('#navbar-default ul').hide();
+		$('#navbar-default div').show();
+		$('#navbar-default > div > img').attr('src',$.cookie('image_url'));
+		$('#navbar-default > div > .name').html($.cookie('uname')).attr('href','/zone#'+ $.cookie('uid'));
+	}
+	$('#quit').on('click',function(){
+		$.cookie('key',null);
+		$.cookie('uid',null);
+		$.cookie('uname',null);
+		$.cookie('image_url',null);
+	})
 });
