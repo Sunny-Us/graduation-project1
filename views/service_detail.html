@@ -23,15 +23,25 @@
         </a>
       </div>
       <div class="collapse navbar-collapse" id="navbar-default">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="signin" data-toggle="modal" data-target="#sigin">注册</li>
-          <li class="login" data-toggle="modal" data-target="#login">登录</li>
-        </ul>
+        <ul class="nav navbar-nav navbar-right" style="display: block">
+            <li class="signup" data-toggle="modal" data-target="#signup">注册</li>
+            <li class="signin" data-toggle="modal" data-target="#signin">登录</li>
+          </ul>
+          <div class="nav navbar-nav navbar-right" style="display: none">
+            <img class="image_url" src="" alt="photo" />
+            <a class="name"></a>
+            <span>|</span>
+            <a href="/" id="quit">退出</a>
+          </div>
       </div>
     </div>
   </nav>
   {% endblock %}
 </div>
+{% endblock %}
+
+{% block sign %}
+  {% parent %}
 {% endblock %}
 
 {% block content %}
@@ -50,39 +60,35 @@
       </div>  
       <div class="col-lg-10 right-tab-content clearfix">
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active" id="clean">
+          <div role="tabpanel" class="tab-pane fade in active" id="service">
             <div class="page-header">
-              <h2>保洁预约<small>——质量三天不满意，无条件返工</small></h2>
+              <h2></h2>
             </div>
-            <!-- <p>服务项目选择：</p> -->
             <form class="form-horizontal clearfix">
               <div class="form-group">
-                <label for="service-options" class="col-sm-2 control-label">保洁项目选择<span class="importent">*</span></label>
+                <label for="service-options" class="col-sm-2 control-label">项目选择<span class="importent">*</span></label>
                 <div class="col-sm-10">
                   <select id="service-options" class="form-control">
-                    <option>日常保洁</option>
-                    <option>深度保洁</option>
-                    <option>开荒保洁</option>
-                    <option>消杀保洁</option>
+                    
                   </select>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">详细说明</label>
                 <div class="col-sm-10">
-                  <p class="form-control-static">适用于家具表面的日常精品保洁，预计打扫1个小时</p>
+                  <p id="service-comment" class="form-control-static">适用于家具表面的日常精品保洁，预计打扫1个小时</p>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">价格</label>
                 <div class="col-sm-10">
-                  <p class="form-control-static orange">￥60</p>
+                  <p id="service-price" class="form-control-static orange">￥<span>60</span></p>
                 </div>
               </div>
               <div class="form-group">
                 <label for="service-data" class="col-sm-2 control-label">上门服务日期<span class="importent">*</span></label>
                 <div class="col-sm-10">
-                  <input id="service-data"data-date-format="yyyy-mm-dd" class="form-control" />
+                  <input id="service-data" data-date-format="yyyy-mm-dd" class="form-control" type="text"/>
                 </div>
               </div>
               <div class="form-group">
@@ -117,93 +123,13 @@
                 <div class="checkbox">
                   <label>
                     <input type="checkbox" value="">
-                    使用账号余额：￥<span>0.00</span>
+                    使用账号余额：￥<span id="balance">0.00</span>
                   </label>
                 </div>
                 <div class="real-money">实付金额：￥<span>0.00</span></div>
-                <button class="btn btn-warning">提交订单</button>
+                <button id="submit" type="button" class="btn btn-warning">提交订单</button>
               </div>
             </form>      
-          </div>
-          <div role="tabpanel" class="tab-pane" id="maintain">
-            <div class="page-header">
-              <h2>日常维修<small>——便捷、及时、专业，为生活保驾护航</small></h2>
-            </div>
-            <!-- <p>服务项目选择：</p> -->
-            <form class="form-horizontal clearfix">
-              <div class="form-group">
-                <label for="maintain-options" class="col-sm-2 control-label">维修项目选择<span class="importent">*</span></label>
-                <div class="col-sm-10">
-                  <select id="maintain-options" class="form-control">
-                    <option>水暖维修</option>
-                    <option>电器维修</option>
-                    <option>锁类维修</option>
-                    <option>电路维修</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">详细说明</label>
-                <div class="col-sm-10">
-                  <p class="form-control-static">水管爆裂漏水不出水问题，及暖气片漏水不热等问题</p>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">价格</label>
-                <div class="col-sm-10">
-                  <p class="form-control-static orange">￥30（仅基本价格）</p>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="maintain-data" class="col-sm-2 control-label">上门服务日期<span class="importent">*</span></label>
-                <div class="col-sm-10">
-                  <input id="maintain-data"data-date-format="yyyy-mm-dd" class="form-control" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="maintain-time" class="col-sm-2 control-label">上门服务时间<span class="importent">*</span></label>
-                <div class="col-sm-10">
-                  <select id="maintain-time" class="form-control">
-                    <option>上午 (09:00-12:00)</option>
-                    <option>下午 (14:00-17:00)</option>
-                    <option>晚上 (18:00-20:00)</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="maintain-phone" class="col-sm-2 control-label">联系电话<span class="importent">*</span></label>
-                <div class="col-sm-10">
-                  <input id="maintain-phone" class="form-control"/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="maintain-address" class="col-sm-2 control-label">地址<span class="importent">*</span></label>
-                <div class="col-sm-10">
-                  <textarea id="maintain-address" class="form-control" rows="2"></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="maintain-need" class="col-sm-2 control-label">特殊需求</label>
-                <div class="col-sm-10">
-                  <textarea id="maintain-need" class="form-control" rows="2"></textarea>
-                </div>
-              </div>
-              <div class="over-right">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" value="">
-                    使用账号余额：￥<span>0.00</span>
-                  </label>
-                </div>
-                <div class="real-money">实付金额：￥<span>0.00</span></div>
-                <button class="btn btn-warning">提交订单</button>
-              </div>
-            </form>  
-          </div>
-          <div role="tabpanel" class="tab-pane" id="recyc">
-            <div class="page-header">
-              <h2>废物回收<small>——变废为宝，为环保贡献力量</small></h2>
-            </div>
           </div>
         </div>
       </div>
@@ -222,23 +148,169 @@
     <script type="text/javascript" src="js/vendor/datepicker.js"></script>
     <script type="text/javascript">
       $(function(){
-        var id = window.location.href.split('#').pop();
+        function toDou(iNum){
+          return iNum<10?'0'+iNum:''+iNum;
+        }
+        //日期格式化函数
+        Date.prototype.Format = function (fmt) { //author: meizz 
+          var o = {
+              "M+": this.getMonth() + 1, //月份 
+              "d+": this.getDate(), //日 
+              "h+": this.getHours(), //小时 
+              "m+": this.getMinutes(), //分 
+              "s+": this.getSeconds(), //秒 
+              "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+              "S": this.getMilliseconds() //毫秒 
+          };
+          if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+          for (var k in o)
+          if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+          return fmt;
+        }
+
+        $('#service-data').val(new Date().Format("yyyy-MM-dd"));
+        var target = window.location.href.split('#').pop();
+        /*页面初加载，获取service——type,创建左侧导航栏*/
         $.ajax({
           url:'http://127.0.0.1:8081/service',
-          post:"GET",
+          type:"POST",
+          data:{
+            method:"query",
+            type:"category"
+          },
           success:function(data){
+            var _this;
             for (var i=0,len=data.data.length;i<len;i++){
-              $('<li role="presentation" class="'+(i==id?'left-nav-active active':'left-nav')+'"><a href="#service'+data.data[i].id+'" role="tab" data-toggle="tab">'+data.data[i].name+'</a></li>').appendTo($('ul.left-nav-tabs'));
+              $('<li role="presentation" class="'+(data.data[i].id==target?'left-nav-active active':'left-nav')+'" data-comment="'+data.data[i].comment+'" data-id="'+data.data[i].id+'"><a href="#service'+data.data[i].id+'" role="tab" data-toggle="tab">'+data.data[i].name+'</a></li>').appendTo($('ul.left-nav-tabs'));
+                if(data.data[i].id==target){
+                _this=i;
+              }
             }  
+            $('#service > .page-header > h2').html(data.data[_this].name+'<small>——'+data.data[_this].comment+'</small>');
+            if(target==3){
+              $('.checkbox').hide();
+              $('.real-money').hide();
+            }
+            //选项卡
+            $('li[role="presentation"]').each(function(item,index){
+              $(this).on('click',function(){
+                $('#service > .page-header > h2').html($(this).text()+'<small>——'+$(this).attr('data-comment')+'</small>');
+                if($(this).attr('data-id')==3){
+                  $('.checkbox').hide();
+                  $('.real-money').hide();
+                }else{
+                  $('.checkbox').show();
+                  $('.real-money').show();
+                }
+                $.ajax({
+                  url:'http://127.0.0.1:8081/service',
+                  type:"POST",
+                  data:{
+                    method:"query",
+                    type:"service",
+                    type_id:$(this).attr('data-id')
+                  },
+                  success:function(data){
+                    $('#service-options > option').remove();
+                    data.data.map(function(item){
+                      $('<option data-sid="'+item.id+'">'+item.name+'</option>').appendTo('#service-options');
+                    });
+                    $('#service-comment').text(data.data[0].comment);
+                    $('#service-price > span').text(data.data[0].price);
+                    $('.real-money span').text(parseFloat($('#service-price span').text()));
+                  },error:function(data){
+                    console.log(err);
+                  }
+                });
+              });
+            });
+            /*页面初加载，获取service*/
+            $.ajax({
+              url:'http://127.0.0.1:8081/service',
+              type:"POST",
+              data:{
+                method:"query",
+                type:"service",
+                type_id:target
+              },
+              success:function(data){
+                data.data.map(function(item){
+                  $('<option data-sid="'+item.id+'">'+item.name+'</option>').appendTo('#service-options');
+                });
+                $('#service-comment').text(data.data[0].comment);
+                $('#service-price > span').text(data.data[0].price);
+                $('.real-money span').html(parseFloat($('#service-price span').html()));
+                $('#service-phone').val($.cookie('phone'));
+                $('#service-address').val($.cookie('address'));
+                $('#balance').val($.cookie('balance'));   
+              },error:function(data){
+                console.log(err);
+              }
+            });
+            
           },
           error:function(data){
             console.log("error");
           }
         });
-        $.ajax({
-          url:'http://127.0.0.1:8081/service?method=query',
-          post:"POST",
-          
+        /*select框改变时获取service*/
+        $('#service-options').on('change',function(){
+          $.ajax({
+            url:'http://127.0.0.1:8081/service',
+            type:"POST",
+            data:{
+              method:"query",
+              type:"service",
+              name:$.trim($('#service-options').val())
+            },
+            success:function(data){
+              $('#service-comment').html(data.data[0].comment);
+              $('#service-price span').html(data.data[0].price);
+              $('.real-money span').text(parseFloat($('#service-price span').text()));
+            }
+          });
+        })
+        $('input:checkbox').on('click',function(){
+          if(this.checked){
+            $('.real-money span').text(parseFloat($('#service-price > span').text())-parseFloat($('#balance').val()));
+          }else{
+            $('.real-money span').text(parseFloat($('#service-price span').text()));
+          }
+        });
+        
+        $('ul.tablist li').on('click',function(){
+
+        });
+
+        //提交订单
+        $('#submit').on('click',function(){
+          var dataList={
+            user_id:$.cookie('uid'),
+            service_id: $('#service-options > option:selected').attr('data-sid'),
+            service_address:$('#service-address').text(),
+            demand:$('service-need').text,
+            book_time:$('#service-data').val()+$('#service-time').val(),
+            order_time:new Date().Format("yyyy-MM-dd hh:mm:ss")
+          }
+          $.ajax({
+            url:"http://127.0.0.1:8081/order",
+            type:"post",
+            data:{
+              method:"insert",
+              data:JSON.stringify([dataList]),
+              token:$.cookie('key')
+            },
+            success:function(data){
+              if(data.result){
+                alert('提交成功！');
+              }else{
+                alert('提交失败！');
+              }
+            },
+            error:function(data){
+              console.log(data);
+            }
+          });
         });
       })
     </script>

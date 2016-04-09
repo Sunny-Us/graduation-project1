@@ -53,7 +53,11 @@
       $(function(){
         $.ajax({
           url:"http://127.0.0.1:8081/service",
-          type:"GET",
+          type:"POST",
+          data:{
+            method:"query",
+            type:"category"
+          },
           success:function(data){
             console.log("service_type",data,data.data.length);
             for (var i=0,len=data.data.length;i<len;i++){
@@ -63,7 +67,7 @@
                     '<div class="caption">'+
                       '<h3>'+data.data[i].name+'</h3>'+
                       '<p>'+data.data[i].comment+'</p>'+
-                      '<p><a href="/serviceDetail#'+i+'" class="btn btn-warning" role="button">预约</a></p>'+
+                      '<p><a href="/serviceDetail#'+data.data[i].id+'" class="btn btn-warning" role="button">预约</a></p>'+
                     '</div>'+
                   '</div>'+
                 '</div>').appendTo($('.service'));
