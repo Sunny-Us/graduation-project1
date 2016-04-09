@@ -36,6 +36,14 @@ em{
 .important{
 	color: red;
 }
+.psd-warning{
+	color:red;
+	display: none;
+}
+.reinput-warning{
+	color:red;
+	display: none;
+}
 /*base info end*/
 
 /*正在进行中的订单 start*/
