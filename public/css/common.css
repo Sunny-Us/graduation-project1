@@ -146,7 +146,8 @@ footer.footer{
     border: 1px solid #dddddd;
     border-right-color: #ffffff;
     cursor: default;
-    padding: 10px 15px 10px 35px;
+    text-align: center;
+    // padding: 10px 15px 10px 35px;
 }
 .nav-tabs > li.left-nav > a {
     margin-right: 2px;
@@ -157,9 +158,10 @@ footer.footer{
 .nav > li.left-nav > a {
     position: relative;
     display: block;
-    padding: 10px 15px 10px 35px;
+    // padding: 10px 15px 10px 35px;
     color: #FFA000;
     width: 100%;
+    text-align: center;
 }
 /*.nav-tabs > li.left-nav > a,.nav-tabs > li.left-nav-active > a {
 	border-radius: 4px 0 0 4px;

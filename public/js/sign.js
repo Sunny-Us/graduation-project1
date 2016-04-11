@@ -101,9 +101,8 @@ $(function(){
                 }
             }
 		}
-
 	})
-	$('#signin-btn').on('click',function(event){
+	$('#signin-btn').on('click',function(){
 		$('#signinForm').bootstrapValidator('validate');
 		if($('#signinForm .glyphicon-remove').length==0){
 			$.ajax({
@@ -180,8 +179,10 @@ $(function(){
 			success:function(data){
 				console.log("success",data);
 				if(!data.result){
-					$('#helpBlock1').html('改用户名已存在！');
-					$('#helpBlock1').addClass('red');
+					$('#inputusername').parent('div').parent('div').removeClass('has-success').addClass('has-error');
+					$('#inputusername + i').removeClass('glyphicon-ok').addClass('glyphicon-remove');
+					alert('改用户名已存在！请重新输入');
+					
 				}
 			},
 			error:function(data){
