@@ -49,15 +49,15 @@
   </div>
   <div class="main-container container-fluid">
     <div class="row-fulid">
-      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+      <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
           <li role="presentation" class="left-nav-active active"><a href="#personal_info" aria-controls="personal_info" role="tab" data-toggle="tab">个人信息</a></li>
-          <li role="presentation" class="left-nav"><a href="#orders" aria-controls="messages" role="tab" data-toggle="tab">我的订单</a></li>
+          <li role="presentation" class="left-nav" id="my_orders"><a href="#orders" aria-controls="messages" role="tab" data-toggle="tab">我的订单</a></li>
           <li role="presentation" class="left-nav"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">账户余额</a></li>
         </ul>
       </div>  
-      <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 right-tab-content">
+      <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 right-tab-content">
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="personal_info">
               <div>
@@ -196,15 +196,15 @@
                <div>
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                  <li role="presentation" class="active"><a href="#ordering" aria-controls="home" role="tab" data-toggle="tab">正在进行订单</a></li>
-                  <li role="presentation"><a href="#ordered" aria-controls="profile" role="tab" data-toggle="tab">历史订单</a></li>
+                  <li role="presentation" class="active" id="orders_going"><a href="#ordering" aria-controls="home" role="tab" data-toggle="tab">正在进行订单</a></li>
+                  <li role="presentation" id="orders_done"><a href="#ordered" aria-controls="profile" role="tab" data-toggle="tab">历史订单</a></li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="ordering">
-                    <ul class="clearfix">
-                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
+                    <ul class="clearfix order-going-ul">
+                      <!-- <li class="order-list" onclick="javascript:openNext('zone_detail');">
                         <div class="row-fluid">
                             <section class="order-item">
                               <span class="order-name">马桶维修</span>
@@ -212,30 +212,15 @@
                               <input type="button" value="删除" class="delete-order-btn">
                               <input type="button" value="修改" class="modify-order-btn">
                               <!-- <span class="order-people">上门师傅：姚素娟</span> -->
-                            </section>   
+                            <!-- </section>   
                         </div>
-                      </li>
-                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
-                        <div class="row-fluid">
-                            <section class="order-item">
-                              <span class="order-name">马桶维修</span>
-                              <span class="order-state">已受理...</span>  <span class="order-time">预约时间：03月29号  9:00-18:00 </span><span class="order-people">上门师傅：姚素娟</span>
-                            </section>   
-                        </div>
-                      </li>
-                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
-                        <div class="row-fluid">
-                            <section class="order-item">
-                              <span class="order-name">马桶维修</span>
-                              <span class="order-state">进行中...</span>  <span class="order-time">预约时间：03月29号  9:00-18:00 </span><span class="order-people">上门师傅：姚素娟</span>
-                            </section>   
-                        </div>
-                      </li>
+                      </li> --> 
+                      
                     </ul>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="ordered">
-                    <ul class="clearfix">
-                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
+                    <ul class="clearfix order-done-ul">
+                      <!-- <li class="order-list" onclick="javascript:openNext('zone_detail');">
                         <div class="row-fluid">
                             <section class="ordered-item">
                               <span class="ordered-name">马桶维修</span>
@@ -244,25 +229,7 @@
                               <input type="button" class="evaluate-btn" value="待评价">
                             </section>   
                         </div>
-                      </li>
-                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
-                        <div class="row-fluid">
-                            <section class="ordered-item">
-                              <span class="ordered-name">马桶维修</span>
-                              <span class="ordered-state">已结束</span>  <span class="ordered-time">预约时间：03月29号  9:00-18:00 </span><span class="ordered-people">上门师傅：姚素娟</span>
-                              <input type="button" class="evaluated-btn" value="已评价" disabled>
-                            </section>   
-                        </div>
-                      </li>
-                      <li class="order-list" onclick="javascript:openNext('zone_detail');">
-                        <div class="row-fluid">
-                            <section class="ordered-item">
-                              <span class="ordered-name">马桶维修</span>
-                              <span class="ordered-state">已结束</span>  <span class="ordered-time">预约时间：03月29号  9:00-18:00 </span><span class="ordered-people">上门师傅：姚素娟</span>
-                              <input type="button" class="evaluated-btn" value="已评价" disabled>
-                            </section>   
-                        </div>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                 </div>
@@ -289,124 +256,6 @@
     {% parent %}
     <script type="text/javascript" src="third-party/upload_img/cropper/cropper.min.js"></script>
     <script type="text/javascript" src="third-party/upload_img/sitelogo/sitelogo.js"></script>
-    <script type="text/javascript">
-      $(function(){
-        //--------------初始化页面
-        var strUrl=window.location.href;
-        // console.log(strUrl);
-        var id=strUrl.split("#")[1];
-        // console.log(id);
-        function getPagesInfo(data){
-          $("#name_input").attr("value",data.data[0].name);
-          $("#tel_input").attr("value",data.data[0].phone);
-          $("#address_input").attr("value",data.data[0].address);
-          switch(data.data[0].gender){
-            case '0':break;
-            case '1':$("#gender").prop("checked","checked");break;
-            case '2':$("#gender1").prop("checked","checked");break;
-          }
-          $(".balance").html(" 您的账户余额为 "+data.data[0].balance+" 元");
-        }
-        function getPsd(data){
-          var oldPsd=$.md5(data.data[0].password);
-          var newPsd=$.md5($("#old_psd").val());
-          if(oldPsd==newPsd){
-            $(".psd-warning").css("display","none");
-            $("#submit_psd").on("click",function(){
-              changePsd();
-            });
-          }else{
-            $(".psd-warning").css("display","block");
-            $("#submit_psd").unbind("click");
-          }
-        }
-        function initial(id,operation){
-          var uid=parseInt(id);
-          var token = $.cookie("key");
-          $.ajax({
-            url:"http://127.0.0.1:8081/user/user",
-            type:"post",
-            data:{"method":"query","id":uid,"token":token},
-            success:function(data){
-              if(operation=="getPagesInfo"){
-                getPagesInfo(data);
-              }else if(operation == "getPsd"){
-                getPsd(data);
-              }
-            }
-          });
-        }
-        initial(id,"getPagesInfo");
-        //-----------修改信息
-        function modifyInfo(name,phone,gender,address){
-          // console.log(name,phone,gender,address);
-          var cookie=$.cookie("key");
-          $.ajax({
-            url:"http://127.0.0.1:8081/user/user",
-            type:"post",
-            data:{"method":"update","token":"cookie","data":JSON.stringify([{"2":{"name":name,"phone":phone,"gender":gender,"address":address}}])},
-            success:function(data){
-              if(data.result){
-                alert("修改信息成功");
-              }
-              
-            },
-            erro:function(data){
-              // console.log(data);
-              alert("修改信息失败");
-            }
-          });
-        }
-        $("#submit_baseInfo").on("click",function(){
-          var newname=$.trim($("#name_input").val());
-          var newtel=$.trim($("#tel_input").val());
-          var newgender=$.trim($('input:radio[name="gender"]:checked').val());
-          // console.log("newgender",newgender);
-          var newaddress=$.trim($("#address_input").val());
-          modifyInfo(newname,newtel,newgender,newaddress);
-        });
-        //-------------修改密码
-        function changePsd(){
-          var cookie=$.cookie("key");
-          var newpsd=$.trim($("#new_psd").val());
-          $.ajax({
-            url:"http://127.0.0.1:8081/user/user",
-            type:"post",
-            data:{"method":"update","token":"cookie","data":JSON.stringify([{"2":{"password":newpsd}}])},
-            success:function(data){
-              if(data.result){
-                alert("修改信息成功");
-              }
-              
-            },
-            erro:function(data){
-              // console.log(data);
-              alert("修改信息失败");
-            }
-          });
-        }
-        $("#old_psd").on("blur",function(){
-          initial(id,"getPsd");
-        });
-        $("#reinput_psd").on("blur",function(){
-          var repsd=$.trim($(this).val());
-          var newpsd=$.trim($("#new_psd").val());
-          if(repsd==newpsd){
-            $(".reinput-warning").css("display","none");
-             $("#submit_psd").on("click",function(){
-              changePsd();
-            });
-          }else{
-            $(".reinput-warning").css("display","block");
-            $("#submit_psd").unbind("click");
-          }
-        });
-
-        $("#submit_psd").on("click",function(){
-          changePsd();
-        });
-
-      });
-  </script>
+    
   {% endblock %}
 {% endblock%}

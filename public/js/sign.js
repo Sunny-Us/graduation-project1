@@ -104,6 +104,7 @@ $(function(){
 
 	})
 	$('#signin-btn').on('click',function(event){
+		console.log("111111111111");
 		$('#signinForm').bootstrapValidator('validate');
 		if($('#signinForm .glyphicon-remove').length==0){
 			$.ajax({
@@ -112,6 +113,7 @@ $(function(){
 					"method":"signin",
 					"username":$.trim($('#username').val()),
 					"password":$.md5($.trim($('#password').val()))
+					// "password":$.trim($("#password").val())
 				},
 				type:"post",
 				success:function(data, textStatus, request){
