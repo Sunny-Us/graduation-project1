@@ -135,6 +135,16 @@ footer.footer{
 	border-left:1px solid #ddd;
 	position: relative;
 	left: -16px;
+	z-index: 99;
+}
+.nav-tabs > li{
+	display: inline;
+	text-align: center;
+}
+.nav-tabs li a{
+	display: inline-block;
+	text-align: left;
+	width: 100%;
 }
 .nav-tabs > li.left-nav-active > a.link, 
 .nav-tabs > li.left-nav-active > a:hover,
@@ -146,7 +156,6 @@ footer.footer{
     border: 1px solid #dddddd;
     border-right-color: #ffffff;
     cursor: default;
-    text-align: center;
     // padding: 10px 15px 10px 35px;
 }
 .nav-tabs > li.left-nav > a {
@@ -161,12 +170,13 @@ footer.footer{
     // padding: 10px 15px 10px 35px;
     color: #FFA000;
     width: 100%;
-    text-align: center;
 }
-/*.nav-tabs > li.left-nav > a,.nav-tabs > li.left-nav-active > a {
-	border-radius: 4px 0 0 4px;
-	color:#FFA000;
-}*/
+@media(min-width:768px)and (max-width:1099px){
+	.nav li a{
+		width: 100%;
+    	text-align: center;
+	}
+}
 /*左侧导航栏 end*/
 /*右侧导航栏 start*/
 .right-tab-content{

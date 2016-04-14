@@ -1,45 +1,9 @@
-{% extends 'layout.html' %}
+{% extends 'layout-admin.html' %}
 
-{% block title %}ziroom | 服务详情{% endblock %}
-{% block link %}
-  {% parent %}
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-datepicker3.css">
-<link rel="stylesheet" type="text/css" href="css/vendor/jquery.dataTables.css">
-<link rel="stylesheet" type="text/css" href="css/admin.css">
-{% endblock %}
+{% block title %}ziroom | 管理员{% endblock %}
+
 {% block header %}
-<div class="default-nav">
-  {% block navbar %}
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-default">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a href="#" class="navbar-brand">
-          <img src="images/logo-orange.png" alt="ziroom">
-        </a>
-      </div>
-      <div class="collapse navbar-collapse" id="navbar-default">
-        <ul class="nav navbar-nav navbar-right" style="display: block">
-            <li class="signup" data-toggle="modal" data-target="#signup">注册</li>
-            <li class="signin" data-toggle="modal" data-target="#signin">登录</li>
-          </ul>
-          <div class="nav navbar-nav navbar-right" style="display: none">
-            <img class="image_url" src="" alt="photo" />
-            <a class="name"></a>
-            <span>|</span>
-            <a href="/" id="quit">退出</a>
-          </div>
-      </div>
-    </div>
-  </nav>
-  {% endblock %}
-</div>
+  {% parent %}
 {% endblock %}
 
 {% block sign %}
@@ -55,7 +19,7 @@
   </div>
   <div class="main-container container-fluid">
     <div class="row-fulid clearfix">
-      <div class="col-lg-2">
+      <div class="col-lg-2 sidebar">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
           <li role="presentation" class="left-nav-active active"><a href="#service1" role="tab" data-toggle="tab">会员信息管理</a></li>
@@ -72,17 +36,43 @@
             <thead>
             <tr>
               <th data-field="id">会员编号</th>
-              <th data-field="email">用户名</th>
-              <th data-field="password">密码</th>              
               <th data-field="name">会员姓名</th>
+              <th data-field="email">用户名</th>  
               <th data-field="gender">性别</th>
               <th data-field="phone">联系电话</th>
-              <th data-field="address">地址</th>     
-              <th data-field="image_url">头像</th>
+              <th data-field="address">地址</th>
               <th data-field="balance">账户余额</th>
+              <th>操作</th>
             </tr>
             </thead>
+            <tbody>
+              {% for x in data %}
+              <tr>   
+                <td>{{x.id}}</td>
+                <td>{{x.name}}</td>
+                <td>{{x.email}}</td>
+                {% if x.gender==0 %}
+                  <td>无</td>
+                {% endif %}
+                {% if x.gender==1 %}
+                  <td>男</td>
+                {% endif %}
+                {% if x.gender==2 %}
+                  <td>女</td>
+                {% endif %}
+                <td>{{x.phone}}</td>
+                <td>{{x.address}}</td>
+                <td>{{x.balance}}</td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#details">查看详情</button>
+                  <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#update">修改</button>
+                  <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete">删除</button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
           </table>
+          <button type="button" class="btn btn-success btn-xs add">添加</button>
         </div>
       </div>
     </div>  
@@ -91,47 +81,11 @@
   </div>
 </div>
 {% endblock %}
+
+{% block action %}
+  {% parent %}
+{% endblock %}
+
 {% block footer %}
   {% parent %}
-  {% block script %}
-    {% parent %}
-    <script type="text/javascript" src="js/vendor/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="js/vendor/bootstrap-datepicker.zh-CN.min.js"></script>
-    <script type="text/javascript" src="js/vendor/datepicker.js"></script>
-    <script type="text/javascript" src="js/vendor/jquery.dataTables.js"></script>
-    <script type="text/javascript">
-      $(function(){
-        $('table[data-datatable]').each(initTable);
-      });
-      function initTable(){
-        var dataTableOptions={
-          "pagingType": "full_numbers",
-          "language": {//语言中文化
-            "url":"Chinese.json"
-          },
-          "processing": true,
-          "bServerSide":false,//服务器端处理分页
-          "bPaginate": true,//是否分页
-          "sPaginationType": "bootstrap",
-          "ajax":{
-            url:"http://127.0.0.1:8081/user/user",
-            type:"post",
-            data:{
-              "method":"query",
-              "role":0
-            }
-          }
-        };
-        // $(this).find('[data-field]').each(function(){
-        //   var columnOptions = {
-        //     data:$(this).data('field'),
-        //     name:$(this).data('field')
-        //   };
-        //   dataTableOptions.colunms.push(columnOptions);
-        // });
-        $('#DataTable').dataTable(dataTableOptions);
-      }
-    </script>
-    <!-- <script type="text/javascript" src="js/datatable.js"></script> -->
-  {% endblock %}
 {% endblock %}
