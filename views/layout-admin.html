@@ -49,13 +49,79 @@
 	
 	{% block action %}
 		{% block showDetail %}
-		
+		<div class="modal fade" id="details">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">查看详情</div>
+					<div class="modal-body">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">编&nbsp;号<span class="importent">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="id" readonly>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="inputname" class="col-sm-2 control-label">姓&nbsp;名<span class="importent">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="name" readonly>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="inputusername" class="col-sm-2 control-label">用户名<span class="importent">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="email" class="form-control" id="username" readonly>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="inputpsd" class="col-sm-2 control-label">密&nbsp;码<span class="importent">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="password" class="form-control" id="password" readonly>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="inputpsd" class="col-sm-2 control-label">性&nbsp;别<span class="importent">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="password" class="form-control" id="gender" readonly>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="inputphone" class="col-sm-2 control-label">联系电话<span class="importent">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="phone" readonly>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="inputaddress" class="col-sm-2 control-label">居住地址<span class="importent">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="address" readonly>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="inputaddress" class="col-sm-2 control-label">头&nbsp;像<span class="importent">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="image_url" readonly>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="inputaddress" class="col-sm-2 control-label">账户余额<span class="importent">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="balance" readonly>
+						    </div>
+						</div>
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		{% endblock %}
 
 		{% block update %}
+		<div class="modal fade" id="update"></div>
 		{% endblock %}
 
 		{% block add %}
+		<div class="modal fade" id="delete"></div>
 		{% endblock %}
 	{% endblock %}
 
