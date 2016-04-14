@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}My Site{% endblock %}</title>
+	{% block link %}
+	<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" href="/css/vendor/bootstrapValidator.css"/>
+	<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-datepicker3.css">
+	<link rel="stylesheet" type="text/css" href="css/vendor/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="css/admin.css">
+	{% endblock %}
+</head>
+<body>
+	{% block header %}
+		<div class="default-nav">
+			<nav class="navbar navbar-default">
+			    <div class="container-fluid">
+			      <div class="navbar-header">
+			        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-default">
+			          <span class="sr-only">Toggle navigation</span>
+			          <span class="icon-bar"></span>
+			          <span class="icon-bar"></span>
+			          <span class="icon-bar"></span>
+			        </button>
+			        <a href="#" class="navbar-brand">
+			          <img src="images/logo-orange.png" alt="ziroom">
+			        </a>
+			      </div>
+			      <div class="collapse navbar-collapse" id="navbar-default">
+			        <ul class="nav navbar-nav navbar-right" style="display: block">
+			            <li class="signin" data-toggle="modal" data-target="#signin">登录</li>
+			          </ul>
+			          <div class="nav navbar-nav navbar-right" style="display: none">
+			            <img class="image_url" src="" alt="photo" />
+			            <a class="name"></a>
+			            <span>|</span>
+			            <a href="/" id="quit">退出</a>
+			          </div>
+			      </div>
+			    </div>
+			  </nav>
+		</div>
+	{% endblock %}
+
+	{% block content %}{% endblock %}
+	
+	{% block action %}
+		{% block showDetail %}
+		
+		{% endblock %}
+
+		{% block update %}
+		{% endblock %}
+
+		{% block add %}
+		{% endblock %}
+	{% endblock %}
+
+	{% block footer %}
+	<footer class="footer container-fluid">
+		<div class="footer-container row">
+			<div class="col-md-3 col-md-offset-1 col-xs-6">
+				<img src="images/logo-footer.png" alt="placeholder+image">
+				<div class="contact">
+					<p>客服电话:</p>
+					<p>123-456-789</p>
+					<p>563-476-382</p>
+				</div>
+			</div>
+			<div class="info col-md-3 col-md-offset-1 col-xs-6">
+				<h3>公司信息</h3>
+				<ul>
+					<li>关于</li>
+					<li>工作机会</li>
+					<li>帮助</li>
+					<li>条款与隐私</li>
+				</ul>
+			</div>
+			<div class="find col-md-3 min-hide">
+				<h3>发现</h3>
+				<ul>
+					<li>信任与安全</li>
+					<li>加入我们</li>
+					<li>关注我们</li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+	{% block script%}
+	<script type="text/javascript" src="js/vendor/jquery-2.1.3.js"></script>
+	<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/vendor/bootstrap.js"></script>
+	<script type="text/javascript" src="js/vendor/jquery.md5.js"></script>
+	<script type="text/javascript" src="js/sign.js"></script>
+	<script type="text/javascript" src="js/vendor/bootstrapValidator.js"></script>
+	<script type="text/javascript" src="js/zone.js"></script>
+	<script type="text/javascript" src="js/html5.js"></script>
+	<script type="text/javascript" src="js/vendor/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script type="text/javascript" src="js/vendor/datepicker.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('table[data-datatable]').each(initTable);
+      });
+      function initTable(){
+        var dataTableOptions={
+          "pagingType": "full_numbers",
+          "language": {//语言中文化
+            "url":"Chinese.json"
+          },
+          "processing": true,
+          "bServerSide":false,//服务器端处理分页
+          "bPaginate": true,//是否分页
+          "sPaginationType": "bootstrap"
+        };
+        $('#DataTable').dataTable(dataTableOptions);
+      }
+    </script>
+	{% endblock %}
+	{% endblock %}
+</body>
+</html>

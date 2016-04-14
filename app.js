@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var request = require('request');
 
 var routes = require('./routes/index');
 var test = require('./routes/test');
@@ -11,7 +12,7 @@ var users = require('./routes/users');
 var zone = require('./routes/personal_zone');
 var serviceDetail = require('./routes/service_detail');
 var orderDetail = require("./routes/order_detail");
-var adminSignup = require("./routes/admin_signup");
+var admin = require("./routes/admin");
 
 var app = express();
 
@@ -33,19 +34,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', routes);
 app.use('/test', test);
 app.use('/users', users);
 app.use('/zone',zone);
 app.use('/serviceDetail',serviceDetail);
 app.use('/orderDetail',orderDetail);
-app.use('/admin',adminSignup);
+// app.use('/admin',admin);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.get('/admin-user',function(req,res){
+  postData={
+    method:"query",
+    role:0
+  };
+  request.post({
+    url:'http://127.0.0.1:8081/user/user',
+    formData:postData
+  },function(error,response,body){
+    console.log(JSON.parse(body).data);
+    if(!error && response.statusCode == 200){
+      res.render('admin',{data:JSON.parse(body).data});
+    }
+  })
 });
 
 // error handlers

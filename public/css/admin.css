@@ -1,0 +1,20 @@
+.main-container{
+	width:95%;
+	min-width: 1000px;
+	padding-left:0;
+	padding-right: 0;
+}
+.sidebar{
+	padding-left: 0;
+}
+.tab-content{
+	position: relative;
+}
+.tab-content button.add{
+	position: absolute;
+	top:0px;
+	left:140px;
+}
+table tbody tr td button{
+	margin: 5px;
+}

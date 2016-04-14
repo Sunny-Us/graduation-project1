@@ -101,10 +101,9 @@ $(function(){
                 }
             }
 		}
-
 	})
-	$('#signin-btn').on('click',function(event){
-		console.log("111111111111");
+
+	$('#signin-btn').on('click',function(){
 		$('#signinForm').bootstrapValidator('validate');
 		if($('#signinForm .glyphicon-remove').length==0){
 			$.ajax({
@@ -124,10 +123,21 @@ $(function(){
 						$.cookie('uid',data.user.id);
 						$.cookie('uname',data.user.name);
 						$.cookie('image_url',data.user.image_url);
+						$.cookie('address',data.user.address);
+						$.cookie('phone',data.user.phone);
+						$.cookie('balance',data.user.balance);
 						$('#navbar-default ul').hide();
 						$('#navbar-default div').show();
 						$('#navbar-default > div > img').attr('src',data.user.image_url);
-						$('#navbar-default > div > .name').html(data.user.name).attr('href','/zone#'+data.user.id);
+						$('#navbar-default > div > .name').html(data.user.name)
+						if(data.user.role==0){
+							$('#navbar-default > div > .name').attr('href','/zone');
+						}else if(data.user.role==1){
+							$('#navbar-default > div > .name').attr('href','/#');
+						}else {
+							$('#navbar-default > div > .name').attr('href','/admin#');
+						}
+						
 						$.ajax({
 							url:"http://127.0.0.1:8081/service",
 							data:{
@@ -171,8 +181,10 @@ $(function(){
 			success:function(data){
 				console.log("success",data);
 				if(!data.result){
-					$('#helpBlock1').html('改用户名已存在！');
-					$('#helpBlock1').addClass('red');
+					$('#inputusername').parent('div').parent('div').removeClass('has-success').addClass('has-error');
+					$('#inputusername + i').removeClass('glyphicon-ok').addClass('glyphicon-remove');
+					alert('改用户名已存在！请重新输入');
+					
 				}
 			},
 			error:function(data){
@@ -221,5 +233,8 @@ $(function(){
 		$.cookie('uid',null);
 		$.cookie('uname',null);
 		$.cookie('image_url',null);
+		$.cookie('phone',null);
+		$.cookie('address',null);
+		$.cookie('balance',null);
 	})
 });
