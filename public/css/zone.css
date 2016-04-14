@@ -71,6 +71,7 @@ em{
 	border-bottom: 1px solid #eeeeee;
 	margin:15px 0 0 0;
 	padding-bottom: 5px;
+	cursor: pointer;
 }
 .order-list{
 	margin-left: 15px;
@@ -138,7 +139,10 @@ a.bread-nav-item-active{
 #take_order:before{
 	content:"已下单";
 }
-.circle-icon-active#take_order:before{
+.circle-icon-active#take_order:before,
+.circle-icon-active#accepted:before,
+.circle-icon-active#ongoing:before,
+.circle-icon-active#order_finished:before{
 	color:#FFA000;
 }
 #accepted:before{
@@ -192,7 +196,8 @@ a.bread-nav-item-active{
 .evaluate-btn,
 .evaluated-btn,
 .delete-order-btn,
-.modify-order-btn{
+.modify-order-btn,
+.evaluate-order-btn{
 	color: #fff;
 	display: block;
 	float: right;
@@ -201,6 +206,9 @@ a.bread-nav-item-active{
 	border-radius:3px;
 	border:1px solid #bdbdbd;
 	padding: 3px; 
+}
+.evaluate-order-btn{
+	background: #FFA000;
 }
 .delete-order-btn{
 	background: #ff0000;
