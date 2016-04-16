@@ -92,7 +92,7 @@ $(function(){
 	  $.ajax({
 	    url:"http://127.0.0.1:8081/user/user",
 	    type:"post",
-	    data:{"method":"update","token":token,"data":JSON.stringify([{"2":{"name":name,"phone":phone,"gender":gender,"address":address}}])},
+	    data:{"method":"update","token":token,"data":JSON.stringify([{[id]:{"name":name,"phone":phone,"gender":gender,"address":address}}])},
 	    success:function(data){
 	      if(data.result){
 	        alert("修改信息成功");
@@ -120,7 +120,7 @@ $(function(){
 	  $.ajax({
 	    url:"http://127.0.0.1:8081/user/user",
 	    type:"post",
-	    data:{"method":"update","token":token,"data":JSON.stringify([{"2":{"password":newpsd}}])},
+	    data:{"method":"update","token":token,"data":JSON.stringify([{[id]:{"password":newpsd}}])},
 	    success:function(data){
 	      if(data.result){
 	        alert("修改信息成功");
@@ -192,16 +192,17 @@ $(function(){
 				$(".order-done-ul").empty();
 				for(i=0;i<listNum;i++){
 					var status=data.data[i].status;
+					console.log("status:",status);
 					var statusDesc;
 					var order=data.data[i].id;
-
+					console.log(i,order);
 					switch(status){
 						case "1":statusDesc="已下单...";break;
 						case "2":statusDesc="已受理...";break;
 						case "3":statusDesc="进行中...";break;
 						case "4":statusDesc="已完成";break;
 					}
-					$("<li class='order-list' id='list"+data.data[i].id +"'>"+
+					$("<li class='order-list' id='list"+data.data[i].id +"' data-class='items"+ data.data[i].status +"'>"+
                         "<div class='row-fluid'>"+
                            "<section class='order-item'>"+
                               "<span class='order-name'>"+data.data[i].service_id.name +"</span>"+
@@ -216,6 +217,7 @@ $(function(){
                     "</li>").appendTo($(wrap));
                     var numStatus=parseInt(status);
                     if(numStatus>1 && numStatus<4){
+                    	console.log("numStatus",numStatus);
                     	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").hide();
                     	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").hide();
                     	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").hide();
@@ -235,14 +237,17 @@ $(function(){
 					});
 					//进入订单详情页 && 更改订单
 					$("div.row-fluid").on("click",".order-item",function(){
-						window.location.href="orderDetail#"+order+"#"+status;
+						var orderid=$.trim($(this).parent("div.row-fluid").parent("li.order-list").attr("id")).slice(4);
+						var orderstatus=$.trim($(this).parent("div.row-fluid").parent("li.order-list").attr("data-class")).slice(5);
+						window.location.href="orderDetail#"+orderid+"#"+orderstatus;
+						// window.location.href="orderDetail#1#1";
 					});
-					$("div.row-fluid").on("click",".modify-order-btn",function(){
-						window.location.href="orderDetail#"+order+"#"+status;
-					});
-					$("div.row-fluid").on("click",".evaluate-order-btn",function(){
-						window.location.href="orderDetail#"+order+"#"+status;
-					});
+					// $("div.row-fluid").on("click",".modify-order-btn",function(){
+					// 	window.location.href="orderDetail#"+order+"#"+status;
+					// });
+					// $("div.row-fluid").on("click",".evaluate-order-btn",function(){
+					// 	window.location.href="orderDetail#"+order+"#"+status;
+					// });
 				}
 			}
 

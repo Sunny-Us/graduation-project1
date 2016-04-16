@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="css/zone.css">
 <link rel="stylesheet" type="text/css" href="third-party/upload_img/cropper/cropper.min.css">
 <link rel="stylesheet" type="text/css" href="third-party/upload_img/sitelogo/sitelogo.css">
+<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-datepicker3.css">
 {% endblock %}
 {% block header %}
 <div class="default-nav">
@@ -47,8 +48,8 @@
   </div>
   <div class="main-container container-fluid">
     <div class="bread-nav">
-      <a href="zone" class="bread-nav-item">我的账单</a><em></em>
-      <a href="javascript:;" class="bread-nav-item">正在进行中的订单</a><em></em>
+      <a href="zone" class="bread-nav-item bread-nav-first">我的账单</a><em></em>
+      <a class="bread-nav-item bread-nav-second">正在进行中的订单</a><em></em>
       <a href="javascript:;" class="bread-nav-item-active">马桶维修</a>
     </div>
     <div class="container-fluid order-state-wrap">
@@ -78,8 +79,9 @@
           <section class="detail-service-address">服务地址：北京市朝阳区芍药居**号院**号楼**单元***室</section>
           <section class="detail-order-num">订单号：mtwx2016041111</section>
           <section class="detail-receive-people">验收人：马小跳</section>
+          <!-- <section class="detail-customer-phone">联系电话：</section> -->
           <!-- 已完成订单待评价 -->
-          <section style="" class="to-evaluate">评价：
+          <section style="display:none;" class="to-evaluate">评价：
             <span class="star-icon"></span>
             <span class="star-icon"></span>
             <span class="star-icon"></span>
@@ -88,15 +90,19 @@
             <button type="submit" class="evaluate-btn">评价</button>
           </section>
           <!-- 已完成订单已评价 -->
-          <section style="display:none">
+          <section style="display:none" class="evaluated">
             评价：
-            <span class="star-icon-active"></span>
-            <span class="star-icon-active"></span>
-            <span class="star-icon-active"></span>
-            <span class="star-icon-active"></span>
-            <span class="star-icon"></span>
+            <span class=""></span>
+            <span class=""></span>
+            <span class=""></span>
+            <span class=""></span>
+            <span class=""></span>
             <input type="button" class="evaluated-btn" value="已评价" disabled>
           </section>
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+           修改信息
+          </button>
+
         </div>
       </div>
     </div>
@@ -104,6 +110,35 @@
   <div class="bottom-flower">
   </div>
  </div>
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">更改订单</h4>
+        </div>
+        <div class="modal-body">
+         <section>
+           <label for="#service-data">预约时间</label>
+           <input id="service-data" data-date-format="yyyy-mm-dd" class="form-control" type="text"/>
+         </section>
+         <section>
+           <label for="#modal_service_addr">服务地址：</label>
+           <input type="text" class="form-control" id="modal_service_addr">
+         </section>
+         <section>
+           <label for="#modal_service_customer">验收人：</label>
+           <input type="text" class="form-control" id="modal_service_customer">
+         </section>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 {% block footer %}
   {% parent %}
@@ -111,21 +146,26 @@
     {% parent %}
     <script type="text/javascript" src="third-party/upload_img/cropper/cropper.min.js"></script>
     <script type="text/javascript" src="third-party/upload_img/sitelogo/sitelogo.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script type="text/javascript" src="js/vendor/datepicker.js"></script>
     <script>
       $(function(){
+        var url=window.location.href;
+        var urlarr=url.split("#");
+        var orderStatus=parseInt(urlarr[2]);
+        var orderId=parseInt(urlarr[1]);
+        var token=$.cookie("key");
+        // console.log(token);
         function initialOrderDetail(){
-          var url=window.location.href;
-          console.log(url);
-          var urlarr=url.split("#");
-          var orderStatus=parseInt(urlarr[2]);
-          var orderId=parseInt(urlarr[1]);
+          // console.log("orderstatus:",orderStatus);
           //先判断状态 start 
           var allLineIcon=$(".line-icon");
           var allCircleIcon=$(".circle-icon");
           allCircleIcon.removeClass("circle-icon-active");
           var circleLength=allCircleIcon.length;
           var lineLength=allLineIcon.length;
-          console.log(lineLength);
+          // console.log(lineLength);
           if(orderStatus>2){
             for(var i=0;i<lineLength;i++){
               allLineIcon.eq(i).addClass("line-icon-active");
@@ -133,11 +173,14 @@
           }else{
             allLineIcon.removeClass("line-icon-active");
             for(var j=0;j<orderStatus;j++){
-               allLineIcon.eq(i).addClass("line-icon-active");
+               allLineIcon.eq(j).addClass("line-icon-active");
             }
           }
           for(var a=0;a<orderStatus;a++){
             allCircleIcon.eq(a).addClass("circle-icon-active");
+          }
+          if(orderStatus<4){
+            $(".bread-nav-second").html("正在进行中的订单");
           }
           //先判断状态 end
           //请求订单详情 start
@@ -151,21 +194,89 @@
                 "token":token
               },
               success:function(data){
-                console.log(data);
+                // console.log(data);
+                // 填充数据
+                $(".bread-nav-item-active").html(data.data[0].service_id.name);
                 $(".service-person-name").html(data.data[0].worker_id.name);
                 $(".service-tel").html("联系电话："+data.data[0].worker_id.phone);
                 $(".detail-book-time").html("预约时间："+data.data[0].book_time);
                 $(".detail-finish-time").html("完成时间："+data.data[0].finish_time);
                 $(".detail-service-address").html("服务地址："+data.data[0].service_address);
                 $(".detail-receive-people").html("验收人："+$.cookie("uname"));
-              }
-          });
-                  
-                 
-          //请求订单详情 end
+                 var evaluatedScore=parseInt(data.data[0].comment);
+                if(data.data[0].status=="4" && evaluatedScore==0){
+                  $(".to-evaluate").css("display","block");
+                }else if(data.data[0].status=="4" && evaluatedScore !=0){
+                  $(".evaluated").css("display","block");
+                }
+                //如果已评价，显示
+                console.log("comment-type:",typeof(data.data[0].comment));
+                var allevaluated=$(".evaluated span");
+                var alllength=allevaluated.length;
+                for(var s=0;s<evaluatedScore;s++){
+                  allevaluated.eq(s).addClass("star-icon-active");
+                }
+                for(var a=evaluatedScore;a<alllength;a++){
+                  allevaluated.eq(a).addClass("start-icon");
+                }
 
+
+
+              }
+          });        
+          //请求订单详情 end
         }
         initialOrderDetail();
+        $(".bread-nav-second").on("click",function(){
+          window.location.href="zone#my_orders";
+        });
+
+        $(".evaluate-btn").on("click",function(){
+          var allactive=$(".to-evaluate .star-icon-active");
+          var score=allactive.length;
+          console.log(score);
+          $.ajax({
+            url:"http://127.0.0.1:8081/order",
+            type:"post",
+            data:{
+              "method":"update",
+              "token":token,
+              "data":JSON.stringify([{
+                [orderId]:{
+                  "comment":score
+                }
+              }])
+            },
+            success:function(data){
+              if(data.result){
+                alert("评价成功");
+                window.reload(true);
+              }
+            }
+          });
+
+        });
+
+        //日期格式化函数 start
+        Date.prototype.Format = function (fmt) { //author: meizz 
+          var o = {
+              "M+": this.getMonth() + 1, //月份 
+              "d+": this.getDate(), //日 
+              "h+": this.getHours(), //小时 
+              "m+": this.getMinutes(), //分 
+              "s+": this.getSeconds(), //秒 
+              "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+              "S": this.getMilliseconds() //毫秒 
+          };
+          if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+          for (var k in o)
+          if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+          return fmt;
+        }
+
+        $('#service-data').val(new Date().Format("yyyy-MM-dd"));
+
+        //日期格式化函数 end
       });
     </script>
   {% endblock %}

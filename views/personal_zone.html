@@ -204,32 +204,12 @@
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="ordering">
                     <ul class="clearfix order-going-ul">
-                      <!-- <li class="order-list" onclick="javascript:openNext('zone_detail');">
-                        <div class="row-fluid">
-                            <section class="order-item">
-                              <span class="order-name">马桶维修</span>
-                              <span class="order-state">已下单...</span>  <span class="order-time">预约时间：03月29号  9:00-18:00 </span>
-                              <input type="button" value="删除" class="delete-order-btn">
-                              <input type="button" value="修改" class="modify-order-btn">
-                              <!-- <span class="order-people">上门师傅：姚素娟</span> -->
-                            <!-- </section>   
-                        </div>
-                      </li> --> 
-                      
+                      <!-- 此处是正在进行中的列表 -->
                     </ul>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="ordered">
                     <ul class="clearfix order-done-ul">
-                      <!-- <li class="order-list" onclick="javascript:openNext('zone_detail');">
-                        <div class="row-fluid">
-                            <section class="ordered-item">
-                              <span class="ordered-name">马桶维修</span>
-                              <span class="ordered-state">已结束</span>  <span class="ordered-time">预约时间：03月29号  9:00-18:00 </span>
-                              <span class="ordered-people">上门师傅：姚素娟</span>
-                              <input type="button" class="evaluate-btn" value="待评价">
-                            </section>   
-                        </div>
-                      </li> -->
+                      <!-- 此处是已完成的订单列表 -->
                     </ul>
                   </div>
                 </div>
@@ -238,8 +218,7 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="account">
                   <div class="balance">
-                   
-
+                   <!-- 此处是账户余额 -->
                   </div> 
             </div>
           </div>
@@ -256,6 +235,16 @@
     {% parent %}
     <script type="text/javascript" src="third-party/upload_img/cropper/cropper.min.js"></script>
     <script type="text/javascript" src="third-party/upload_img/sitelogo/sitelogo.js"></script>
-    
+    <script>
+    $(function(){
+      function initialZone(){
+        var url=window.location.href;
+        if(url.indexOf("#my_orders")>=0){
+            $("#my_orders a").click();
+        }
+      }
+      initialZone();
+    });
+    </script>
   {% endblock %}
 {% endblock%}

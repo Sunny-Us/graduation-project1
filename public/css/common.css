@@ -156,7 +156,7 @@ footer.footer{
     border: 1px solid #dddddd;
     border-right-color: #ffffff;
     cursor: default;
-    // padding: 10px 15px 10px 35px;
+    /*padding: 10px 15px 10px 35px;*/
 }
 .nav-tabs > li.left-nav > a {
     margin-right: 2px;
@@ -167,7 +167,7 @@ footer.footer{
 .nav > li.left-nav > a {
     position: relative;
     display: block;
-    // padding: 10px 15px 10px 35px;
+    /*padding: 10px 15px 10px 35px;*/
     color: #FFA000;
     width: 100%;
 }
@@ -295,9 +295,9 @@ footer.footer{
 	right: 100px;
 	top: 50px;
 	width: 30px;
-	-moz-animation-name:'cloud2';
-	-moz-animation-duration:10s;
-	-moz-animation-iteration-count:infinite;
+	-ms-animation-name:'cloud2';
+	-ms-animation-duration:10s;
+	-ms-animation-iteration-count:infinite;
 	-webkit-animation-name:'cloud2';
 	-webkit-animation-duration:10s;
 	-webkit-animation-iteration-count:infinite;

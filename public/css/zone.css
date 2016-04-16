@@ -104,6 +104,7 @@ em{
 a.bread-nav-item{
 	color:#bdbdbd;
 	text-decoration: none;
+	cursor: pointer;
 }
 a.bread-nav-item:hover,
 a.bread-nav-item-active{
