@@ -119,9 +119,18 @@
           <h4 class="modal-title" id="myModalLabel">更改订单</h4>
         </div>
         <div class="modal-body">
+         <div class="form-group">
          <section>
-           <label for="#service-data">预约时间</label>
+           <label for="service-data" class="col-sm-2 control-label">上门服务日期</label>
            <input id="service-data" data-date-format="yyyy-mm-dd" class="form-control" type="text"/>
+         </section>
+         <section>
+           <label for="service-time" class="col-sm-2 control-label">上门服务时间</label>
+            <select id="service-time" class="form-control">
+              <option>上午 (09:00-12:00)</option>
+              <option>下午 (14:00-17:00)</option>
+              <option>晚上 (18:00-20:00)</option>
+            </select>
          </section>
          <section>
            <label for="#modal_service_addr">服务地址：</label>
@@ -200,6 +209,7 @@
                 $(".service-person-name").html(data.data[0].worker_id.name);
                 $(".service-tel").html("联系电话："+data.data[0].worker_id.phone);
                 $(".detail-book-time").html("预约时间："+data.data[0].book_time);
+                $("#service-data").value(data.data[0].book_time);
                 $(".detail-finish-time").html("完成时间："+data.data[0].finish_time);
                 $(".detail-service-address").html("服务地址："+data.data[0].service_address);
                 $(".detail-receive-people").html("验收人："+$.cookie("uname"));
