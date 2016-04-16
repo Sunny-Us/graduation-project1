@@ -1,0 +1,121 @@
+{% extends 'layout-admin.html' %}
+
+{% block title %}ziroom | 管理员{% endblock %}
+
+{% block header %}
+  {% parent %}
+{% endblock %}
+
+{% block sign %}
+  {% parent %}
+{% endblock %}
+
+{% block content %}
+<div class="content clearfix">
+  <div class="cloud">
+    <img src="images/cloud1.png" class="cloud1">
+    <img src="images/cloud2.png" class="cloud2">
+    <img src="images/cloud3.png" class="cloud3">
+  </div>
+  <div class="main-container container-fluid">
+    <div class="row-fulid clearfix">
+      <div class="col-lg-2 sidebar">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
+          <li role="presentation" class="left-nav"><a href="/admin-user">会员信息管理</a></li>
+          <li role="presentation" class="left-nav-active active"><a href="/admin-worker">家政人员信息管理</a></li>
+          <li role="presentation" class="left-nav"><a href="/admin-admin">管理员信息管理</a></li>
+          <li role="presentation" class="left-nav"><a href="/admin-serviceType">服务类型信息管理</a></li>
+          <li role="presentation" class="left-nav"><a href="/admin-service">服务信息管理</a></li>
+          <li role="presentation" class="left-nav"><a href="/admin-order">订单信息管理</a></li>
+        </ul>
+      </div>  
+      <div class="col-lg-10 right-tab-content clearfix">
+        <div class="tab-content">
+          <table id="DataTable" data-datatable width="100%"class="table table-striped table-bordered" cellspacing="0" id="test">
+            <thead>
+            <tr>
+              <th>会员编号</th>
+              <th>会员姓名</th>
+              <th>用户名</th>  
+              <th>性别</th>
+              <th>联系电话</th>
+              <th>地址</th>
+              <th>账户余额</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+              {% for x in data %}
+              <tr>   
+                <td>{{x.id}}</td>
+                <td>{{x.name}}</td>
+                <td>{{x.email}}</td>
+                {% if x.gender==0 %}
+                  <td>无</td>
+                {% endif %}
+                {% if x.gender==1 %}
+                  <td>男</td>
+                {% endif %}
+                {% if x.gender==2 %}
+                  <td>女</td>
+                {% endif %}
+                <td>{{x.phone}}</td>
+                <td>{{x.address}}</td>
+                <td>{{x.balance}}</td>
+                {% if x.status==0 %}
+                  <td class='importent'>禁用</td>
+                {% endif %}
+                {% if x.status==1 %}
+                  <td class="enable">启用</td>
+                {% endif %}
+                <td>
+                  <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#checkout">查看详情</button>
+                  <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#update">修改</button>
+                  <button type="button" class="btn btn-danger btn-xs delete"data-wahtever={{x.id}}>删除</button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-success btn-xs add" data-toggle="modal" data-target="#add">添加</button>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+{% endblock %}
+
+{% block action %}
+  {% parent %}
+{% endblock %}
+
+{% block footer %}
+  {% parent %}
+  <script type="text/javascript" src="js/action-user.js"></script>
+  <script type="text/javascript">
+  $(function(){
+    $('#add').on('show.bs.modal',function(){
+      var modal = $(this);
+      $('#add-submit').on('click',function(){
+        $('#signupForm').bootstrapValidator('validate');
+        var ajaxDate={ 
+          "name":$.trim(modal.find('#name').val()),
+          "email":$.trim(modal.find("#username").val()),
+          "phone":$.trim(modal.find("#phone").val()),
+          "password":$.md5($.trim(modal.find("#password").val())),
+          "address":$.trim(modal.find("#address").val()),
+          'gender':$.trim(modal.find('input:radio:checked').val()),
+          "status":1,
+          "role":1
+        }
+        add(ajaxDate);
+        $('#add').modal('hide').then(location.reload());
+      });
+    });
+  });
+    
+  </script>
+{% endblock %}
+
