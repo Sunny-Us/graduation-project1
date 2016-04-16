@@ -59,6 +59,10 @@ nav.navbar{
 	width: 100%;
 	text-align: center;
 }
+.importent{
+	color:#FFA000;
+	margin-left:5px;
+}
 footer.footer{
 	padding: 50px 0;
 	height:300px;
@@ -130,6 +134,7 @@ footer.footer{
 	right: -3px;
 	z-index: 22;
 	margin-right: 0;
+	margin-bottom: 20px;
 }
 .right-tab-content{
 	border-left:1px solid #ddd;

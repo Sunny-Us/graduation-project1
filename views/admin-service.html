@@ -1,0 +1,352 @@
+{% extends 'layout-admin.html' %}
+
+{% block title %}ziroom | 管理员{% endblock %}
+
+{% block header %}
+  {% parent %}
+{% endblock %}
+
+{% block sign %}
+  {% parent %}
+{% endblock %}
+
+{% block content %}
+<div class="content clearfix">
+  <div class="cloud">
+    <img src="images/cloud1.png" class="cloud1">
+    <img src="images/cloud2.png" class="cloud2">
+    <img src="images/cloud3.png" class="cloud3">
+  </div>
+  <div class="main-container container-fluid">
+    <div class="row-fulid clearfix">
+      <div class="col-lg-2 sidebar">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
+          <li role="presentation" class="left-nav"><a href="/admin">会员信息管理</a></li>
+          <li role="presentation" class="left-nav"><a href="/admin-worker">家政人员信息管理</a></li>
+          <li role="presentation" class="left-nav"><a href="/admin-admin">管理员信息管理</a></li>
+          <li role="presentation" class="left-nav"><a href="/admin-serviceType">服务类型信息管理</a></li>
+          <li role="presentation" class="left-nav-active active"><a href="/admin-service">服务信息管理</a></li>
+          <li role="presentation" class="left-nav"><a href="/admin-order">订单信息管理</a></li>
+        </ul>
+      </div>  
+      <div class="col-lg-10 right-tab-content clearfix">
+        <div class="tab-content">
+          <table id="DataTable" data-datatable width="100%"class="table table-striped table-bordered" cellspacing="0" id="test">
+            <thead>
+            <tr>
+              <th>服务编号</th>
+              <th>服务名称</th>
+              <th>服务类别</th>
+              <th>服务价格</th>
+              <td>操作</td>
+            </tr>
+            </thead>
+            <tbody>
+              {% for x in data %}
+              <tr>   
+                <td>{{x.id}}</td>
+                <td>{{x.name}}</td>
+                <td>{{x.type_id}}</td>
+                <td>{{x.price}}</td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#checkout">查看详情</button>
+                  <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#update">修改</button>
+                  <button type="button" class="btn btn-danger btn-xs delete"data-wahtever={{x.id}}>删除</button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-success btn-xs add" data-toggle="modal" data-target="#add">添加</button>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+{% endblock %}
+
+{% block action %}
+    {% block showDetail %}
+    <div class="modal fade" id="checkout">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">查看详情</h4>
+          </div>
+          <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">编&nbsp;号<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="id" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">名&nbsp;称<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="name" readonly>
+                </div>
+            </div>            
+            <div class="form-group">
+              <label class="col-sm-2 control-label">类&nbsp;型<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="type_id" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">价格<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="price" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">描述</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="comment" readonly>
+                </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+
+    {% block update %}
+    <div class="modal fade" id="update">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改信息</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="id" class="col-sm-2 control-label">编&nbsp;号<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="id" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">名&nbsp;称<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="type_id" class="col-sm-2 control-label">类型编号<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="type_id" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="price" class="col-sm-2 control-label">价&nbsp;格<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="price" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="comment" class="col-sm-2 control-label">描述</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="comment" >
+                  </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="update-submit">确定</button>
+              </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+
+    {% block add %}
+    <div class="modal fade" id="add">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" id="insertForm">
+              <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">名&nbsp;称<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" placeholder="服务名称" name="name">
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="type_id" class="col-sm-2 control-label">服务类型编号<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="type_id" placeholder="服务类型编号" name="type_id">
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="price" class="col-sm-2 control-label">价格<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="price" placeholder="小标题" name="price">
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="comment" class="col-sm-2 control-label">描&nbsp;述</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="comment" placeholder="描述" name="comment">
+                  </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="add-submit">确定</button>
+              </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  {% endblock %}
+
+
+{% block footer %}
+  {% parent %}
+  <script type="text/javascript">
+    function checkout(sid,modal){
+      $.ajax({
+        url:'http://127.0.0.1:8081/service',
+        type:"POST",
+        data:{
+          method:'query',
+          type:'service',
+          id:sid
+        },
+        success:function(data){
+          if(data.result){
+            data.data.map(function(item){
+              modal.find('#id').val(item.id);
+              modal.find('#name').val(item.name);
+              modal.find('#type_id').val(item.type_id);
+              modal.find('#price').val(item.price);
+              modal.find('#comment').val(item.comment);
+            });
+          }
+        },
+        error:function(data){
+          console.log(data);
+        }
+      });
+    }
+    function update(sid,modal){
+      var postData={};
+      postData.id=modal.find('#id').val();
+      postData.name=modal.find('#name').val();
+      postData.type_id=modal.find('#type_id').val();
+      postData.price=modal.find('#price').val();
+      postData.comment=modal.find('#comment').val();
+      console.log(postData);
+      $.ajax({
+        url:'http://127.0.0.1:8081/service',
+        type:'POST',
+        data:{
+          method:'update',
+          type:'service',
+          data:JSON.stringify([{[sid]:postData}])
+        },
+        success:function(data){
+          if(data.result){
+            alert('修改成功！');
+          }else{
+            alert('修改失败！');
+          }
+        },
+        error:function(data){
+          console.log(data);
+        }
+      });
+    }
+    function add(ajaxDate){
+      $.ajax({
+        url:'http://127.0.0.1:8081/service',
+        type:'POST',
+        data:{
+          'method':'insert',
+          'type':'service',
+          'data':JSON.stringify(ajaxDate)
+        },
+        success:function(data){
+          if(data.result){
+            alert('添加成功！');
+          }else{
+            alert('添加失败！');
+          }
+        },
+        error:function(data){
+          console.log(data);
+        }
+      });
+    }
+    $(function(){
+      //----------点击查看详情按钮
+      $('#checkout').on('show.bs.modal',function(event){
+        var button = $(event.relatedTarget);
+        var sid  = button.data('wahtever');
+        var modal = $(this);  
+        checkout(sid,modal);
+      });
+      //----------------点击修改按钮
+      $('#update').on('show.bs.modal',function(event){
+        var button = $(event.relatedTarget);
+        var sid  = button.data('wahtever');
+        var modal = $(this);
+        checkout(sid,modal);
+        $('#update-submit').on('click',function(){
+          update(sid,modal);
+          $('#update').modal('hide').then(location.reload());
+        });
+      });
+      //--------------点击删除
+      $('.delete').on('click',function(event){
+        var sid = $(this).data('wahtever');
+        var postData=[];
+        postData.push(sid);
+        $.ajax({
+          url:'http://127.0.0.1:8081/service',
+          type:'POST',
+          contentType:"application/x-www-form-urlencoded",
+          data:{
+            "method":'delete',
+            "type":'service',
+            "data":JSON.stringify(postData)
+          },
+          success:function(data){
+            if(data.result){
+              alert('删除成功！');
+              location.reload();
+            }else{
+              alert('删除失败！');
+            }
+          },
+          error:function(data){
+            console.log(data);
+          }
+        });
+      })
+      $('#add').on('show.bs.modal',function(){
+        var modal = $(this);
+        $('#add-submit').on('click',function(){
+          $('#insertForm').bootstrapValidator('validate');
+          var ajaxDate=[{ 
+            "name":$.trim(modal.find('#name').val()),
+            "type_id":$.trim(modal.find("#type_id").val()),
+            "price":$.trim(modal.find("#price").val()),
+            "comment":$.trim(modal.find("#comment").val())
+          }]
+          add(ajaxDate);
+          $('#add').modal('hide').then(location.reload());
+        });
+      });
+    });
+  </script>
+{% endblock %}

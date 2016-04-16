@@ -1,8 +1,7 @@
 .main-container{
 	width:95%;
 	min-width: 1000px;
-	padding-left:0;
-	padding-right: 0;
+	padding:25px 0 20px 0;
 }
 .sidebar{
 	padding-left: 0;
@@ -17,4 +16,7 @@
 }
 table tbody tr td button{
 	margin: 5px;
+}
+.enable{
+	color:#449A44;
 }

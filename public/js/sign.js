@@ -1,111 +1,9 @@
 $(function(){
-	$('#signupForm').bootstrapValidator({
-		message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-		fields:{
-			name:{
-				message:"请填写真实姓名",
-				validators:{
-					notEmpty:{
-						message:'姓名不能为空',
-					}
-				}
-			},
-			username:{
-				message:'请填写邮箱地址',
-				validators:{
-					notEmpty:{
-						message:'用户名不能为空',
-					},
-					stringLength:{
-						min: 6,
-						max: 30,
-						message:'用户名必须多于6个字符，少于30个字符'
-					}
-				}
-			},
-			password:{
-				validators:{
-					notEmpty:{
-						message:'密码不能为空'
-					},
-					identical:{
-						field:'confirmPassword',
-						message:'密码和确认密码不一致'
-					},
-					stringLength:{
-						min: 6,
-						max: 30,
-						message:'密码必须多于6个字符，少于30个字符'
-					}
-				}
-			},
-			confirmPassword:{
-				validators:{
-					notEmpty:{
-						message:'确认密码不能为空'
-					},
-					identical:{
-						field:'password',
-						message:'密码和确认密码不一致'
-					}
-				}
-			},
-			phoneNum:{
-				validators:{
-					notEmpty:{
-						message:'联系方式不能为空'
-					}
-				}
-			},
-			address:{
-				validators:{
-					notEmpty:{
-						message:'地址不能为空'
-					}
-				}
-			}
-		}
-	})
-	$('#signinForm').bootstrapValidator({
-		message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-		fields:{
-			username:{
-				validators:{
-					notEmpty:{
-						message:'用户名不能为空',
-					}
-				}
-			},
-			password:{
-				validators:{
-					notEmpty:{
-						message:'密码不能为空'
-					}
-				}
-			},
-			role: {
-                validators: {
-                    notEmpty: {
-                        message: '角色不能为空'
-                    }
-                }
-            }
-		}
-	})
-
+	//-----------------登录
 	$('#signin-btn').on('click',function(){
 		$('#signinForm').bootstrapValidator('validate');
 		if($('#signinForm .glyphicon-remove').length==0){
+			console.log($.md5($.trim($('#password').val())));
 			$.ajax({
 				url:"http://127.0.0.1:8081/user/signin",
 				data:{
@@ -129,39 +27,23 @@ $(function(){
 						$('#navbar-default ul').hide();
 						$('#navbar-default div').show();
 						$('#navbar-default > div > img').attr('src',data.user.image_url);
-						$('#navbar-default > div > .name').html(data.user.name)
+						$('#navbar-default > div > .name').html(data.user.name);
 						if(data.user.role==0){
 							$('#navbar-default > div > .name').attr('href','/zone');
 						}else if(data.user.role==1){
 							$('#navbar-default > div > .name').attr('href','/#');
-						}else {
-							$('#navbar-default > div > .name').attr('href','/admin#');
+						}else if(data.user.role==2){
+							$('#navbar-default > div > .name').attr('href','javascript:;');
+							location.href='/admin-user';
+						}	
+						
+					}else{
+						if(data.code==1){
+							alert('登录名或密码错误！');
+						}else{
+							alert('登录失败！');
 						}
 						
-						$.ajax({
-							url:"http://127.0.0.1:8081/service",
-							data:{
-								"method":"query",
-								"type":"category",
-								"id":0,
-								'token':$.cookie('key')
-							},
-							type:"post",
-							statusCode: {
-							    403: function() {
-							      location.href = "";
-							    }
-							},
-							success:function(data){
-
-								console.log("success",data);
-							},
-							error:function(data){
-								console.log("error",data);
-							}
-						});
-					}else if(data.code==1){
-						alert('用户名或密码错误！');
 					}
 				},
 				error: function (data) {
@@ -170,6 +52,7 @@ $(function(){
 			});
 		}
 	});
+	//---------------注册验证
 	$('#inputusername').on('blur',function(){
 		$.ajax({
 			url:"http://127.0.0.1:8081/user/signup",
@@ -192,6 +75,7 @@ $(function(){
 			}
 		});
 	})
+	//---------------注册
 	$('#signup-btn').on('click',function(){
 		$('#signupForm').bootstrapValidator('validate');
 		var ajaxDate={ 
@@ -200,6 +84,7 @@ $(function(){
 			"phone":$.trim($("#inputphone").val()),
 			"password":$.md5($.trim($("#inputpsd").val())),
 			"address":$.trim($("#inputaddress").val()),
+			"role":$("input:radio:checked").val(),
 			"status":1
 		}
 		if($('#signupForm .glyphicon-remove').length==0){
@@ -226,7 +111,7 @@ $(function(){
 		$('#navbar-default ul').hide();
 		$('#navbar-default div').show();
 		$('#navbar-default > div > img').attr('src',$.cookie('image_url'));
-		$('#navbar-default > div > .name').html($.cookie('uname')).attr('href','/zone#'+ $.cookie('uid'));
+		$('#navbar-default > div > .name').html($.cookie('uname'));
 	}
 	$('#quit').on('click',function(){
 		$.cookie('key',null);

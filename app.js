@@ -52,13 +52,83 @@ app.get('/admin-user',function(req,res){
     url:'http://127.0.0.1:8081/user/user',
     formData:postData
   },function(error,response,body){
-    console.log(JSON.parse(body).data);
     if(!error && response.statusCode == 200){
-      res.render('admin',{data:JSON.parse(body).data});
+      res.render('admin.html',{data:JSON.parse(body).data});
     }
   })
 });
-
+app.get('/admin-worker',function(req,res){
+  postData={
+    method:"query",
+    role:1
+  };
+  request.post({
+    url:'http://127.0.0.1:8081/user/user',
+    formData:postData
+  },function(error,response,body){
+    if(!error && response.statusCode == 200){
+      res.render('admin-worker.html',{data:JSON.parse(body).data});
+    }
+  })
+});
+app.get('/admin-admin',function(req,res){
+  postData={
+    method:"query",
+    role:2
+  };
+  request.post({
+    url:'http://127.0.0.1:8081/user/user',
+    formData:postData
+  },function(error,response,body){
+    if(!error && response.statusCode == 200){
+      res.render('admin-admin.html',{data:JSON.parse(body).data});
+    }
+  })
+});
+app.get('/admin-serviceType',function(req,res){
+  postData={
+    method:"query",
+    type:"category"
+  };
+  request.post({
+    url:'http://127.0.0.1:8081/service',
+    formData:postData
+  },function(error,response,body){
+    if(!error && response.statusCode == 200){
+      res.render('admin-serviceType.html',{data:JSON.parse(body).data});
+    }
+  })
+});
+app.get('/admin-service',function(req,res){
+  postData={
+    method:"query",
+    type:"service"
+  };
+  request.post({
+    url:'http://127.0.0.1:8081/service',
+    formData:postData
+  },function(error,response,body){
+    if(!error && response.statusCode == 200){
+      res.render('admin-service.html',{data:JSON.parse(body).data});
+    }
+  })
+});
+app.get('/admin-order',function(req,res){
+  postData={
+    method:"query",
+    token: req.cookies.key
+  };
+  console.log(postData)
+  request.post({
+    url:'http://127.0.0.1:8081/order',
+    formData:JSON.stringify(postData),
+    contentType:'application/x-www-form-urlencoded'
+  },function(error,response,body){
+    if(!error && response.statusCode == 200){
+      res.render('admin-order.html',{data:JSON.parse(body).data});
+    }
+  })
+});
 // error handlers
 app.use(function(err,req,res,next){
   res.status(404).send('Sorry cannot find that!');

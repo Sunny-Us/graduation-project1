@@ -25,20 +25,20 @@
 			          <span class="icon-bar"></span>
 			          <span class="icon-bar"></span>
 			        </button>
-			        <a href="#" class="navbar-brand">
+			        <a href="/" class="navbar-brand">
 			          <img src="images/logo-orange.png" alt="ziroom">
 			        </a>
 			      </div>
 			      <div class="collapse navbar-collapse" id="navbar-default">
-			        <ul class="nav navbar-nav navbar-right" style="display: block">
-			            <li class="signin" data-toggle="modal" data-target="#signin">登录</li>
-			          </ul>
-			          <div class="nav navbar-nav navbar-right" style="display: none">
-			            <img class="image_url" src="" alt="photo" />
-			            <a class="name"></a>
-			            <span>|</span>
-			            <a href="/" id="quit">退出</a>
-			          </div>
+			      	<ul class="nav navbar-nav navbar-right" style="display: block">
+			      		<li class="signin" data-toggle="modal" data-target="#signin">登录</li>
+			      	</ul>
+			      	<div class="nav navbar-nav navbar-right" style="display: none">
+			      		<img class="image_url" src="" alt="photo" />
+			      		<a class="name"></a>
+			      		<span>|</span>
+			      		<a href="/" id="quit">退出</a>
+			      	</div>
 			      </div>
 			    </div>
 			  </nav>
@@ -49,10 +49,13 @@
 	
 	{% block action %}
 		{% block showDetail %}
-		<div class="modal fade" id="details">
+		<div class="modal fade" id="checkout">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
-					<div class="modal-header">查看详情</div>
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        				<h4 class="modal-title">查看详情</h4>
+					</div>
 					<div class="modal-body">
 					<form class="form-horizontal">
 						<div class="form-group">
@@ -62,51 +65,66 @@
 						    </div>
 						</div>
 						<div class="form-group">
-							<label for="inputname" class="col-sm-2 control-label">姓&nbsp;名<span class="importent">*</span></label>
+							<label class="col-sm-2 control-label">姓&nbsp;名<span class="importent">*</span></label>
 						    <div class="col-sm-10">
 						      <input type="text" class="form-control" id="name" readonly>
 						    </div>
 						</div>
 						<div class="form-group">
-							<label for="inputusername" class="col-sm-2 control-label">用户名<span class="importent">*</span></label>
+							<label class="col-sm-2 control-label">用户名<span class="importent">*</span></label>
 						    <div class="col-sm-10">
 						      <input type="email" class="form-control" id="username" readonly>
 						    </div>
 						</div>
 						<div class="form-group">
-							<label for="inputpsd" class="col-sm-2 control-label">密&nbsp;码<span class="importent">*</span></label>
+							<label class="col-sm-2 control-label">密&nbsp;码<span class="importent">*</span></label>
 						    <div class="col-sm-10">
-						      <input type="password" class="form-control" id="password" readonly>
+						      <input type="text" class="form-control" id="password" readonly>
 						    </div>
 						</div>
 						<div class="form-group">
-							<label for="inputpsd" class="col-sm-2 control-label">性&nbsp;别<span class="importent">*</span></label>
+							<label class="col-sm-2 control-label">性&nbsp;别<span class="importent">*</span></label>
 						    <div class="col-sm-10">
-						      <input type="password" class="form-control" id="gender" readonly>
+						      <input type="text" class="form-control" id="gender" readonly>
 						    </div>
 						</div>
 						<div class="form-group">
-							<label for="inputphone" class="col-sm-2 control-label">联系电话<span class="importent">*</span></label>
+							<label class="col-sm-2 control-label">联系电话<span class="importent">*</span></label>
 						    <div class="col-sm-10">
 						      <input type="text" class="form-control" id="phone" readonly>
 						    </div>
 						</div>
 						<div class="form-group">
-							<label for="inputaddress" class="col-sm-2 control-label">居住地址<span class="importent">*</span></label>
+							<label class="col-sm-2 control-label">居住地址<span class="importent">*</span></label>
 						    <div class="col-sm-10">
 						      <input type="text" class="form-control" id="address" readonly>
 						    </div>
 						</div>
 						<div class="form-group">
-							<label for="inputaddress" class="col-sm-2 control-label">头&nbsp;像<span class="importent">*</span></label>
+							<label class="col-sm-2 control-label">头&nbsp;像<span class="importent">*</span></label>
 						    <div class="col-sm-10">
 						      <input type="text" class="form-control" id="image_url" readonly>
 						    </div>
 						</div>
 						<div class="form-group">
-							<label for="inputaddress" class="col-sm-2 control-label">账户余额<span class="importent">*</span></label>
+							<label class="col-sm-2 control-label">账户余额<span class="importent">*</span></label>
 						    <div class="col-sm-10">
 						      <input type="text" class="form-control" id="balance" readonly>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">状&nbsp;态<span class="importent">*</span></label>
+						    <div class="col-sm-10">
+						      <div class="col-sm-6 radio">
+                                    <label>
+                                        <input class="status" type="radio" name="status" value="1" readonly/> 启用
+                                    </label>
+                                </div>
+                                <div class="col-sm-6 radio">
+                                    <label>
+                                        <input class="status" type="radio" name="status" value="0" readonly/> 禁用
+                                    </label>
+                                </div>
 						    </div>
 						</div>
 					</form>
@@ -117,11 +135,163 @@
 		{% endblock %}
 
 		{% block update %}
-		<div class="modal fade" id="update"></div>
+		<div class="modal fade" id="update">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        				<h4 class="modal-title">修改信息</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label for="id" class="col-sm-2 control-label">编&nbsp;号<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="id" >
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="name" class="col-sm-2 control-label">姓&nbsp;名<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="name" >
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="username" class="col-sm-2 control-label">用户名<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="email" class="form-control" id="username" >
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="password" class="col-sm-2 control-label">密&nbsp;码<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="password" >
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="gender" class="col-sm-2 control-label">性&nbsp;别<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="gender" >
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="phone" class="col-sm-2 control-label">联系电话<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="phone" >
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="address" class="col-sm-2 control-label">居住地址<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="address" >
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="image_url" class="col-sm-2 control-label">头&nbsp;像<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="image_url" >
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="balance" class="col-sm-2 control-label">账户余额<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="balance" >
+							    </div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">状&nbsp;态<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <div class="col-sm-6 radio">
+	                                    <label>
+	                                        <input class="status" type="radio" name="gender" value="1" /> 启用
+	                                    </label>
+	                                </div>
+	                                <div class="col-sm-6 radio">
+	                                    <label>
+	                                        <input class="status" type="radio" name="gender" value="0" /> 禁用
+	                                    </label>
+	                                </div>
+							    </div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+				        <button type="button" class="btn btn-primary" id="update-submit">确定</button>
+			        </div>
+				</div>
+			</div>
+		</div>
 		{% endblock %}
 
 		{% block add %}
-		<div class="modal fade" id="delete"></div>
+		<div class="modal fade" id="add">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        				<h4 class="modal-title">添加</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal"id="signupForm">
+							<div class="form-group">
+								<label for="name" class="col-sm-2 control-label">姓&nbsp;名<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="name" placeholder="姓名" name="name">
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="username" class="col-sm-2 control-label">用户名<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="email" class="form-control" id="username" placeholder="邮箱" name="username">
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="password" class="col-sm-2 control-label">密&nbsp;码<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="password" class="form-control" id="password" placeholder="密码" name="password">
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="confirmpsd" class="col-sm-2 control-label">确认密码<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="password" class="form-control" id="confirmpsd" placeholder="确认密码" name="confirmPassword">
+							    </div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">性&nbsp;别<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <div class="col-sm-6 radio">
+	                                    <label>
+	                                        <input type="radio" name="gender" value="1" /> 男
+	                                    </label>
+	                                </div>
+	                                <div class="col-sm-6 radio">
+	                                    <label>
+	                                        <input type="radio" name="gender" value="2" /> 女
+	                                    </label>
+	                                </div>
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="phoneNum" class="col-sm-2 control-label">联系电话<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="phone" placeholder="电话" name="phoneNum">
+							    </div>
+							</div>
+							<div class="form-group">
+								<label for="address" class="col-sm-2 control-label">居住地址<span class="importent">*</span></label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" id="address" placeholder="地址" name="address">
+							    </div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+				        <button type="button" class="btn btn-primary" id="add-submit">确定</button>
+			        </div>
+				</div>
+			</div>
+		</div>
 		{% endblock %}
 	{% endblock %}
 
@@ -160,17 +330,23 @@
 	<script type="text/javascript" src="js/vendor/jquery.cookie.js"></script>
 	<script type="text/javascript" src="js/vendor/bootstrap.js"></script>
 	<script type="text/javascript" src="js/vendor/jquery.md5.js"></script>
-	<script type="text/javascript" src="js/sign.js"></script>
+	<script type="text/javascript" src="js/validate.js"></script>
 	<script type="text/javascript" src="js/vendor/bootstrapValidator.js"></script>
-	<script type="text/javascript" src="js/zone.js"></script>
 	<script type="text/javascript" src="js/html5.js"></script>
 	<script type="text/javascript" src="js/vendor/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="js/vendor/bootstrap-datepicker.zh-CN.min.js"></script>
     <script type="text/javascript" src="js/vendor/datepicker.js"></script>
     <script type="text/javascript" src="js/vendor/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="js/sign.js"></script>
     <script type="text/javascript">
       $(function(){
         $('table[data-datatable]').each(initTable);
+        if($.cookie('key')){
+        	$('#navbar-default>ul').hide();
+        	$('#navbar-default>div').show();
+        	$('#navbar-default > div > img').attr('src',$.cookie('image_url'));
+			$('#navbar-default > div > .name').html($.cookie('uname'))
+        }
       });
       function initTable(){
         var dataTableOptions={
