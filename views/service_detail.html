@@ -145,7 +145,7 @@
     {% parent %}
     <script type="text/javascript" src="js/vendor/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="js/vendor/bootstrap-datepicker.zh-CN.min.js"></script>
-    <script type="text/javascript" src="js/vendor/datepicker.js"></script>
+    <script type="text/javascript" src="js/datepicker.js"></script>
     <script type="text/javascript">
       $(function(){
         function toDou(iNum){
@@ -287,7 +287,7 @@
           var dataList={
             user_id:$.cookie('uid'),
             service_id: $('#service-options > option:selected').attr('data-sid'),
-            service_address:$('#service-address').text(),
+            service_address:$('#service-address').val(),
             demand:$('service-need').text,
             book_time:$('#service-data').val()+$('#service-time').val(),
             order_time:new Date().Format("yyyy-MM-dd hh:mm:ss")
