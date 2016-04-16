@@ -111,7 +111,7 @@ $(function(){
 		$('#navbar-default ul').hide();
 		$('#navbar-default div').show();
 		$('#navbar-default > div > img').attr('src',$.cookie('image_url'));
-		$('#navbar-default > div > .name').html($.cookie('uname'));
+		$('#navbar-default > div > .name').html($.cookie('uname')).attr('href','/zone');
 	}
 	$('#quit').on('click',function(){
 		$.cookie('key',null);

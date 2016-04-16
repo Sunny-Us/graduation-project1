@@ -121,8 +121,8 @@ app.get('/admin-order',function(req,res){
   console.log(postData)
   request.post({
     url:'http://127.0.0.1:8081/order',
-    formData:JSON.stringify(postData),
-    contentType:'application/x-www-form-urlencoded'
+    formData:postData,
+    'ContentType':'application/x-www-form-urlencoded'
   },function(error,response,body){
     if(!error && response.statusCode == 200){
       res.render('admin-order.html',{data:JSON.parse(body).data});
