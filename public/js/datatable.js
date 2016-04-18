@@ -1,10 +1,8 @@
 $(function(){
-  // $.ajax({
-  //   url:"http://127.0.0.1:8081/user/user"
-  // });
   $('table[data-datatable]').each(initTable);
   
 });
+
 function initTable(){
   var dataTableOptions = {
     "ordering":false,
