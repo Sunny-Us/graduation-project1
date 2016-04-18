@@ -54,6 +54,9 @@
     </div>
     <div class="container-fluid order-state-wrap">
       <div class="row-fluid order-state clearfix">
+        <section class="notice">
+          （提示：点击下列按钮，可更改订单状态）
+        </section>
         <div class="circle-icon circle-icon-active" id="take_order"></div>
         <div class="line-icon line-icon-active"></div>
         <div class="circle-icon" id="accepted"></div>
@@ -66,7 +69,7 @@
         <div class="col-lg-3 service-info-left">
           <img src="images/service_person.png" class="service-person-img">
           <div class="service-person-indetail">
-            <section class="service-person-name">姚小瑶</section>
+            <section class="customer-name">客户：姚小瑶</section>
             <section class="service-tel">
               联系电话：18612345678
             </section>
@@ -78,53 +81,38 @@
           <section class="detail-finish-time">完成时间：2016.04.11 12:35</section>
           <section class="detail-service-address">服务地址：北京市朝阳区芍药居**号院**号楼**单元***室</section>
           <section class="detail-order-num">订单号：mtwx2016041111</section>
-          <section class="detail-receive-people">验收人：马小跳</section>
+          <!-- <section class="detail-receive-people">验收人：马小跳</section> -->
           <!-- <section class="detail-customer-phone">联系电话：</section> -->
           <!-- 已完成订单待评价 -->
-          <div style="display:none;" class="make-comment">
-            <section class="to-evaluate">
-              评价：
-              <span class="star-icon"></span>
-              <span class="star-icon"></span>
-              <span class="star-icon"></span>
-              <span class="star-icon"></span>
-              <span class="star-icon"></span>
-            </section>
-            <section class="clearfix od-comment">
-              <section for="comment_text" class="comment-title-wrap">评论：</section>
-              <textarea name="" id="comment_text" cols="60" rows="5" class="comment-text"></textarea>
-            </section>
-            <section class="clearfix od-additional-comment">
-              <section for="additional_comment_text" class="comment-title-wrap">追加评论：</section>
-              <textarea name="" id="additional_comment_text" cols="60" rows="5" class="additional-comment-text"></textarea>
-            </section>
+          <!-- <section style="display:none;" class="to-evaluate">评价：
+            <span class="star-icon"></span>
+            <span class="star-icon"></span>
+            <span class="star-icon"></span>
+            <span class="star-icon"></span>
+            <span class="star-icon"></span>
             <button type="submit" class="evaluate-btn">评价</button>
-          </div>
-         
+          </section> -->
           <!-- 已完成订单已评价 -->
-          <div class="commented" style="display:none;">
-            <section class="evaluated">
-              评价：
-              <span class=""></span>
-              <span class=""></span>
-              <span class=""></span>
-              <span class=""></span>
-              <span class=""></span>
-            </section>
-            <section class="clearfix od-commented">
-              <section for="comment_text" class="comment-title-wrap">评论：</section>
-              <textarea name="" id="commented_text" cols="60" rows="5" class="comment-text" readonly></textarea>
-            </section>
-            <section class="clearfix od-additional-commented">
-              <section for="additional_comment_text" class="comment-title-wrap">追加评论：</section>
-              <textarea name="" id="additional_commented_text" cols="60" rows="5" class="additional-comment-text"></textarea>
-            </section>
-            <input type="button" class="evaluated-btn" value="已评价" disabled>
-          </div>
-          
-          <button type="button" class="btn btn-primary modify-order-info-btn" data-toggle="modal" data-target="#myModal" style="float:right">
+          <section class="evaluated">
+            评价：
+            <span class="star-icon"></span>
+            <span class="star-icon"></span>
+            <span class="star-icon"></span>
+            <span class="star-icon"></span>
+            <span class="star-icon"></span>
+            <!-- <input type="button" class="evaluated-btn" value="已评价" disabled> -->
+          </section>
+          <section class="clearfix">
+            <section for="comment_text" class="comment-title-wrap">评论：</section>
+            <textarea name="" id="comment_text" cols="60" rows="5" class="comment-text"></textarea>
+          </section>
+          <section class="clearfix">
+            <section for="additional_comment_text" class="comment-title-wrap">追加评论：</section>
+            <textarea name="" id="additional_comment_text" cols="60" rows="5" class="additional-comment-text"></textarea>
+          </section>
+         <!--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="float:right">
            修改信息
-          </button>
+          </button> -->
 
         </div>
       </div>
@@ -134,7 +122,7 @@
   </div>
  </div>
  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -159,10 +147,10 @@
            <label for="modal_service_addr">服务地址：</label>
            <input type="text" class="form-control" id="modal_service_addr">
          </section>
-        <!--  <section>
+         <section>
            <label for="#modal_service_customer">验收人：</label>
            <input type="text" class="form-control" id="modal_service_customer">
-         </section> -->
+         </section>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" id="save_orderchanges">保存</button>
@@ -171,7 +159,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 {% endblock %}
 {% block footer %}
   {% parent %}
@@ -201,6 +189,7 @@
           var lineLength=allLineIcon.length;
           // console.log(lineLength);
           if(orderStatus>2){
+            $(".notice").css("display","block");
             for(var i=0;i<lineLength;i++){
               allLineIcon.eq(i).addClass("line-icon-active");
             }
@@ -217,7 +206,6 @@
             $(".bread-nav-second").html("正在进行中的订单");
           }
           orderStatus==1 ? $(".service-info-left").css("display","none") : $(".service-info-left").css("display","block");
-          orderStatus > 1 ? $(".modify-order-info-btn").css("display","none") : $(".modify-order-info-btn").css("display","block");
           //先判断状态 end
           //请求订单详情 start
           var token=$.cookie("key");
@@ -230,46 +218,36 @@
                 "token":token
               },
               success:function(data){
-                // console.log(data);
+                console.log(data);
                 // 填充数据
                 $(".bread-nav-item-active").html(data.data[0].service_id.name);
-                $(".service-person-name").html("服务人员："+data.data[0].worker_id.name);
-                $(".service-tel").html("联系电话："+data.data[0].worker_id.phone);
+                $(".customer-name").html("客户："+data.data[0].user_id.name);
+                $(".service-tel").html("联系电话："+data.data[0].user_id.phone);
                 $(".detail-book-time").html("预约时间："+data.data[0].book_time);
                 // $("#service-data").value(data.data[0].book_time);
                 $(".detail-finish-time").html("完成时间："+data.data[0].finish_time);
                 // console.log(data.data[0].service_address);
                 $(".detail-service-address").html("服务地址："+data.data[0].service_address);
                 $("#modal_service_addr").val(data.data[0].service_address);
-                $(".detail-receive-people").html("验收人："+$.cookie("uname"));
+
+                //评价框 数据填充
+                // $(".comment-text").text(data.data[0].comment_id.comment);
+                // $(".additional-comment-text").text(data.data[0].additional_comment);
+                
+
+
+
+                // $(".detail-receive-people").html("验收人："+$.cookie("uname"));
                 // $("#modal_service_customer").val($.cookie("uname"));
 
-                var evaluatedScore=parseInt(data.data[0].comment_id.score);
-                var commentText=data.data[0].comment_id.comment;
-                var additionalCommentText=data.data[0].comment_id.additional_comment;
-                //没有评分、评论、追加评论
-                if(data.data[0].status=="4" && evaluatedScore==0){
-                  $(".commented").css("display","none");
-                  $(".make-comment").css("display","block");
-                  $("#additional_commented_text").css("display","none");
-                }
-                //有评分，无评论，无追加评论
-                //有评分，有评论，无追加评论
-                if(data.data[0].status=="4" && evaluatedScore !=0 && additionalCommentText==null){
-                  $(".make-comment").css("display","none");
-                  $(".commented").css("display","block");
-                  $("#commented_text").text(commentText);
-                  $(".evaluated-btn").val("追加评论").removeAttr("disabled");
-                }
-                //有评分，有评论，有追加评论
-                $(data.data[0].status=="4" && evaluatedScore !=0 && additionalCommentText != null){
-                  $(".make-comment").css("display","none");
-                  $(".commented").css("display","block");
-                  $("#commented_text").text(commentText);
-                  $("#additional_commented_text").text(additionalCommentText);
-                  $(".evaluated-btn").css("display","none");
-                }
-
+                var evaluatedScore=parseInt(data.data[0].comment);
+                // if(data.data[0].status=="4" && evaluatedScore==0){
+                //   $(".to-evaluate").css("display","block");
+                // }else 
+                // 判断是否已有评分
+                // if(data.data[0].status=="4" && evaluatedScore !=0){
+                //   $(".evaluated").css("display","block");
+                // }
                 //如果已评价，显示
                 // console.log("comment-type:",typeof(data.data[0].comment));
                 var allevaluated=$(".evaluated span");
@@ -278,8 +256,9 @@
                   allevaluated.eq(s).addClass("star-icon-active");
                 }
                 for(var a=evaluatedScore;a<alllength;a++){
-                  allevaluated.eq(a).addClass("star-icon");
+                  allevaluated.eq(a).addClass("start-icon");
                 }
+
 
 
               }
@@ -287,81 +266,12 @@
           //请求订单详情 end
         }
         initialOrderDetail();
-      //面包屑导航 第二个导航 start
         $(".bread-nav-second").on("click",function(){
-          window.location.href="zone#my_orders";
-        });
-      //面包屑导航 第二个导航 end
-      //点击评论按钮 start
-        $(".evaluate-btn").on("click",function(){
-          var allactive=$(".to-evaluate .star-icon-active");
-          var score=allactive.length;
-          console.log(score);
-          var comment=$("#comment_text").text();
-          if(score==0){
-            alert("评分不可为0！");
-          }else{
-            $.ajax({
-              url:"http://127.0.0.1:8081/order",
-              type:"post",
-              data:{
-                "method":"update",
-                "token":token,
-                "data":JSON.stringify([{
-                  [orderId]:{
-                    "score":score,       //此处需和数据库确认
-                    "comment":comment    //此处需和数据库确认  
-                  }
-                }])
-              },
-              success:function(data){
-                if(data.result){
-                  alert("评价成功");
-                  location.reload(true);
-                }
-              }
-            });
-          }
-        });
-         
-      //点击评价按钮 end
-      //点击追加评价按钮 start
-        $(".evaluated-btn").on("click",function(){
-          var additional=$("#additional_commented_text").text();
-          if(additional==null){
-            alert("追加评价不可为空！");
-          }else{
-            $.ajax({
-              url:"http://127.0.0.1:8081/order",
-              type:"post",
-              data:{
-                "method":"update",
-                "token":token,
-                "data":JSON.stringify([{
-                  [orderId]:{
-                    "additional_comment":additional    //此处需和数据库确认  
-                  }
-                }])
-              },
-              success:function(data){
-                if(data.result){
-                  alert("追加评价成功");
-                  location.reload(true);
-                }
-              }
-            });
-          }
+          window.location.href="workerZone#my_orders";
         });
 
-      //点击追加评价按钮 end  
-
-        });
-      //保存修改 start
-        $("#save_orderchanges").on("click",function(){
-          var serviceTime=$("#service-data").val() + $("#service-time").val();
-          console.log(serviceTime);
-          var serviceAddr=$("#modal_service_addr").val();
-          console.log(serviceAddr);
+        //更改订单状态 start
+        function changeStatus(status){
           $.ajax({
             url:"http://127.0.0.1:8081/order",
             type:"post",
@@ -370,42 +280,121 @@
               "token":token,
               "data":JSON.stringify([{
                 [orderId]:{
-                  // "order_id":orderId,
-                  "service_address":serviceAddr,
-                  "book_time":serviceTime
+                  "status":status
                 }
-
-               
               }])
             },
             success:function(data){
-              // $("#myModal").css("display","none");
-              data.result ? alert("更改订单成功！"):alert("更改订单失败");
-              location.reload(true);
+              data.result ? alert("修改状态成功！"):alert("修改状态失败！");
             }
-          })
-        });
-      //保存修改 end
-      //日期格式化函数 start
-        Date.prototype.Format = function (fmt) { //author: meizz 
-          var o = {
-              "M+": this.getMonth() + 1, //月份 
-              "d+": this.getDate(), //日 
-              "h+": this.getHours(), //小时 
-              "m+": this.getMinutes(), //分 
-              "s+": this.getSeconds(), //秒 
-              "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-              "S": this.getMilliseconds() //毫秒 
-          };
-          if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-          for (var k in o)
-          if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-          return fmt;
+          });
+
         }
+        $("#ongoing").on("click",function(){
+          var status=3;
+          changeStatus(status);
+          $(".circle-icon").eq(2).addClass("circle-icon-active");
+          $(".line-icon").eq(2).addClass("line-icon-active");
+        });
+        $("#order_finished").on("click",function(){
+          var status=4;
+          if($(".circle-icon").eq(2).hasClass("circle-icon-active")){
+            changeStatus(status);
+            $(".circle-icon").eq(3).addClass("circle-icon-active");
+          }else{
+            alert("请先点击“进行中”按钮！");
+          }
+        });
 
-        $('#service-data').val(new Date().Format("yyyy-MM-dd"));
 
-      //日期格式化函数 end
+
+
+        
+        //更改订单状态 end
+
+
+
+
+
+
+        //评价按钮 start
+        // $(".evaluate-btn").on("click",function(){
+        //   var allactive=$(".to-evaluate .star-icon-active");
+        //   var score=allactive.length;
+        //   console.log(score);
+        //   $.ajax({
+        //     url:"http://127.0.0.1:8081/order",
+        //     type:"post",
+        //     data:{
+        //       "method":"update",
+        //       "token":token,
+        //       "data":JSON.stringify([{
+        //         [orderId]:{
+        //           "comment":score
+        //         }
+        //       }])
+        //     },
+        //     success:function(data){
+        //       if(data.result){
+        //         alert("评价成功");
+        //         location.reload(true);
+        //       }
+        //     }
+        //   });
+        // });
+        //评价按钮 end
+        
+        
+        //保存修改 start
+        // $("#save_orderchanges").on("click",function(){
+        //   var serviceTime=$("#service-data").val() + $("#service-time").val();
+        //   console.log(serviceTime);
+        //   var serviceAddr=$("#modal_service_addr").val();
+        //   console.log(serviceAddr);
+        //   $.ajax({
+        //     url:"http://127.0.0.1:8081/order",
+        //     type:"post",
+        //     data:{
+        //       "method":"update",
+        //       "token":token,
+        //       "data":JSON.stringify([{
+        //         [orderId]:{
+        //           // "order_id":orderId,
+        //           "service_address":serviceAddr,
+        //           "book_time":serviceTime
+        //         }
+
+               
+        //       }])
+        //     },
+        //     success:function(data){
+        //       // $("#myModal").css("display","none");
+        //       data.result ? alert("更改订单成功！"):alert("更改订单失败");
+        //       location.reload(true);
+        //     }
+        //   })
+        // });
+        //保存修改 end
+        //日期格式化函数 start
+        // Date.prototype.Format = function (fmt) { //author: meizz 
+        //   var o = {
+        //       "M+": this.getMonth() + 1, //月份 
+        //       "d+": this.getDate(), //日 
+        //       "h+": this.getHours(), //小时 
+        //       "m+": this.getMinutes(), //分 
+        //       "s+": this.getSeconds(), //秒 
+        //       "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        //       "S": this.getMilliseconds() //毫秒 
+        //   };
+        //   if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        //   for (var k in o)
+        //   if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        //   return fmt;
+        // }
+
+        // $('#service-data').val(new Date().Format("yyyy-MM-dd"));
+
+        //日期格式化函数 end
       });
     </script>
   {% endblock %}

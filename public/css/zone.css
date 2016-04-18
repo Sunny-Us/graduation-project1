@@ -229,5 +229,25 @@ a.bread-nav-item-active{
 }
 /*账单详情页 end*/
 
-
+/*worker_order_detail.html start*/
+.service-info-right section.comment-title-wrap{
+	padding-left: 0;
+	padding-right: 0;
+	width: 80px;
+	float: left;
+	text-align: left;
+	resize:none;
+}
+.comment-text,.additional-comment-text{
+	float: left;
+}
+#ongoing,#order_finished{
+	cursor: pointer;
+}
+.notice{
+	display: none;
+	color: red;
+	padding-bottom: 15px;
+}
+/*worker_order_detail.html end*/
 

@@ -272,7 +272,7 @@
             user_id:$.cookie('uid'),
             service_id: $('#service-options > option:selected').attr('data-sid'),
             service_address:$('#service-address').val(),
-            demand:$('service-need').text,
+            demand:$('service-need').val(),
             book_time:$('#service-data').val()+$('#service-time').val(),
             order_time:new Date().Format("yyyy-MM-dd hh:mm:ss")
           }

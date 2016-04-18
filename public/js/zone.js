@@ -207,7 +207,7 @@ $(function(){
                            "<section class='order-item'>"+
                               "<span class='order-name'>"+data.data[i].service_id.name +"</span>"+
                               "<span class='order-state'>"+ statusDesc +"</span>"+  
-                              "<span class='order-time'>"+"预约时间："+data.data[i].order_time +"</span>"+
+                              "<span class='order-time'>"+"预约时间："+data.data[i].book_time +"</span>"+
                               "<input type='button' value='删除' class='delete-order-btn'>"+
                               "<input type='button' value='修改' class='modify-order-btn'>"+
                               "<input type='button' value='评价' class='evaluate-order-btn'>"+
