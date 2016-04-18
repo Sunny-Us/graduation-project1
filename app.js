@@ -13,6 +13,8 @@ var zone = require('./routes/personal_zone');
 var serviceDetail = require('./routes/service_detail');
 var orderDetail = require("./routes/order_detail");
 var admin = require("./routes/admin");
+var workerZone = require("./routes/worker_zone");
+var workerOrderDetail = require("./routes/worker_order_detail");
 
 var app = express();
 
@@ -42,6 +44,8 @@ app.use('/zone',zone);
 app.use('/serviceDetail',serviceDetail);
 app.use('/orderDetail',orderDetail);
 // app.use('/admin',admin);
+app.use('/workerZone',workerZone);
+app.use('/workerOrderDetail',workerOrderDetail);
 
 app.get('/admin-user',function(req,res){
   postData={
