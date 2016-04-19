@@ -34,8 +34,7 @@ function checkout(oid,modal){
     }
   });
 }
-function update(oid,modal,postData){
-  
+function update(oid,postData){
   $.ajax({
     url:'http://127.0.0.1:8081/order',
     type:"POST",
@@ -60,7 +59,7 @@ $(function(){
   //----------点击查看详情按钮
   $('#checkout').on('show.bs.modal',function(event){
     var button = $(event.relatedTarget);
-    var oid  = button.data('wahtever');
+    var oid  = button.data('whatever');
     console.log(oid);
     var modal = $(this);  
     checkout(oid,modal);
@@ -68,7 +67,7 @@ $(function(){
   //----------------点击修改按钮
   $('#update').on('show.bs.modal',function(event){
     var button = $(event.relatedTarget);
-    var oid  = button.data('wahtever');
+    var oid  = button.data('whatever');
     var modal = $(this);
     checkout(oid,modal);
     $('#update-submit').on('click',function(){
@@ -84,14 +83,14 @@ $(function(){
       postData.demand=modal.find('#demand').val();
       postData.comment=modal.find('#comment').val();
       postData.book_time=modal.find('#book_time').val();
-      update(oid,modal,postData);
+      update(oid,postData);
       $('#update').modal('hide').then(location.reload(true));
     });
   });
   //----------------点击受理按钮
   $('#accept').on('show.bs.modal',function(event){
     var button = $(event.relatedTarget);
-    var oid  = button.data('wahtever');
+    var oid  = button.data('whatever');
     var modal = $(this);
     $.ajax({
       url:'http://127.0.0.1:8081/user/user',
@@ -113,13 +112,13 @@ $(function(){
       var postData={};
       postData.worker_id=modal.find('#worker>option:selected').data('id');
       postData.status=2;
-      update(oid,modal,postData);
-      $('#update').modal('hide').then(location.reload(true));
+      update(oid,postData);
+      $('#accept').modal('hide').then(location.reload(true));
     });
   });
   //---------------点击删除按钮
   $('.delete').on('click',function(event){
-    var oid = $(this).data('wahtever');
+    var oid = $(this).data('whatever');
     var postData=[];
     postData.push(oid);
     $.ajax({
@@ -143,5 +142,13 @@ $(function(){
         console.log(data);
       }
     });
+  })
+  //---------------点击确认完成按钮
+  $('.finish').on('click',function(event){
+    var oid = $(this).data('whatever');
+    console.log(oid);
+    var postData={};
+    postData.status=4;
+    update(oid,postData).then(location.reload(true));
   })
 });

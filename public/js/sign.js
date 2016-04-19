@@ -31,7 +31,7 @@ $(function(){
 						if(data.user.role==0){
 							$('#navbar-default > div > .name').attr('href','/zone');
 						}else if(data.user.role==1){
-							$('#navbar-default > div > .name').attr('href','/#');
+							$('#navbar-default > div > .name').attr('href','/worker_zone');
 						}else if(data.user.role==2){
 							$('#navbar-default > div > .name').attr('href','javascript:;');
 							location.href='/admin-user';
@@ -84,7 +84,8 @@ $(function(){
 			"phone":$.trim($("#inputphone").val()),
 			"password":$.md5($.trim($("#inputpsd").val())),
 			"address":$.trim($("#inputaddress").val()),
-			"role":$("input:radio:checked").val(),
+			"gender":$('.gender:radio:checked').val(),
+			"role":0,
 			"status":1
 		}
 		if($('#signupForm .glyphicon-remove').length==0){
@@ -101,17 +102,23 @@ $(function(){
 						alert('注册成功！');
 						$('#signup').modal('hide');
 					}else{
-						alert("error");
+						alert("注册失败！");
 					}
+				},
+				error:function(data){
+					console.log(data);
 				}
 			})
 		}
 	});
-	if($.cookie('key')!='null'){
+	if($.cookie('key')&&$.cookie('key')!='null'){
 		$('#navbar-default ul').hide();
 		$('#navbar-default div').show();
 		$('#navbar-default > div > img').attr('src',$.cookie('image_url'));
 		$('#navbar-default > div > .name').html($.cookie('uname')).attr('href','/zone');
+	}else{
+		$('#navbar-default ul').show();
+		$('#navbar-default div').hide();
 	}
 	$('#quit').on('click',function(){
 		$.cookie('key',null);

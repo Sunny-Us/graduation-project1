@@ -162,6 +162,21 @@ app.get('/finished-order',function(req,res){
     }
   });
 });
+app.get('/admin-comment',function(req,res){
+  request.post({
+    url:'http://127.0.0.1:8081/order',
+    formData:{
+      method:"query",
+      token: req.cookies.key,
+      status:JSON.stringify([4])
+    },
+    'content-type':'application/x-www-form-urlencoded'
+  },function(error,response,body){
+    if(!error && response.statusCode == 200){
+      res.render('admin-comment.html',{data:JSON.parse(body).data});
+    }
+  });
+});
 // error handlers
 app.use(function(err,req,res,next){
   res.status(404).send('Sorry cannot find that!');

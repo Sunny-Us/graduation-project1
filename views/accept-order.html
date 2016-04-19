@@ -27,7 +27,7 @@
           <li role="presentation" class="left-nav"><a href="/admin-admin">管理员信息管理</a></li>
           <li role="presentation" class="left-nav"><a href="/admin-serviceType">服务类型信息管理</a></li>
           <li role="presentation" class="left-nav"><a href="/admin-service">服务信息管理</a></li>
-          <li role="presentation" class="left-nav-active active"><a href="/admin-order">订单信息管理</a></li>
+          <li role="presentation" class="left-nav-active active"><a href="/admin-order">订单信息管理</a></li><li role="presentation" class="left-nav"><a href="/admin-comment">评价信息管理</a></li>
         </ul>
       </div>  
       <div class="col-lg-10 right-tab-content clearfix">
@@ -78,9 +78,10 @@
                       {% endif %}
                       <td>{{x.book_time}}</td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#checkout">查看详情</button>
-                        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#update">修改</button>
-                        <button type="button" class="btn btn-danger btn-xs delete"data-wahtever={{x.id}}>删除</button>
+                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-whatever={{x.id}} data-target="#checkout">查看详情</button>
+                        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-whatever={{x.id}} data-target="#update">修改</button>
+                        <button type="button" class="btn btn-danger btn-xs delete"data-whatever={{x.id}}>删除</button>
+                        <button type="button" class="btn btn-success btn-xs finish"data-whatever={{x.id}}>确认完成</button>
                       </td>
                     </tr>
                     {% endfor %}

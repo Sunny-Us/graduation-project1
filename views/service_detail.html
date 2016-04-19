@@ -64,72 +64,87 @@
             <div class="page-header">
               <h2></h2>
             </div>
-            <form class="form-horizontal clearfix">
-              <div class="form-group">
-                <label for="service-options" class="col-sm-2 control-label">项目选择<span class="importent">*</span></label>
-                <div class="col-sm-10">
-                  <select id="service-options" class="form-control">
-                    
-                  </select>
+            <div>
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="present" class="active">
+                  <a href="#service-tab" aria-controls="home" role="tab" data-toggle="tab"aria-expanded="false">预约服务</a>
+                </li>
+                <li role="present">
+                  <a href="#comment-tab" aria-controls="home" role="tab" data-toggle="tab"aria-expanded="false">查看评价</a>
+                </li>
+              </ul>
+              <div class="tab-content service-comment-tab">
+                <div role="tabpanel" class="tab-pane active" id="service-tab">
+                  <form class="form-horizontal clearfix">
+                    <div class="form-group">
+                      <label for="service-options" class="col-sm-2 control-label">项目选择<span class="importent">*</span></label>
+                      <div class="col-sm-10">
+                        <select id="service-options" class="form-control">
+                          
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">详细说明</label>
+                      <div class="col-sm-10">
+                        <p id="service-comment" class="form-control-static">适用于家具表面的日常精品保洁，预计打扫1个小时</p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">价格</label>
+                      <div class="col-sm-10">
+                        <p id="service-price" class="form-control-static orange">￥<span>60</span></p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="service-data" class="col-sm-2 control-label">上门服务日期<span class="importent">*</span></label>
+                      <div class="col-sm-10">
+                        <input id="service-data" data-date-format="yyyy-mm-dd" class="form-control" type="text"/>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="service-time" class="col-sm-2 control-label">上门服务时间<span class="importent">*</span></label>
+                      <div class="col-sm-10">
+                        <select id="service-time" class="form-control">
+                          <option>上午 (09:00-12:00)</option>
+                          <option>下午 (14:00-17:00)</option>
+                          <option>晚上 (18:00-20:00)</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="service-phone" class="col-sm-2 control-label">联系电话<span class="importent">*</span></label>
+                      <div class="col-sm-10">
+                        <input id="service-phone" class="form-control"/>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="service-address" class="col-sm-2 control-label">地址<span class="importent">*</span></label>
+                      <div class="col-sm-10">
+                        <textarea id="service-address" class="form-control" rows="2"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="service-need" class="col-sm-2 control-label">特殊需求</label>
+                      <div class="col-sm-10">
+                        <textarea id="service-need" class="form-control" rows="2"></textarea>
+                      </div>
+                    </div>
+                    <div class="over-right">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="">
+                          使用账号余额：￥<span id="balance">0.00</span>
+                        </label>
+                      </div>
+                      <div class="real-money">实付金额：￥<span>0.00</span></div>
+                      <button id="submit" type="button" class="btn btn-warning">提交订单</button>
+                    </div>
+                  </form>
                 </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">详细说明</label>
-                <div class="col-sm-10">
-                  <p id="service-comment" class="form-control-static">适用于家具表面的日常精品保洁，预计打扫1个小时</p>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">价格</label>
-                <div class="col-sm-10">
-                  <p id="service-price" class="form-control-static orange">￥<span>60</span></p>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="service-data" class="col-sm-2 control-label">上门服务日期<span class="importent">*</span></label>
-                <div class="col-sm-10">
-                  <input id="service-data" data-date-format="yyyy-mm-dd" class="form-control" type="text"/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="service-time" class="col-sm-2 control-label">上门服务时间<span class="importent">*</span></label>
-                <div class="col-sm-10">
-                  <select id="service-time" class="form-control">
-                    <option>上午 (09:00-12:00)</option>
-                    <option>下午 (14:00-17:00)</option>
-                    <option>晚上 (18:00-20:00)</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="service-phone" class="col-sm-2 control-label">联系电话<span class="importent">*</span></label>
-                <div class="col-sm-10">
-                  <input id="service-phone" class="form-control"/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="service-address" class="col-sm-2 control-label">地址<span class="importent">*</span></label>
-                <div class="col-sm-10">
-                  <textarea id="service-address" class="form-control" rows="2"></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="service-need" class="col-sm-2 control-label">特殊需求</label>
-                <div class="col-sm-10">
-                  <textarea id="service-need" class="form-control" rows="2"></textarea>
-                </div>
-              </div>
-              <div class="over-right">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" value="">
-                    使用账号余额：￥<span id="balance">0.00</span>
-                  </label>
-                </div>
-                <div class="real-money">实付金额：￥<span>0.00</span></div>
-                <button id="submit" type="button" class="btn btn-warning">提交订单</button>
-              </div>
-            </form>      
+                <div role="tabpanel" class="tab-pane" id="comment-tab"></div>
+              </div> 
+            </div>     
           </div>
         </div>
       </div>
@@ -146,6 +161,7 @@
     <script type="text/javascript" src="js/vendor/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="js/vendor/bootstrap-datepicker.zh-CN.min.js"></script>
     <script type="text/javascript" src="js/datepicker.js"></script>
+    <script type="text/javascript" src="js/tab.js"></script>
     <script type="text/javascript">
       $(function(){
         function toDou(iNum){
