@@ -85,7 +85,7 @@ $(function(){
     });
   }
   initial(id,"getPagesInfo");
-  //- ----------修改信息
+  //- ----------修改基本信息
   function modifyInfo(name,phone,gender,address){
     // console.log(name,phone,gender,address);
     // var cookie=$.cookie("key");
@@ -256,12 +256,15 @@ $(function(){
   //获取订单列表 end
 
   $("#my_orders").on("click",function(){
+    console.log("点击了‘我的订单’");
     getOrders([2,3],"ul.order-going-ul");
   });
   $("#orders_going").on("click",function(){
+    console.log("点击了正在进行中的订单");
     getOrders([2,3],"ul.order-going-ul");
   });
   $("#orders_done").on("click",function(){
+    console.log("点击了已完成的订单");
     getOrders([4],"ul.order-done-ul");
   });
 

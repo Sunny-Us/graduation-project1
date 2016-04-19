@@ -249,5 +249,8 @@ a.bread-nav-item-active{
 	color: red;
 	padding-bottom: 15px;
 }
+textarea{
+	resize:none;
+}
 /*worker_order_detail.html end*/
 

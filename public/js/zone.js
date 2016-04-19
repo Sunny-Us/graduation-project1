@@ -33,7 +33,6 @@ $(function(){
 		
 	});
 });
-
 $(function(){
 	//--------------初始化页面
 	// var strUrl=window.location.href;
@@ -202,6 +201,10 @@ $(function(){
 						case "3":statusDesc="进行中...";break;
 						case "4":statusDesc="已完成";break;
 					}
+					var workerName=data.data[i].worker_id.name;
+					if(workerName=="undefined"){
+						workerName="未分配";
+					}
 					$("<li class='order-list' id='list"+data.data[i].id +"' data-class='items"+ data.data[i].status +"'>"+
                         "<div class='row-fluid'>"+
                            "<section class='order-item'>"+
@@ -211,7 +214,7 @@ $(function(){
                               "<input type='button' value='删除' class='delete-order-btn'>"+
                               "<input type='button' value='修改' class='modify-order-btn'>"+
                               "<input type='button' value='评价' class='evaluate-order-btn'>"+
-                              "<span class='order-people'>"+"上门师傅："+data.data[i].worker_id.name +"</span>" +
+                              "<span class='order-people'>"+"上门师傅："+ workerName +"</span>" +
                             "</section>"+   
                         "</div>"+
                     "</li>").appendTo($(wrap));
@@ -264,8 +267,4 @@ $(function(){
 	$("#orders_done").on("click",function(){
 		getOrders([4],"ul.order-done-ul");
 	});
-
-	
-	
-
 });
