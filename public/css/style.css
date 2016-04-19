@@ -1,6 +1,6 @@
-a {
-  color: #00B7FF;
-}
+// a {
+//   color: #00B7FF;
+// }
 .mycarousel{
 	height:600px;
 	position:relative;
@@ -109,8 +109,12 @@ a {
 	float: right;
 	margin-top:10px;
 }
+.service-comment-tab{
+	margin-top:20px;
+}
 /*service_detail页面 end*/
 
 .red{
 	color:#C41A16;
 }
+

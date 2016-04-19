@@ -118,20 +118,64 @@ app.get('/admin-service',function(req,res){
   })
 });
 app.get('/admin-order',function(req,res){
-  postData={
-    method:"query",
-    token: req.cookies.key
-  };
-  console.log(postData)
   request.post({
     url:'http://127.0.0.1:8081/order',
-    formData:postData,
-    'ContentType':'application/x-www-form-urlencoded'
+    formData:{
+      method:"query",
+      token: req.cookies.key,
+      status:JSON.stringify([1])
+    },
+    'content-type':'application/x-www-form-urlencoded'
   },function(error,response,body){
     if(!error && response.statusCode == 200){
       res.render('admin-order.html',{data:JSON.parse(body).data});
     }
-  })
+  });
+});
+app.get('/accept-order',function(req,res){
+  request.post({
+    url:'http://127.0.0.1:8081/order',
+    formData:{
+      method:"query",
+      token: req.cookies.key,
+      status:JSON.stringify([2,3])
+    },
+    'content-type':'application/x-www-form-urlencoded'
+  },function(error,response,body){
+    if(!error && response.statusCode == 200){
+      res.render('accept-order.html',{acceptData:JSON.parse(body).data});
+    }
+  });
+});
+app.get('/finished-order',function(req,res){
+  request.post({
+    url:'http://127.0.0.1:8081/order',
+    formData:{
+      method:"query",
+      token: req.cookies.key,
+      status:JSON.stringify([4])
+    },
+    'content-type':'application/x-www-form-urlencoded'
+  },function(error,response,body){
+    if(!error && response.statusCode == 200){
+      res.render('finished-order.html',{acceptData:JSON.parse(body).data});
+    }
+  });
+});
+app.get('/admin-comment',function(req,res){
+  request.post({
+    url:'http://127.0.0.1:8081/order',
+    formData:{
+      method:"query",
+      token: req.cookies.key,
+      status:JSON.stringify([4])
+    },
+    'content-type':'application/x-www-form-urlencoded'
+  },function(error,response,body){
+    if(!error && response.statusCode == 200){
+      res.render('admin-comment.html',{data:JSON.parse(body).data});
+    }
+  });
 });
 // error handlers
 app.use(function(err,req,res,next){
