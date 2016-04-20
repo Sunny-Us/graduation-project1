@@ -79,9 +79,9 @@
                       {% endif %}
                       <td>{{x.book_time}}</td>
                       <td>
-                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#checkout">查看详情</button>
-                        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#update">修改</button>
-                        <button type="button" class="btn btn-danger btn-xs delete"data-wahtever={{x.id}}>删除</button>
+                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-whatever={{x.id}} data-target="#checkout">查看详情</button>
+                        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-whatever={{x.id}} data-target="#update">修改</button>
+                        <button type="button" class="btn btn-danger btn-xs delete"data-whatever={{x.id}}>删除</button>
                       </td>
                     </tr>
                     {% endfor %}
@@ -230,7 +230,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">查看详情</h4>
+          <h4 class="modal-title">修改信息</h4>
         </div>
         <div class="modal-body">
           <form class="form-horizontal">
@@ -370,6 +370,7 @@
 {% parent %}
   {% block script %}
     {% parent %}
+    <script type="text/javascript" src="js/admin.js"></script>
     <script type="text/javascript" src="js/admin_order.js"></script>
   {% endblock %}
 {% endblock %}

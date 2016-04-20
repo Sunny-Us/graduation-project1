@@ -112,14 +112,14 @@ $(function(){
   //----------点击查看详情按钮
   $('#checkout').on('show.bs.modal',function(event){
     var button = $(event.relatedTarget);
-    var uid  = button.data('wahtever');
+    var uid  = button.data('whatever');
     var modal = $(this);  
     checkout(uid,modal);
   });
   //----------------点击修改按钮
   $('#update').on('show.bs.modal',function(event){
     var button = $(event.relatedTarget);
-    var uid  = button.data('wahtever');
+    var uid  = button.data('whatever');
     var modal = $(this);
     checkout(uid,modal);
     $('#update-submit').on('click',function(){
@@ -129,7 +129,7 @@ $(function(){
   });
   //--------------点击删除
   $('.delete').on('click',function(event){
-    var uid = $(this).data('wahtever');
+    var uid = $(this).data('whatever');
     var postData=[];
     postData.push(uid);
     $.ajax({

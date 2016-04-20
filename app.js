@@ -164,11 +164,10 @@ app.get('/finished-order',function(req,res){
 });
 app.get('/admin-comment',function(req,res){
   request.post({
-    url:'http://127.0.0.1:8081/order',
+    url:'http://127.0.0.1:8081/comment',
     formData:{
       method:"query",
-      token: req.cookies.key,
-      status:JSON.stringify([4])
+      token: req.cookies.key
     },
     'content-type':'application/x-www-form-urlencoded'
   },function(error,response,body){

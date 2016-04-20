@@ -22,7 +22,7 @@
       <div class="col-lg-2 sidebar">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
-          <li role="presentation" class="left-nav-active active"><a href="/admin">会员信息管理</a></li>
+          <li role="presentation" class="left-nav-active active"><a href="/admin-user">会员信息管理</a></li>
           <li role="presentation" class="left-nav"><a href="/admin-worker">家政人员信息管理</a></li>
           <li role="presentation" class="left-nav"><a href="/admin-admin">管理员信息管理</a></li>
           <li role="presentation" class="left-nav"><a href="/admin-serviceType">服务类型信息管理</a></li>
@@ -72,9 +72,9 @@
                   <td class="enable">启用</td>
                 {% endif %}
                 <td>
-                  <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#checkout">查看详情</button>
-                  <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#update">修改</button>
-                  <button type="button" class="btn btn-danger btn-xs delete"data-wahtever={{x.id}}>删除</button>
+                  <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-whatever={{x.id}} data-target="#checkout">查看详情</button>
+                  <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-whatever={{x.id}} data-target="#update">修改</button>
+                  <button type="button" class="btn btn-danger btn-xs delete"data-whatever={{x.id}}>删除</button>
                 </td>
               </tr>
               {% endfor %}

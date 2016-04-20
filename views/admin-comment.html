@@ -22,7 +22,7 @@
       <div class="col-lg-2 sidebar">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
-          <li role="presentation" class="left-nav"><a href="/admin">会员信息管理</a></li>
+          <li role="presentation" class="left-nav"><a href="/admin-user">会员信息管理</a></li>
           <li role="presentation" class="left-nav"><a href="/admin-worker">家政人员信息管理</a></li>
           <li role="presentation" class="left-nav"><a href="/admin-admin">管理员信息管理</a></li>
           <li role="presentation" class="left-nav"><a href="/admin-serviceType">服务类型信息管理</a></li>
@@ -38,12 +38,11 @@
             <tr>
               <th>编号</th>
               <th>会员姓名</th>
-              <th>用户名</th>  
-              <th>性别</th>
-              <th>联系电话</th>
-              <th>地址</th>
-              <th>账户余额</th>
-              <th>状态</th>
+              <th>服务名称</th>  
+              <th>家政人员姓名</th>
+              <th>评分</th>
+              <th>评价信息</th>
+              <th>追加评价信息</th>
               <th>操作</th>
             </tr>
             </thead>
@@ -51,36 +50,21 @@
               {% for x in data %}
               <tr>   
                 <td>{{x.id}}</td>
-                <td>{{x.name}}</td>
-                <td>{{x.email}}</td>
-                {% if x.gender==0 %}
-                  <td>无</td>
-                {% endif %}
-                {% if x.gender==1 %}
-                  <td>男</td>
-                {% endif %}
-                {% if x.gender==2 %}
-                  <td>女</td>
-                {% endif %}
-                <td>{{x.phone}}</td>
-                <td>{{x.address}}</td>
-                <td>{{x.balance}}</td>
-                {% if x.status==0 %}
-                  <td class='importent'>禁用</td>
-                {% endif %}
-                {% if x.status==1 %}
-                  <td class="enable">启用</td>
-                {% endif %}
+                <td>{{x.user_id.name}}</td>
+                <td>{{x.service_id.name}}</td>
+                <td>{{x.worker_id.name}}</td>
+                <td>{{x.score}}</td>
+                <td>{{x.comment}}</td>
+                <td>{{x.add_comment}}</td>
                 <td>
-                  <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#checkout">查看详情</button>
-                  <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-wahtever={{x.id}} data-target="#update">修改</button>
-                  <button type="button" class="btn btn-danger btn-xs delete"data-wahtever={{x.id}}>删除</button>
+                  <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-whatever={{x.id}} data-target="#checkout">查看详情</button>
+                  <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-whatever={{x.id}} data-target="#update">修改</button>
+                  <button type="button" class="btn btn-danger btn-xs delete"data-whatever={{x.id}}>删除</button>
                 </td>
               </tr>
               {% endfor %}
             </tbody>
           </table>
-          <button type="button" class="btn btn-success btn-xs add" data-toggle="modal" data-target="#add">添加</button>
         </div>
       </div>
     </div>  
@@ -89,32 +73,285 @@
 {% endblock %}
 
 {% block action %}
-  {% parent %}
+  {% block showDetail %}
+    <div class="modal fade" id="checkout">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">查看详情</h4>
+          </div>
+          <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">编&nbsp;号<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control id" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">会员编号<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control user_id" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">会员姓名<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control user_name" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">服务编号<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control service_id" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">服务名称<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control service_name" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">家政人员编号<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control worker_id" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">家政人员姓名<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control worker_name" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">评分<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control score" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">评价信息<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control comment" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">追加评价信息<span class="importent">*</span></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control add_comment" readonly>
+                </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+
+    {% block update %}
+    <div class="modal fade" id="update">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改信息</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">编&nbsp;号<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control id" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">会员编号<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control user_id" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">会员姓名<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control user_name" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">服务编号<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control service_id" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">服务名称<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control service_name" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">家政人员编号<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control worker_id" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">家政人员姓名<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control worker_name" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">评分<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control score" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">评价信息<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control comment" >
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">追加评价信息<span class="importent">*</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control add_comment">
+                  </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="update-submit">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+
+    {% block add %}
+    
+    {% endblock %}
 {% endblock %}
 
 {% block footer %}
   {% parent %}
-  <script type="text/javascript" src="js/action-user.js"></script>
   <script type="text/javascript">
-    $(function(){
-      $('#add').on('show.bs.modal',function(){
-        var modal = $(this);
-        $('#add-submit').on('click',function(){
-          $('#signupForm').bootstrapValidator('validate');
-          var ajaxDate={ 
-            "name":$.trim(modal.find('#name').val()),
-            "email":$.trim(modal.find("#username").val()),
-            "phone":$.trim(modal.find("#phone").val()),
-            "password":$.md5($.trim(modal.find("#password").val())),
-            "address":$.trim(modal.find("#address").val()),
-            'gender':modal.find('input:radio:checked').val(),
-            "status":1,
-            "role":0
-          }
-          add(ajaxDate);
-          $('#add').modal('hide').then(location.reload());
-        });
+  function checkout(oid,modal,action,fn){
+    $.ajax({
+      url:'http://127.0.0.1:8081/'+action,
+      type:"POST",
+      data:{
+        method:'query',
+        token:$.cookie('key'),
+        comment_id:oid
+      },
+      success:function(data){
+        if(data.result){
+          fn(data.data);
+        }
+      },
+      error:function(data){
+        console.log(data);
+      }
+    });
+  }
+  function update(oid,postData,action){
+    $.ajax({
+      url:'http://127.0.0.1:8081/'+action,
+      type:"POST",
+      data:{
+        method:'update',
+        token:$.cookie('key'),
+        data:JSON.stringify([{[oid]:postData}])
+      },
+      success:function(data){
+        if(data.result){
+          alert('修改成功！');
+        }else{
+          alert('修改失败!');
+        }
+      },
+      error:function(data){
+        console.log(data);
+      }
+    });
+  }
+   $(function(){
+    function selectcomment(modal,item){
+      modal.find('.id').val(item.id);
+      modal.find('.user_id').val(item.user_id.id);
+      modal.find('.user_name').val(item.user_id.name);
+      modal.find('.service_id').val(item.service_id.id);
+      modal.find('.service_name').val(item.service_id.name);
+      modal.find('.worker_id').val(item.worker_id.id);
+      modal.find('.worker_name').val(item.worker_id.name);
+      modal.find('.score').val(item.score);
+      modal.find('.comment').val(item.comment);
+      modal.find('.add_comment').val(item.add_comment);
+    }
+    $('#checkout').on('show.bs.modal',function(event){
+      var button = $(event.relatedTarget);
+      var oid  = button.data('whatever');
+      var modal = $(this);  
+      checkout(oid,modal,'comment',function(data){
+        data.map(function(item){
+          selectcomment(modal,item);
+        })
       });
     });
+    //----------------点击修改按钮
+    $('#update').on('show.bs.modal',function(event){
+      var button = $(event.relatedTarget);
+      var oid  = button.data('whatever');
+      var modal = $(this);
+      checkout(oid,modal,'comment',function(data){
+        data.map(function(item){
+          selectcomment(modal,item);
+        })
+      });
+      $('#update-submit').on('click',function(){
+        var postData={};
+        postData.user_id=modal.find('.user_id').val();
+        postData.service_id=modal.find('.service_id').val();
+        if(modal.find('.worker_id').val()){
+          postData.worker_id=modal.find('.worker_id').val()
+        }
+        postData.score=modal.find('.score').val();
+        postData.comment=modal.find('.comment').val();
+        postData.add_comment=modal.find('.add_comment').val();
+        update(oid,postData,'comment');
+        $('#update').modal('hide').then(location.reload(true));
+      });
+    });
+    //---------------点击删除按钮
+    $('.delete').on('click',function(event){
+      var oid = $(this).data('whatever');
+      var postData=[];
+      postData.push(oid);
+      $.ajax({
+        url:'http://127.0.0.1:8081/comment',
+        type:'POST',
+        contentType:"application/x-www-form-urlencoded",
+        data:{
+          "method":'delete',
+          "token":$.cookie('key'),
+          "data":JSON.stringify(postData)
+        },
+        success:function(data){
+          if(data.result){
+            alert('删除成功！');
+            location.reload(true);
+          }else{
+            alert('删除失败！');
+          }
+        },
+        error:function(data){
+          console.log(data);
+        }
+      });
+    })
+  });
   </script>
 {% endblock %}

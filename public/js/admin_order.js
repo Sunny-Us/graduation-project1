@@ -1,6 +1,6 @@
-function checkout(oid,modal){
+function checkout(oid,modal,action,fn){
   $.ajax({
-    url:'http://127.0.0.1:8081/order',
+    url:'http://127.0.0.1:8081/'+action,
     type:"POST",
     data:{
       method:'query',
@@ -8,25 +8,8 @@ function checkout(oid,modal){
       order_id:oid
     },
     success:function(data){
-      console.log(data)
       if(data.result){
-        data.data.map(function(item){
-          modal.find('#id').val(item.id);
-          modal.find('#user_id').val(item.user_id.id);
-          modal.find('#user_name').val(item.user_id.name);
-          modal.find('#service_id').val(item.service_id.id);
-          modal.find('#service_name').val(item.service_id.name);
-          modal.find('#worker_id').val(item.worker_id.id);
-          modal.find('#worker_name').val(item.worker_id.name);
-          modal.find('#service_address').val(item.service_address);
-          modal.find('.status:radio[value='+item.status+']').attr('checked','checked');
-          modal.find('#demand').val(item.demand);
-          modal.find('#comment').val(item.comment);
-          modal.find('#book_time').val(item.book_time);
-          modal.find('#order_time').val(item.order_time);
-          modal.find('#accept_time').val(item.accept_time);
-          modal.find('#finish_time').val(item.finish_time);
-        })
+        fn(data.data);
       }
     },
     error:function(data){
@@ -34,9 +17,9 @@ function checkout(oid,modal){
     }
   });
 }
-function update(oid,postData){
+function update(oid,postData,action){
   $.ajax({
-    url:'http://127.0.0.1:8081/order',
+    url:'http://127.0.0.1:8081/'+action,
     type:"POST",
     data:{
       method:'update',
@@ -56,20 +39,44 @@ function update(oid,postData){
   });
 }
 $(function(){
+  function selectorder(modal,item){
+    modal.find('#id').val(item.id);
+      modal.find('#user_id').val(item.user_id.id);
+      modal.find('#user_name').val(item.user_id.name);
+      modal.find('#service_id').val(item.service_id.id);
+      modal.find('#service_name').val(item.service_id.name);
+      modal.find('#worker_id').val(item.worker_id.id);
+      modal.find('#worker_name').val(item.worker_id.name);
+      modal.find('#service_address').val(item.service_address);
+      modal.find('.status:radio[value='+item.status+']').attr('checked','checked');
+      modal.find('#demand').val(item.demand);
+      modal.find('#comment').val(item.comment_id.score);
+      modal.find('#book_time').val(item.book_time);
+      modal.find('#order_time').val(item.order_time);
+      modal.find('#accept_time').val(item.accept_time);
+      modal.find('#finish_time').val(item.finish_time);
+  }
   //----------点击查看详情按钮
   $('#checkout').on('show.bs.modal',function(event){
     var button = $(event.relatedTarget);
     var oid  = button.data('whatever');
-    console.log(oid);
     var modal = $(this);  
-    checkout(oid,modal);
+    checkout(oid,modal,'order',function(data){
+      data.map(function(item){
+        selectorder(modal,item);
+      })
+    });
   });
   //----------------点击修改按钮
   $('#update').on('show.bs.modal',function(event){
     var button = $(event.relatedTarget);
     var oid  = button.data('whatever');
     var modal = $(this);
-    checkout(oid,modal);
+    checkout(oid,modal,'order',function(data){
+      data.map(function(item){
+        selectorder(modal,item);
+      })
+    });
     $('#update-submit').on('click',function(){
       var postData={};
       postData.user_id=modal.find('#user_id').val();
@@ -81,9 +88,11 @@ $(function(){
       postData.service_address=modal.find('#service_address').val();
       postData.status=modal.find('.status:radio:checked').val();
       postData.demand=modal.find('#demand').val();
-      postData.comment=modal.find('#comment').val();
+      if(modal.find('#comment').val()){
+        postData.comment_id=modal.find('#comment').val();
+      }
       postData.book_time=modal.find('#book_time').val();
-      update(oid,postData);
+      update(oid,postData,'order');
       $('#update').modal('hide').then(location.reload(true));
     });
   });
@@ -112,7 +121,8 @@ $(function(){
       var postData={};
       postData.worker_id=modal.find('#worker>option:selected').data('id');
       postData.status=2;
-      update(oid,postData);
+      postData.accept_time=new Date().Format("yyyy-MM-dd hh:mm:ss");
+      update(oid,postData,'order');
       $('#accept').modal('hide').then(location.reload(true));
     });
   });
@@ -149,6 +159,8 @@ $(function(){
     console.log(oid);
     var postData={};
     postData.status=4;
-    update(oid,postData).then(location.reload(true));
+    postData.finish_time=new Date.Format("yyyy-MM-dd hh:mm:ss");
+    update(oid,postData,'order');
+    location.reload(true);
   })
 });

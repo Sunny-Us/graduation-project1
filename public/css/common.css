@@ -7,9 +7,9 @@
   *zoom: 1;
 }
 .clearfix:after {
-  display: table;
+  display: block;
   clear: both;
-  content: " ";
+  content: "";
 }
 body {
   margin:0;
@@ -318,3 +318,53 @@ footer.footer{
 .has-feedback label ~ .form-control-feedback {
     top: 0; 
 }
+/*评价展示 start*/
+.evaluation{
+	padding-bottom:30px;
+	border-bottom:1px solid #def1f2; 
+}
+.evaluation-con{
+	// position: relative;
+	padding-left:10px;
+	padding-top: 10px;
+}
+.evaluation-con img{
+	width:40px;
+	height:40px;
+	border-radius: 50%;
+	border:1px solid #ccc;
+	// position: absolute;
+	// top:26px;
+	// left:10px;
+	margin-top:14px;
+	float:left;
+}
+.evaluation-con.add{
+	padding-left: 80px;
+}
+.add-info{
+	margin-left: 0;
+}
+.content-box{
+	// position: absolute;
+	// left:68px;
+	// top:18px;
+	margin-left:20px;
+	margin-top:10px;
+	float:left;
+}
+.content-box .user-info .user-name{
+	color:#5e5e5e;
+	font-size: 12px;
+}
+.content-box .info{
+	margin-top: 14px;
+}
+.content-box .info p{
+	margin-bottom: 5px;
+}
+.content-box .info .time{
+	color:#C5BFD3;
+	font-size: 12px;
+}
+/*评价展示 end*/
