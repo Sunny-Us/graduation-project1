@@ -101,14 +101,15 @@
             <span class="star-icon"></span>
             <span class="star-icon"></span>
             <!-- <input type="button" class="evaluated-btn" value="已评价" disabled> -->
-          </section>
-          <section class="clearfix">
-            <section for="comment_text" class="comment-title-wrap">评论：</section>
-            <textarea name="" id="comment_text" cols="60" rows="5" class="comment-text"></textarea>
-          </section>
-          <section class="clearfix">
-            <section for="additional_comment_text" class="comment-title-wrap">追加评论：</section>
-            <textarea name="" id="additional_comment_text" cols="60" rows="5" class="additional-comment-text"></textarea>
+          
+            <section class="clearfix">
+              <section for="comment_text" class="comment-title-wrap">评论：</section>
+              <textarea name="" id="comment_text" cols="60" rows="5" class="comment-text" readonly="readonly"></textarea>
+            </section>
+            <section class="clearfix">
+              <section for="additional_comment_text" class="comment-title-wrap">追加评论：</section>
+              <textarea name="" id="additional_comment_text" cols="60" rows="5" class="additional-comment-text" readonly="readonly"></textarea>
+            </section>
           </section>
          <!--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="float:right">
            修改信息
@@ -176,9 +177,10 @@
         var orderId=parseInt(urlarr[1]);
         var token=$.cookie("key");
         // console.log(token);
+        // initialOrderDetail() start
         function initialOrderDetail(){
           // console.log("orderstatus:",orderStatus);
-          //先判断状态 start 
+        //先判断订单状态 start 
           var allLineIcon=$(".line-icon");
           var allCircleIcon=$(".circle-icon");
           allCircleIcon.removeClass("circle-icon-active");
@@ -201,6 +203,10 @@
           }
           if(orderStatus<4){
             $(".bread-nav-second").html("正在进行中的订单");
+            //当订单为“正在进行中的订单”的时候 评价不显示
+            // $(".evaluated").css("display","none");
+            // $("#comment_text").css("display","none");
+            // $("#additional_comment_text").css("display","none");
           }
           orderStatus==1 ? $(".service-info-left").css("display","none") : $(".service-info-left").css("display","block");
           //先判断状态 end
@@ -215,7 +221,7 @@
                 "token":token
               },
               success:function(data){
-                console.log(data);
+                console.log("all:",data);
                 // 填充数据
                 $(".bread-nav-item-active").html(data.data[0].service_id.name);
                 $(".customer-name").html("客户："+data.data[0].user_id.name);
@@ -230,45 +236,69 @@
                 //评价框 数据填充
                 // $(".comment-text").text(data.data[0].comment_id.comment);
                 // $(".additional-comment-text").text(data.data[0].additional_comment);
-                
-
-
+              
 
                 // $(".detail-receive-people").html("验收人："+$.cookie("uname"));
                 // $("#modal_service_customer").val($.cookie("uname"));
-
-                var evaluatedScore=parseInt(data.data[0].comment);
-                // if(data.data[0].status=="4" && evaluatedScore==0){
-                //   $(".to-evaluate").css("display","block");
-                // }else 
-                // 判断是否已有评分
-                // if(data.data[0].status=="4" && evaluatedScore !=0){
-                //   $(".evaluated").css("display","block");
-                // }
-                //如果已评价，显示
-                // console.log("comment-type:",typeof(data.data[0].comment));
-                var allevaluated=$(".evaluated span");
-                var alllength=allevaluated.length;
-                for(var s=0;s<evaluatedScore;s++){
-                  allevaluated.eq(s).addClass("star-icon-active");
+                if(parseInt(data.data[0].status)==4){
+                  var evaluatedScore=parseInt(data.data[0].comment_id.score);
+                  // console.log("evaluatedScore",evaluatedScore);
+                  var evaluatedComment=data.data[0].comment_id.comment;
+                  var evaluatedAdditionalComment=data.data[0].comment_id.add_comment;
+                  
+                  if(data.data[0].comment_id !="None"){
+                    $(".evaluated").css("display","block");
+                    var allevaluated=$(".evaluated span");
+                    var alllength=allevaluated.length;
+                    for(var s=0;s<evaluatedScore;s++){
+                      console.log("s:",s);
+                      allevaluated.eq(s).removeClass("star-icon");
+                      allevaluated.eq(s).addClass("star-icon-active");
+                    }
+                    for(var a=evaluatedScore;a<alllength;a++){
+                      allevaluated.eq(a).removeClass("start-icon-icon");
+                      allevaluated.eq(a).addClass("start-icon");
+                    }
+                    $("#comment_text").text(evaluatedComment);
+                    $("#additional_comment_text").text(evaluatedAdditionalComment);
+                    if(evaluatedComment=="undefined"){
+                      $("#comment_text").text("");
+                    }
+                    if(evaluatedAdditionalComment=="undefined"){
+                      $("#additional_comment_text").css("display","none");
+                    }
+                  }else{
+                    $(".evaluated").css("display","none");
+                  }
+                  
+                  // if(evaluatedComment)
+                }else{
+                  $(".evaluated").css("display","none");
                 }
-                for(var a=evaluatedScore;a<alllength;a++){
-                  allevaluated.eq(a).addClass("start-icon");
-                }
-
-
-
               }
           });        
           //请求订单详情 end
         }
+        //initialOrderDetail()  end
         initialOrderDetail();
         $(".bread-nav-second").on("click",function(){
           window.location.href="workerZone#my_orders";
         });
 
-        //更改订单状态 start
+      //更改订单状态 start
+      //changeStatus(status) start
         function changeStatus(status){
+          var changeDate=new Date().Format("yyyy-MM-dd hh:mm:ss");
+          if(status==4){
+            var parameter={
+              "status":status,
+              "finish_time":changeDate
+            }
+          }else{
+            var parameter={
+              "status":status
+            }
+          }
           $.ajax({
             url:"http://127.0.0.1:8081/order",
             type:"post",
@@ -276,38 +306,46 @@
               "method":"update",
               "token":token,
               "data":JSON.stringify([{
-                [orderId]:{
-                  "status":status
-                }
+                [orderId]:parameter
               }])
             },
             success:function(data){
               data.result ? alert("修改状态成功！"):alert("修改状态失败！");
             }
           });
-
         }
+      //changeStatus(status) end
+       //点击“进行中”按钮 start
         $("#ongoing").on("click",function(){
-          var status=3;
-          changeStatus(status);
-          $(".circle-icon").eq(2).addClass("circle-icon-active");
-          $(".line-icon").eq(2).addClass("line-icon-active");
-        });
-        $("#order_finished").on("click",function(){
-          var status=4;
-          if($(".circle-icon").eq(2).hasClass("circle-icon-active")){
+          if(orderStatus<3){
+            var status=3;
             changeStatus(status);
-            $(".circle-icon").eq(3).addClass("circle-icon-active");
+            $(".circle-icon").eq(2).addClass("circle-icon-active");
+            $(".line-icon").eq(2).addClass("line-icon-active");
+          }else if(orderStatus==3){
+            alert("订单已为‘进行中’状态");
           }else{
-            alert("请先点击“进行中”按钮！");
+            alert("订单为‘已完成’状态，不可更改");
           }
         });
+        //点击“进行中”按钮 end
+        //点击 “已完成”按钮 start
+        $("#order_finished").on("click",function(){
+          if(orderStatus<4){
+            var status=4;
+            if($(".circle-icon").eq(2).hasClass("circle-icon-active")){
+              changeStatus(status);
+              $(".circle-icon").eq(3).addClass("circle-icon-active");
+            }else{
+              alert("请先点击“进行中”按钮！");
+            }
+          }else{
+            alert("订单已为‘已完成’状态");
+          }
+         //点击 “已完成”按钮 end 
+        });
 
-
-
-
-        
-        //更改订单状态 end
+      //更改订单状态 end
 
 
 
@@ -372,26 +410,24 @@
         //   })
         // });
         //保存修改 end
-        //日期格式化函数 start
-        // Date.prototype.Format = function (fmt) { //author: meizz 
-        //   var o = {
-        //       "M+": this.getMonth() + 1, //月份 
-        //       "d+": this.getDate(), //日 
-        //       "h+": this.getHours(), //小时 
-        //       "m+": this.getMinutes(), //分 
-        //       "s+": this.getSeconds(), //秒 
-        //       "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-        //       "S": this.getMilliseconds() //毫秒 
-        //   };
-        //   if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        //   for (var k in o)
-        //   if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        //   return fmt;
-        // }
-
+      // 日期格式化函数 start
+        Date.prototype.Format = function (fmt) { //author: meizz 
+          var o = {
+              "M+": this.getMonth() + 1, //月份 
+              "d+": this.getDate(), //日 
+              "h+": this.getHours(), //小时 
+              "m+": this.getMinutes(), //分 
+              "s+": this.getSeconds(), //秒 
+              "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+              "S": this.getMilliseconds() //毫秒 
+          };
+          if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+          for (var k in o)
+          if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+          return fmt;
+        }
         // $('#service-data').val(new Date().Format("yyyy-MM-dd"));
-
-        //日期格式化函数 end
+      // 日期格式化函数 end
       });
     </script>
   {% endblock %}

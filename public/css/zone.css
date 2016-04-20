@@ -198,7 +198,8 @@ a.bread-nav-item-active{
 .evaluated-btn,
 .delete-order-btn,
 .modify-order-btn,
-.evaluate-order-btn{
+.evaluate-order-btn,
+.add-evaluate-btn{
 	color: #fff;
 	display: block;
 	float: right;
@@ -217,7 +218,7 @@ a.bread-nav-item-active{
 .modify-order-btn{
 	background: #8dd35f;
 }
-.evaluate-btn{
+.evaluate-btn,.add-evaluate-btn{
 	background:#FFA000;
 }
 .evaluated-btn{
@@ -227,7 +228,8 @@ a.bread-nav-item-active{
 .to-evaluate span{
 	cursor: pointer;
 }
-/*账单详情页 end*/
+
+/*订单详情页 end*/
 
 /*worker_order_detail.html start*/
 .service-info-right section.comment-title-wrap{
@@ -248,6 +250,16 @@ a.bread-nav-item-active{
 	display: none;
 	color: red;
 	padding-bottom: 15px;
+}
+textarea{
+	resize:none;
+	padding:5px 15px;
+}
+.nothing-found{
+	width: 100%;
+	margin-top:30px;
+	text-align: center;
+	font-size: 30px;
 }
 /*worker_order_detail.html end*/
 

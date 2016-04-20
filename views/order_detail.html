@@ -95,27 +95,27 @@
               <span class="star-icon"></span>
               <span class="star-icon"></span>
               <span class="star-icon"></span>
-            </section>
+            </section>  
             <section class="clearfix od-comment">
               <section for="comment_text" class="comment-title-wrap">评论：</section>
               <textarea name="" id="comment_text" cols="60" rows="5" class="comment-text"></textarea>
             </section>
-            <section class="clearfix od-additional-comment">
+            <!-- <section class="clearfix od-additional-comment">
               <section for="additional_comment_text" class="comment-title-wrap">追加评论：</section>
               <textarea name="" id="additional_comment_text" cols="60" rows="5" class="additional-comment-text"></textarea>
-            </section>
-            <button type="submit" class="evaluate-btn">评价</button>
+            </section> -->
+            <button type="submit" class="evaluate-btn">发表评论</button>
           </div>
          
           <!-- 已完成订单已评价 -->
           <div class="commented" style="display:none;">
             <section class="evaluated">
               评价：
-              <span class=""></span>
-              <span class=""></span>
-              <span class=""></span>
-              <span class=""></span>
-              <span class=""></span>
+              <span class="star-icon"></span>
+              <span class="star-icon"></span>
+              <span class="star-icon"></span>
+              <span class="star-icon"></span>
+              <span class="star-icon"></span>
             </section>
             <section class="clearfix od-commented">
               <section for="comment_text" class="comment-title-wrap">评论：</section>
@@ -125,7 +125,8 @@
               <section for="additional_comment_text" class="comment-title-wrap">追加评论：</section>
               <textarea name="" id="additional_commented_text" cols="60" rows="5" class="additional-comment-text"></textarea>
             </section>
-            <input type="button" class="evaluated-btn" value="已评价" disabled>
+            <!-- <input type="button" class="evaluated-btn" value="已评价" disabled> -->
+            <input type="button" class="add-evaluate-btn" value="追加评论">
           </div>
           
           <button type="button" class="btn btn-primary modify-order-info-btn" data-toggle="modal" data-target="#myModal" style="float:right">
@@ -193,7 +194,15 @@
         var orderStatus=parseInt(urlarr[2]);
         var orderId=parseInt(urlarr[1]);
         var token=$.cookie("key");
+        var user_id=$.cookie("uid");
+        var worker_id;
+        var service_id;
         // console.log(token);
+  //发表评论执行的函数 start
+        function toComment(){
+
+        }
+  //发表评论执行的函数 end
         function initialOrderDetail(){
           // console.log("orderstatus:",orderStatus);
           //先判断状态 start 
@@ -236,7 +245,9 @@
                 // console.log(data);
                 // 填充数据
                 $(".bread-nav-item-active").html(data.data[0].service_id.name);
+                service_id=data.data[0].service_id.id;  //全局变量 service_id
                 $(".service-person-name").html("服务人员："+data.data[0].worker_id.name);
+                worker_id=data.data[0].worker_id.id;
                 $(".service-tel").html("联系电话："+data.data[0].worker_id.phone);
                 $(".detail-book-time").html("预约时间："+data.data[0].book_time);
                 // $("#service-data").value(data.data[0].book_time);
@@ -249,40 +260,62 @@
 
                 var evaluatedScore=parseInt(data.data[0].comment_id.score);
                 var commentText=data.data[0].comment_id.comment;
-                var additionalCommentText=data.data[0].comment_id.additional_comment;
+                var additionalCommentText=data.data[0].comment_id.add_comment;
                 //没有评分、评论、追加评论
-                if(data.data[0].status=="4" && evaluatedScore==0){
+                //如果status大于1  则更改按钮不显示，评论和追加评论也不显示  start
+                //如果status大于1  则更改按钮不显示，评论和追加评论也不显示  start
+                if(data.data[0].status=="4" && data.data[0].comment_id=="None"){
                   $(".commented").css("display","none");
                   $(".make-comment").css("display","block");
-                  $("#additional_commented_text").css("display","none");
+                //已完成订单待评价  点击星星评分 start
+                  $(".to-evaluate span").each(function(){
+                    console.log($(this));
+                    var object=$(".to-evaluate span.star-icon");
+                    var length=object.length;
+                    var index=$(this).index();
+                    $(this).on("click",function(){
+                      console.log("entered hahahhahah");
+                      var i=0;
+                      for(i=0;i<=index;i++){
+                        object.eq(i).removeClass('star-icon');
+                        object.eq(i).addClass("star-icon-active");
+                      }
+                      for(i;i<length;i++){
+                        object.eq(i).removeClass('star-icon-active');
+                        object.eq(i).addClass('star-icon');
+                      }
+                    }); 
+                  });
+                //已完成订单待评价  点击星星评分 start
+
                 }
                 //有评分，无评论，无追加评论
                 //有评分，有评论，无追加评论
-                if(data.data[0].status=="4" && evaluatedScore !=0 && additionalCommentText==null){
-                  $(".make-comment").css("display","none");
-                  $(".commented").css("display","block");
-                  $("#commented_text").text(commentText);
-                  $(".evaluated-btn").val("追加评论").removeAttr("disabled");
-                }
+                // if(data.data[0].status=="4" && evaluatedScore !=0 && additionalCommentText==null){
+                //   $(".make-comment").css("display","none");
+                //   $(".commented").css("display","block");
+                //   $("#commented_text").text(commentText);
+                //   $(".evaluated-btn").val("追加评论").removeAttr("disabled");
+                // }
                 //有评分，有评论，有追加评论
-                $(data.data[0].status=="4" && evaluatedScore !=0 && additionalCommentText != null){
-                  $(".make-comment").css("display","none");
-                  $(".commented").css("display","block");
-                  $("#commented_text").text(commentText);
-                  $("#additional_commented_text").text(additionalCommentText);
-                  $(".evaluated-btn").css("display","none");
-                }
+                // if(data.data[0].status=="4" && evaluatedScore !=0 && additionalCommentText != null){
+                //   $(".make-comment").css("display","none");
+                //   $(".commented").css("display","block");
+                //   $("#commented_text").text(commentText);
+                //   $("#additional_commented_text").text(additionalCommentText);
+                //   $(".evaluated-btn").css("display","none");
+                // }
 
                 //如果已评价，显示
                 // console.log("comment-type:",typeof(data.data[0].comment));
-                var allevaluated=$(".evaluated span");
-                var alllength=allevaluated.length;
-                for(var s=0;s<evaluatedScore;s++){
-                  allevaluated.eq(s).addClass("star-icon-active");
-                }
-                for(var a=evaluatedScore;a<alllength;a++){
-                  allevaluated.eq(a).addClass("star-icon");
-                }
+                // var allevaluated=$(".evaluated span");
+                // var alllength=allevaluated.length;
+                // for(var s=0;s<evaluatedScore;s++){
+                //   allevaluated.eq(s).addClass("star-icon-active");
+                // }
+                // for(var a=evaluatedScore;a<alllength;a++){
+                //   allevaluated.eq(a).addClass("star-icon");
+                // }
 
 
               }
@@ -290,6 +323,7 @@
           //请求订单详情 end
         }
         initialOrderDetail();
+
       //面包屑导航 第二个导航 start
         $(".bread-nav-second").on("click",function(){
           window.location.href="zone#my_orders";
@@ -301,23 +335,28 @@
           var score=allactive.length;
           console.log(score);
           var comment=$("#comment_text").text();
+          var comment_time=new Date().Format("yyyy-MM-dd hh:mm:ss")
           if(score==0){
             alert("评分不可为0！");
           }else{
+            console.log("chenggong");
             $.ajax({
-              url:"http://127.0.0.1:8081/order",
+              url:"http://127.0.0.1:8081/comment",
               type:"post",
               data:{
-                "method":"update",
+                "method":"insert",
                 "token":token,
                 "data":JSON.stringify([{
-                  [orderId]:{
                     "score":score,       //此处需和数据库确认
-                    "comment":comment    //此处需和数据库确认  
-                  }
+                    // "comment":comment,    //此处需和数据库确认 
+                    "user_id":user_id,
+                    "service_id":service_id,
+                    "worker_id":worker_id,
+                    "comment_time":comment_time
                 }])
               },
               success:function(data){
+                console.log("data",data);
                 if(data.result){
                   alert("评价成功");
                   location.reload(true);
@@ -358,7 +397,7 @@
 
       //点击追加评价按钮 end  
 
-        });
+        // });
       //保存修改 start
         $("#save_orderchanges").on("click",function(){
           var serviceTime=$("#service-data").val() + $("#service-time").val();
