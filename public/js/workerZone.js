@@ -186,71 +186,49 @@ $(function(){
       },
       success:function(data){
         console.log(data);
-        var listNum=data.data.length;
-        var i=0;
-        $(".order-going-ul").empty();
-        $(".order-done-ul").empty();
-        for(i=0;i<listNum;i++){
-          var status=data.data[i].status;
-          console.log("status:",status);
-          var statusDesc;
-          var order=data.data[i].id;
-          console.log(i,order);
-          switch(status){
-            case "1":statusDesc="已下单...";break;
-            case "2":statusDesc="已受理...";break;
-            case "3":statusDesc="进行中...";break;
-            case "4":statusDesc="已完成";break;
+        if(data.data){
+          var listNum=data.data.length;
+          var i=0;
+          $(".order-going-ul").empty();
+          $(".order-done-ul").empty();
+          for(i=0;i<listNum;i++){
+            var status=data.data[i].status;
+            console.log("status:",status);
+            var statusDesc;
+            var order=data.data[i].id;
+            console.log(i,order);
+            switch(status){
+              case "1":statusDesc="已下单...";break;
+              case "2":statusDesc="已受理...";break;
+              case "3":statusDesc="进行中...";break;
+              case "4":statusDesc="已完成";break;
+            }
+            $("<li class='order-list' id='list"+data.data[i].id +"' data-class='items"+ data.data[i].status +"'>"+
+                          "<div class='row-fluid'>"+
+                             "<section class='order-item'>"+
+                                "<span class='order-name'>"+data.data[i].service_id.name +"</span>"+
+                                "<span class='order-state'>"+ statusDesc +"</span>"+  
+                                "<span class='order-time'>"+"预约时间："+data.data[i].book_time +"</span>"+
+                                // "<input type='button' value='删除' class='delete-order-btn'>"+
+                                // "<input type='button' value='修改' class='modify-order-btn'>"+
+                                // "<input type='button' value='评价' class='evaluate-order-btn'>"+
+                                // "<span class='order-people'>"+"上门师傅："+data.data[i].worker_id.name +"</span>" +
+                              "</section>"+   
+                          "</div>"+
+                      "</li>").appendTo($(wrap));
+            var numStatus=parseInt(status);      
+            //进入订单详情页 
+            $("div.row-fluid").on("click",".order-item",function(){
+              var orderid=$.trim($(this).parent("div.row-fluid").parent("li.order-list").attr("id")).slice(4);
+              var orderstatus=$.trim($(this).parent("div.row-fluid").parent("li.order-list").attr("data-class")).slice(5);
+              window.location.href="workerOrderDetail#"+orderid+"#"+orderstatus;
+            });
           }
-          $("<li class='order-list' id='list"+data.data[i].id +"' data-class='items"+ data.data[i].status +"'>"+
-                        "<div class='row-fluid'>"+
-                           "<section class='order-item'>"+
-                              "<span class='order-name'>"+data.data[i].service_id.name +"</span>"+
-                              "<span class='order-state'>"+ statusDesc +"</span>"+  
-                              "<span class='order-time'>"+"预约时间："+data.data[i].book_time +"</span>"+
-                              // "<input type='button' value='删除' class='delete-order-btn'>"+
-                              // "<input type='button' value='修改' class='modify-order-btn'>"+
-                              // "<input type='button' value='评价' class='evaluate-order-btn'>"+
-                              // "<span class='order-people'>"+"上门师傅："+data.data[i].worker_id.name +"</span>" +
-                            "</section>"+   
-                        "</div>"+
-                    "</li>").appendTo($(wrap));
-                    var numStatus=parseInt(status);
-                    // if(numStatus>1 && numStatus<4){
-                    //   console.log("numStatus",numStatus);
-                    //   $("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").hide();
-                    //   $("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").hide();
-                    //   $("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").hide();
-                    // }else if(numStatus == 1){
-                    //   $("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").show();
-                    //   $("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").show();
-                    //   $("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").hide();
-                    // }else if(numStatus == 4 && data.data[i].comment =="0"){
-                    //   $("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").hide();
-                    //   $("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").hide();
-                    //   $("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").show();
-                    // }
-                    //删除订单
-          // $("section.order-item").on("click",".delete-order-btn",function(){
-          //   var orderId=$.trim($(this).parent("section.order-item").parent("div.row-fluid").parent("li.order-list").attr("id")).slice(4);
-          //   deleteOrder(orderId);
-          // });
-          //进入订单详情页 && 更改订单
-          $("div.row-fluid").on("click",".order-item",function(){
-            var orderid=$.trim($(this).parent("div.row-fluid").parent("li.order-list").attr("id")).slice(4);
-            var orderstatus=$.trim($(this).parent("div.row-fluid").parent("li.order-list").attr("data-class")).slice(5);
-            window.location.href="workerOrderDetail#"+orderid+"#"+orderstatus;
-            // window.location.href="orderDetail#1#1";
-          });
-          // $("div.row-fluid").on("click",".modify-order-btn",function(){
-          //  window.location.href="orderDetail#"+order+"#"+status;
-          // });
-          // $("div.row-fluid").on("click",".evaluate-order-btn",function(){
-          //  window.location.href="orderDetail#"+order+"#"+status;
-          // });
+        }else{
+          wrap=="ul.order-going-ul" ? $("#ordering").html("<section class='nothing-found'>您并没有正在进行中的订单</section>"):$("#ordering").html("<section class='nothing-found'>您并没有已完成的订单</section>");
+          
         }
       }
-
     });
   }
   //获取订单列表 end
