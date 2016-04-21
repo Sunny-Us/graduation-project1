@@ -208,6 +208,7 @@ $(function(){
                         "</div>"+
                     "</li>").appendTo($(wrap));
                     var numStatus=parseInt(status);
+                    console.log(i,data.data[i].comment_id);
                     if(numStatus>1 && numStatus<4){
                     	console.log("numStatus",numStatus);
                     	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").hide();

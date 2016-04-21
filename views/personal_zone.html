@@ -54,11 +54,13 @@
         <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
           <li role="presentation" class="left-nav-active active"><a href="#personal_info" aria-controls="personal_info" role="tab" data-toggle="tab">个人信息</a></li>
           <li role="presentation" class="left-nav" id="my_orders"><a href="#orders" aria-controls="messages" role="tab" data-toggle="tab">我的订单</a></li>
+          <li role="presentation" class="left-nav" id="my_comments"><a href="#comments" aria-controls="messages" role="tab" data-toggle="tab">我的评价</a></li>
           <li role="presentation" class="left-nav"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">账户余额</a></li>
         </ul>
       </div>  
       <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 right-tab-content">
         <div class="tab-content">
+        <!-- 个人信息 modal start -->
             <div role="tabpanel" class="tab-pane fade in active" id="personal_info">
               <div>
                 <!-- 个人信息 tabs -->
@@ -189,8 +191,8 @@
                 </div>
               </div>
             </div>
-
-
+        <!-- 个人信息 modal end -->
+        <!-- 我的订单 modal start -->
             <div role="tabpanel" class="tab-pane" id="orders">
                <div>
                 <!-- Nav tabs -->
@@ -214,11 +216,19 @@
                 </div>
               </div>
             </div>
+        <!-- 我的订单 modal end -->
+            <div role="tabpanel" class="tab-pane" id="comments">
+              
+            </div>
+
+
+        <!-- 账户余额 modal start -->
             <div role="tabpanel" class="tab-pane" id="account">
                   <div class="balance">
                    <!-- 此处是账户余额 -->
                   </div> 
             </div>
+        <!-- 账户余额 modal end -->
           </div>
       </div>
     </div>  

@@ -242,7 +242,7 @@
                 "token":token
               },
               success:function(data){
-                // console.log(data);
+                console.log(data);
                 // 填充数据
                 $(".bread-nav-item-active").html(data.data[0].service_id.name);
                 service_id=data.data[0].service_id.id;  //全局变量 service_id
@@ -259,15 +259,14 @@
                 // $("#modal_service_customer").val($.cookie("uname"));
 
                 var evaluatedScore=parseInt(data.data[0].comment_id.score);
+                console.log("evaluatedScore",evaluatedScore);
                 var commentText=data.data[0].comment_id.comment;
                 var additionalCommentText=data.data[0].comment_id.add_comment;
                 //没有评分、评论、追加评论
-                //如果status大于1  则更改按钮不显示，评论和追加评论也不显示  start
-                //如果status大于1  则更改按钮不显示，评论和追加评论也不显示  start
                 if(data.data[0].status=="4" && data.data[0].comment_id=="None"){
                   $(".commented").css("display","none");
                   $(".make-comment").css("display","block");
-                //已完成订单待评价  点击星星评分 start
+                   //已完成订单待评价  点击星星评分 start
                   $(".to-evaluate span").each(function(){
                     console.log($(this));
                     var object=$(".to-evaluate span.star-icon");
@@ -287,7 +286,42 @@
                     }); 
                   });
                 //已完成订单待评价  点击星星评分 start
-
+                }else if(data.data[0].status=="4" && evaluatedScore!=0 && data.data[0].comment_id.add_comment!="None"){
+                  var evalscore=data.data[0].comment_id.score;
+                  $(".make-comment").css("display","none");
+                  $(".commented").css("display","block");
+                  $("#additional_commented_text").attr("readonly","readonly");
+                  $(".add-evaluate-btn").hide();
+                  var allevaluated=$(".evaluated span");
+                  var alllength=allevaluated.length;
+                  for(var s=0;s<evalscore;s++){
+                    allevaluated.eq(s).removeClass("star-icon");
+                    allevaluated.eq(s).addClass("star-icon-active");
+                  }
+                  for(var a=evalscore;a<alllength;a++){
+                    allevaluated.eq(a).removeClass("star-icon-active");
+                    allevaluated.eq(a).addClass("star-icon");
+                  }
+                  $("#commented_text").text(data.data[0].comment_id.comment);
+                  $("#additional_commented_text").text(data.data[0].comment_id.add_comment);
+                }else if(data.data[0].status=="4" && evaluatedScore!=0 && data.data[0].comment_id.add_comment=="None"){
+                  var evalscore=data.data[0].comment_id.score;
+                  $(".make-comment").css("display","none");
+                  $(".commented").css("display","block");
+                  // $("#additional_commented_text").attr("readonly","readonly");
+                  // $(".add-evaluate-btn").hide();
+                  var allevaluated=$(".evaluated span");
+                  var alllength=allevaluated.length;
+                  for(var s=0;s<evalscore;s++){
+                    allevaluated.eq(s).removeClass("star-icon");
+                    allevaluated.eq(s).addClass("star-icon-active");
+                  }
+                  for(var a=evalscore;a<alllength;a++){
+                    allevaluated.eq(a).removeClass("star-icon-active");
+                    allevaluated.eq(a).addClass("star-icon");
+                  }
+                  $("#commented_text").text(data.data[0].comment_id.comment);
+                  // $("#additional_commented_text").text(data.data[0].comment_id.add_comment);
                 }
                 //有评分，无评论，无追加评论
                 //有评分，有评论，无追加评论
@@ -334,7 +368,7 @@
           var allactive=$(".to-evaluate .star-icon-active");
           var score=allactive.length;
           console.log(score);
-          var comment=$("#comment_text").text();
+          var comment=$("#comment_text").val();
           var comment_time=new Date().Format("yyyy-MM-dd hh:mm:ss")
           if(score==0){
             alert("评分不可为0！");
@@ -343,14 +377,17 @@
             $.ajax({
               url:"http://127.0.0.1:8081/comment",
               type:"post",
+              cache : false, 
+              async : false,
               data:{
                 "method":"insert",
                 "token":token,
                 "data":JSON.stringify([{
                     "score":score,       //此处需和数据库确认
-                    // "comment":comment,    //此处需和数据库确认 
+                    "comment":comment,    //此处需和数据库确认 
                     "user_id":user_id,
                     "service_id":service_id,
+                    "order_id":orderId,
                     "worker_id":worker_id,
                     "comment_time":comment_time
                 }])
@@ -358,15 +395,62 @@
               success:function(data){
                 console.log("data",data);
                 if(data.result){
+                  $(".evaluate-btn").unbind("click");//评价成功之后 发表评价  按钮不可点击
+                  $(".star-icon").unbind("click");//评价成功之后  星星不可点击
+                  $("#comment_text").attr("readonly","readonly");
+                  getCommentId();
                   alert("评价成功");
-                  location.reload(true);
+                  $(".evaluate-btn").html("已评价");
+                  // window.location.reload(true);
                 }
               }
             });
           }
         });
-         
+//获取某条评论的 id    start
+        function getCommentId(){
+          $.ajax({
+            url:"http://127.0.0.1:8081/comment",
+            type:"post",
+            cache : false, 
+            async : false,
+            data:{
+              "method":"query",
+              "token":token,
+              "order_id":orderId
+            },
+            success:function(data){
+              var commentId=data.data[0].id;
+              passValue(commentId);
+            }
+          });
+        }
+//获取某条评论的id  end 
+//给 order表中的comment_id 字段赋值 start
+        function passValue(commentId){
+          console.log("enter passValue");
+          $.ajax({
+            url:"http://127.0.0.1:8081/order",
+            type:"post",
+            cache:false,
+            async:false,
+            data:{
+              "method":"update",
+              "token":token,
+              "data":JSON.stringify([{
+                [orderId]:{
+                  "comment_id":commentId    //此处需和数据库确认  
+                }
+              }])
+            }
+          });
+        }
+
+//给 order表中的comment_id 字段赋值 end
       //点击评价按钮 end
+      
+      
+      
       //点击追加评价按钮 start
         $(".evaluated-btn").on("click",function(){
           var additional=$("#additional_commented_text").text();
