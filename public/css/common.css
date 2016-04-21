@@ -353,9 +353,14 @@ footer.footer{
 	margin-top:10px;
 	float:left;
 }
+.content-box .user-info{
+	height:20px;
+	line-height: 20px;
+}
 .content-box .user-info .user-name{
 	color:#5e5e5e;
 	font-size: 12px;
+	float: left;
 }
 .content-box .info{
 	margin-top: 14px;
@@ -366,5 +371,25 @@ footer.footer{
 .content-box .info .time{
 	color:#C5BFD3;
 	font-size: 12px;
+}
+.nocomment{
+	padding-left: 10px;
+	color:#FFA000;
+}
+.star-box{
+	float:left;
+	margin-left: 10px;
+}
+.star-icon-active{
+	background:url(../images/star_icon_active.png);
+}
+.star-icon{
+	background: url(../images/star_icon.png);
+}
+.star-icon-active,.star-icon{
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin:0 2px;
 }
 /*评价展示 end*/

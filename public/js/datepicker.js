@@ -4,7 +4,7 @@ $(function (){
 	    todayHighlight: true,
 	    format: 'yyyy-mm-dd',
 	    autoclose: true,
-	    startDate: '-3d'
+	    startDate: '+1d'
 	});
 	$('#service-data').val(new Date().getTime());
 	$('#maintain-data').datepicker({
@@ -12,7 +12,7 @@ $(function (){
 	    todayHighlight: true,
 	    format: 'yyyy-mm-dd',
 	    autoclose: true,
-	    startDate: '-3d'
+	    startDate: '+d'
 	});
 });
 //日期格式化函数
