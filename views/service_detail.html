@@ -70,7 +70,7 @@
                   <a href="#service-tab" aria-controls="home" role="tab" data-toggle="tab"aria-expanded="false">预约服务</a>
                 </li>
                 <li role="present">
-                  <a href="#evaluation-list" aria-controls="home" role="tab" data-toggle="tab"aria-expanded="false">查看评价</a>
+                  <a href="#evaluation-list" aria-controls="home" class="show-comment" role="tab" data-toggle="tab"aria-expanded="false">查看评价</a>
                 </li>
               </ul>
               <div class="tab-content service-comment-tab">
@@ -143,45 +143,6 @@
                   </form>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="evaluation-list">
-                  <div class="evaluation clearfix">
-                    <div class="evaluation-con clearfix">
-                      <img src="http://7xso2f.com1.z0.glb.clouddn.com/profile_image.svg" alt="photo">
-                      <div class="content-box">
-                        <div class="user-info">
-                          <span class="user-name">李四</span>
-                          <div class="star-box"></div>
-                        </div>
-                        <div class="info">
-                          <p>还不错</p>
-                          <span class="time">日期：2016-4-20 18:00:00</span>
-                        </div>    
-                      </div>
-                    </div>
-                  </div>
-                  <div class="evaluation clearfix">
-                    <div class="evaluation-con clearfix">
-                      <img src="http://7xso2f.com1.z0.glb.clouddn.com/profile_image.svg" alt="photo">
-                      <div class="content-box">
-                        <div class="user-info">
-                          <span class="user-name">李四</span>
-                          <div class="star-box"></div>
-                        </div>
-                        <div class="info">
-                          <p>还不错</p>
-                          <span class="time">日期：2016-4-20 18:00:00</span>
-                        </div>    
-                      </div>
-                    </div>
-                    <div class="evaluation-con add clearfix">
-                      <div class="content-box">
-                        <p class="add-info importent">追加评论</p>
-                        <div class="info">
-                          <p>还不错</p>
-                          <span class="time">日期：2016-4-20 18:00:00</span>
-                        </div>    
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div> 
             </div>     
@@ -199,6 +160,7 @@
   {% block script %}
     {% parent %}
     <script type="text/javascript" src="js/tab.js"></script>
+    <script type="text/javascript" src="js/show_comment.js"></script>
     <script type="text/javascript">
       $(function(){
         function toDou(iNum){
@@ -255,10 +217,13 @@
                     $('#service-comment').text(data.data[0].comment);
                     $('#service-price > span').text(data.data[0].price);
                     $('.real-money span').text(parseFloat($('#service-price span').text()));
-                  },error:function(data){
+                  },
+                  error:function(data){
                     console.log(err);
                   }
                 });
+                var service_type=$(this).data('id');
+                showComment(service_type);//插入评价
               });
             });
             /*页面初加载，获取service*/
