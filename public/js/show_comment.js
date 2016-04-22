@@ -14,7 +14,6 @@ function showComment(service_type){
 				data.data.map(function(item){
 					service.push(parseInt(item.id));
 				});
-				console.log(service);
 				$.ajax({
 					url:'http://127.0.0.1:8081/comment',
 					type:'POST',
@@ -49,6 +48,7 @@ function showComment(service_type){
 					                        '<div class="info">'+
 					                            '<p>'+elem.comment+'</p>'+
 					                            '<span class="time">日期：'+elem.comment_time+'</span>'+
+					                            '<span class="service-name">服务名称：'+elem.service_id.name+'</span>'+
 					                        '</div>'+   
 				                        '</div>'+
 				                    '</div>'+

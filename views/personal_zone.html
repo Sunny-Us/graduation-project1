@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="third-party/upload_img/cropper/cropper.min.css">
 <link rel="stylesheet" type="text/css" href="third-party/upload_img/sitelogo/sitelogo.css">
 <link rel="stylesheet" type="text/css" href="css/special.css">
+
 {% endblock %}
 {% block header %}
 <div class="default-nav">
@@ -128,7 +129,6 @@
                       </div>
                     </div>
                     <!-- 修改头像modal end -->
-
                     <form class="form-horizontal clearfix">
                         <div class="form-group">
                           <label class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">姓名：</label>
@@ -246,6 +246,7 @@
     <script type="text/javascript" src="third-party/upload_img/sitelogo/sitelogo.js"></script>
     <script type="text/javascript" src="js/userZoneShowComments.js"></script>
     <script type="text/javascript" src="js/zone.js"></script>
+    <script type="text/javascript" src="third-party/uploadify/jquery.uploadify.js"></script>
     <script>
     $(function(){
       function initialZone(){
@@ -255,6 +256,17 @@
         }
       }
       initialZone();
+      // $('#uploadImage').uploadify({
+      //   auto:true,
+      //   height:30,
+      //   width:200,
+      //   swf:'third-party/uploadify/uploadify.swf',
+      //   uploader:'third-party/uploadify/uploadify.php',
+      //   buttonCursor:'hand',
+      //   folder:'/',
+      //   // buttonText: "选择文件",
+      //   buttonClass: "btn btn-primary",
+      // });
     });
     </script>
   {% endblock %}

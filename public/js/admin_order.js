@@ -159,7 +159,7 @@ $(function(){
     console.log(oid);
     var postData={};
     postData.status=4;
-    postData.finish_time=new Date.Format("yyyy-MM-dd hh:mm:ss");
+    postData.finish_time=new Date().Format("yyyy-MM-dd hh:mm:ss");
     update(oid,postData,'order');
     location.reload(true);
   })
