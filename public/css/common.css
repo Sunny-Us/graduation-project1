@@ -42,6 +42,11 @@ nav.navbar{
 .navbar-right a:hover{
 	text-decoration: none;
 }
+.navbar-right .admin-zone{
+	cursor: pointer;
+	display: inline-block;
+	margin-right: 10px;
+}
 .input-group{
 	padding-bottom: 30px;
 	width:100%;

@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var request = require('request');
+var fs = require('fs');
+var multer  = require('multer');
 
 var routes = require('./routes/index');
 var test = require('./routes/test');
@@ -19,6 +21,7 @@ var workerOrderDetail = require("./routes/worker_order_detail");
 var app = express();
 
 app.use(express.static('public'));
+// app.use(multer({ dest: './uploads/'}));
 
 var swig = require('swig'),
   people;
@@ -35,7 +38,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use('/', routes);
 app.use('/test', test);
@@ -176,6 +178,25 @@ app.get('/admin-comment',function(req,res){
     }
   });
 });
+
+// app.post('/upload-img',function(req,res){
+//   console.log('hahaha,upload');
+//   console.log("这是啥"+req.files.thumbnail.path);
+//   // 获得文件的临时路径
+//   var tmp_path = req.files.thumbnail.path;
+//   // 指定文件上传后的目录 - 示例为"images"目录。 
+//   var target_path = './public/images/' + req.files.thumbnail.name;
+//   // 移动文件
+//   fs.rename(tmp_path, target_path, function(err) {
+//     if (err) throw err;
+//     // 删除临时文件夹文件, 
+//     fs.unlink(tmp_path, function() {
+//        if (err) throw err;
+//        res.send('File uploaded to: ' + target_path + ' - ' + req.files.thumbnail.size + ' bytes');
+//     });
+//   });
+// });
+
 // error handlers
 app.use(function(err,req,res,next){
   res.status(404).send('Sorry cannot find that!');
