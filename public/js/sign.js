@@ -24,26 +24,26 @@ $(function(){
 						$.cookie('address',data.user.address);
 						$.cookie('phone',data.user.phone);
 						$.cookie('balance',data.user.balance);
+						$.cookie('role',data.user.role);
 						$('#navbar-default ul').hide();
 						$('#navbar-default div').show();
-						$('#navbar-default > div > img').attr('src',data.user.image_url);
+						$('#navbar-default .image_url').attr('src',data.user.image_url);
 						$('#navbar-default > div > .name').html(data.user.name);
 						if(data.user.role==0){
 							$('#navbar-default > div > .name').attr('href','/zone');
 						}else if(data.user.role==1){
 							$('#navbar-default > div > .name').attr('href','/workerZone');
 						}else if(data.user.role==2){
-							$('#navbar-default > div > .name').attr('href','javascript:;');
+							$('#navbar-default > div > .name').attr('href','/adminZone');
+							// $('<a class="admin-zone" href="/admin-user">主界面</a>').insertBefore('#navbar-default > div > img');
 							location.href='/admin-user';
-						}	
-						
+						}
 					}else{
 						if(data.code==1){
 							alert('登录名或密码错误！');
 						}else{
 							alert('登录失败！');
 						}
-						
 					}
 				},
 				error: function (data) {
@@ -52,6 +52,15 @@ $(function(){
 			});
 		}
 	});
+	if($.cookie('role')==0){
+		$('#navbar-default > div > .name').attr('href','/zone');
+	}else if($.cookie('role')==1){
+		$('#navbar-default > div > .name').attr('href','/workerZone');
+	}else if($.cookie('role')==2){
+		$('#navbar-default > div > .name').attr('href','/adminZone');
+		// $('<a class="admin-zone" href="/admin-user">主界面</a>').insertBefore('#navbar-default > div > img');
+	}
+	$('#navbar-default .image_url').attr('src',$.cookie('image_url'));
 	//---------------注册验证
 	$('#inputusername').on('blur',function(){
 		$.ajax({
@@ -128,5 +137,6 @@ $(function(){
 		$.cookie('phone',null);
 		$.cookie('address',null);
 		$.cookie('balance',null);
+		$.cookie('role',null);
 	})
 });
