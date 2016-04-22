@@ -31,7 +31,7 @@ $(function(){
 						if(data.user.role==0){
 							$('#navbar-default > div > .name').attr('href','/zone');
 						}else if(data.user.role==1){
-							$('#navbar-default > div > .name').attr('href','/worker_zone');
+							$('#navbar-default > div > .name').attr('href','/workerZone');
 						}else if(data.user.role==2){
 							$('#navbar-default > div > .name').attr('href','javascript:;');
 							location.href='/admin-user';
