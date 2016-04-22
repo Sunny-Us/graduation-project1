@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="css/zone.css">
 <link rel="stylesheet" type="text/css" href="third-party/upload_img/cropper/cropper.min.css">
 <link rel="stylesheet" type="text/css" href="third-party/upload_img/sitelogo/sitelogo.css">
+<link rel="stylesheet" type="text/css" href="third-party/uploadify/uploadify.css">
 {% endblock %}
 {% block header %}
 <div class="default-nav">
@@ -74,8 +75,8 @@
                       <div class="row">
                         <div id="crop-avatar" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <div class="avatar-view" title="Change Logo Picture">
-                              <img src="images/upload_logo.jpg" alt="Logo">
-                            </div>
+                            <img src="images/upload_logo.jpg" alt="Logo">
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -86,7 +87,7 @@
                           <form class="avatar-form" action="{{url('admin/upload-logo')}}" enctype="multipart/form-data" method="post">
                             <div class="modal-header">
                               <button class="close" data-dismiss="modal" type="button">&times;</button>
-                              <h4 class="modal-title" id="avatar-modal-label">Change Logo Picture</h4>
+                              <h4 class="modal-title" id="avatar-modal-label">修改头像</h4>
                             </div>
                             <div class="modal-body">
                               <div class="avatar-body">
@@ -125,7 +126,6 @@
                       </div>
                     </div>
                     <!-- 修改头像modal end -->
-
                     <form class="form-horizontal clearfix">
                         <div class="form-group">
                           <label class="col-sm-2 col-lg-2 col-md-2 col-xs-2 col-lg-offset-2 col-md-offset-2 control-label">姓名：</label>
@@ -190,7 +190,6 @@
               </div>
             </div>
 
-
             <div role="tabpanel" class="tab-pane" id="orders">
                <div>
                 <!-- Nav tabs -->
@@ -234,6 +233,7 @@
     <script type="text/javascript" src="third-party/upload_img/cropper/cropper.min.js"></script>
     <script type="text/javascript" src="third-party/upload_img/sitelogo/sitelogo.js"></script>
     <script type="text/javascript" src="js/zone.js"></script>
+    <script type="text/javascript" src="third-party/uploadify/jquery.uploadify.js"></script>
     <script>
     $(function(){
       function initialZone(){
@@ -243,6 +243,17 @@
         }
       }
       initialZone();
+      // $('#uploadImage').uploadify({
+      //   auto:true,
+      //   height:30,
+      //   width:200,
+      //   swf:'third-party/uploadify/uploadify.swf',
+      //   uploader:'third-party/uploadify/uploadify.php',
+      //   buttonCursor:'hand',
+      //   folder:'/',
+      //   // buttonText: "选择文件",
+      //   buttonClass: "btn btn-primary",
+      // });
     });
     </script>
   {% endblock %}

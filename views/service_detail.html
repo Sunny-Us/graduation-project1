@@ -166,8 +166,13 @@
         function toDou(iNum){
           return iNum<10?'0'+iNum:''+iNum;
         }
-
-        $('#service-data').val(new Date().Format("yyyy-MM-dd"));
+        //使日期变为后一天
+        function setDate(addDayCount){
+          var dd = new Date();
+          dd.setDate(dd.getDate()+addDayCount);
+          return dd;
+        }
+        $('#service-data').val(setDate(1).Format("yyyy-MM-dd"));
         var target = window.location.href.split('#').pop();
         /*页面初加载，获取service——type,创建左侧导航栏*/
         $.ajax({
@@ -304,7 +309,8 @@
             },
             success:function(data){
               if(data.result){
-                alert('提交成功,请等待服务人员与您联系！');
+                alert('提交成功！');
+                location.href="https://www.alipay.com/";
               }else{
                 alert('提交失败！');
               }

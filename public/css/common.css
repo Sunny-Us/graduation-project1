@@ -18,7 +18,7 @@ body {
   font: 14px "微软雅黑", Helvetica, Arial, sans-serif;
 }
 nav.navbar{
-	z-index:99;
+	z-index:9;
 }
 .navbar-right li{
 	padding:0 15px;
@@ -371,6 +371,11 @@ footer.footer{
 .content-box .info .time{
 	color:#C5BFD3;
 	font-size: 12px;
+}
+.content-box .info .service-name{
+	color:#C5BFD3;
+	font-size: 12px;
+	margin-left: 20px;
 }
 .nocomment{
 	padding-left: 10px;
