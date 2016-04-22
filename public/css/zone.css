@@ -263,3 +263,31 @@ textarea{
 }
 /*worker_order_detail.html end*/
 
+/*personal_zone.html start*/
+.comment-info{
+
+}
+.content-box{
+	float: left;
+	width: 80%;
+}
+.booktime{
+	margin-left: 10px;
+	float: left;
+	padding-top: 12px;
+	font-size: 12px;
+	/*color: #e00000;*/
+}
+/*personal_zone.html end*/
+
+/*worker_zone.html start*/
+.uinfo{
+	width: 40px;
+	float: left;
+}
+.uinfo span{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+/*worker_zone.html end*/
