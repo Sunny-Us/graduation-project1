@@ -58,7 +58,7 @@
     addListener: function () {
       this.$avatarView.on('click', $.proxy(this.click, this));
       this.$avatarInput.on('change', $.proxy(this.change, this));
-      this.$avatarForm.on('submit', $.proxy(this.submit, this));
+      this.$avatarSave.on('click', $.proxy(this.submit, this));
       this.$avatarBtns.on('click', $.proxy(this.rotate, this));
     },
 
@@ -225,35 +225,76 @@
 
     ajaxUpload: function () {
       var url = this.$avatarForm.attr('action'),
-          data = new FormData(this.$avatarForm[0]),
+          // data = new FormData(this.$avatarInput[0]),
           _this = this;
-
-      $.ajax(url, {
-        headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
-        type: 'post',
-        data: data,
-        dataType: 'json',
-        processData: false,
-        contentType: false,
-
-        beforeSend: function () {
-          _this.submitStart();
-        },
-
-        success: function (data) {
-          _this.submitDone(data);
-        },
-
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-          _this.submitFail(textStatus || errorThrown);
-        },
-
-        complete: function () {
-          _this.submitEnd();
+      var fd=new FormData();
+      
+      var file=document.getElementById("avatarInput").files[0];
+      var imgName=file.name;
+      console.log("file",file);
+      fd.append("file",file);
+      console.log(fd);
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(){
+          console.log("xhr.readyState",xhr.readyState);
+          if(xhr.readyState == 4 && xhr.status == 200){
+              var b = xhr.responseText;
+              console.log("xhr",xhr);
+              if(b=="finished!"){
+                var id=$.cookie("uid");
+                var token=$.cookie("key");
+                var imgurl="../images/user_icon/"+imgName;
+                $.ajax({
+                  url:"http://127.0.0.1:8081/user/user",
+                  type:"POST",
+                  cache:false,
+                  async:false,
+                  data:{"method":"update","token":token,"data":JSON.stringify([{[id]:{"image_url":imgurl}}])},
+                  success:function(data){
+                    data.result ? alert("修改头像成功！"):alert("修改头像失败!");
+                    // this.$avatarModal.modal('hide');
+                    window.location.reload(true);
+                  }
+                });
+              }else{
+                alert("failed!");
+              }
+          }
         }
-      });
-    },
+        xhr.open("POST", "http://127.0.0.1:8081/icon",false);
+        xhr.send(fd);
+      // $.ajax({
+      //   // headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
+      //   type: 'post',
+      //   url:url,
+      //   data: fd,
+      //   // dataType: 'json',
+      //   processData: false,
+      //   contentType: false,
+      //   cache:false,
+      //   async:false,
+      //   beforeSend: function () {
+      //     _this.submitStart();
+      //   },
 
+      //   success: function (data) {
+      //     // _this.submitDone(data);
+      //     if(data.result){
+      //       $.ajax({
+
+      //       });
+      //     }
+      //   },
+
+      //   error: function (XMLHttpRequest, textStatus, errorThrown) {
+      //     _this.submitFail(textStatus || errorThrown);
+      //   },
+
+      //   complete: function () {
+      //     _this.submitEnd();
+      //   }
+      // });
+    },
     syncUpload: function () {
       this.$avatarSave.click();
     },
@@ -311,7 +352,9 @@
   };
 
   $(function () {
-    return new CropAvatar($('#crop-avatar'));
+   
+      return new CropAvatar($('#crop-avatar'));
+
   });
 
 });

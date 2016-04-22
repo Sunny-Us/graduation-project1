@@ -24,6 +24,8 @@ $(function(){
 	var token=$.cookie("key");
 //页面渲染用户基本信息 start
 	function getPagesInfo(data){
+	  $.cookie("image_url",data.data[0].image_url);
+	  $(".avatar-view img").attr("src",data.data[0].image_url);
 	  $("#name_input").attr("value",data.data[0].name);
 	  $("#tel_input").attr("value",data.data[0].phone);
 	  $("#address_input").attr("value",data.data[0].address);

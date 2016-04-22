@@ -54,9 +54,6 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-stacked left-nav-tabs" role="tablist">
           <li role="presentation" class="left-nav-active active"><a href="#personal_info" aria-controls="personal_info" role="tab" data-toggle="tab">个人信息</a></li>
-          <li role="presentation" class="left-nav" id="my_orders"><a href="#orders" aria-controls="messages" role="tab" data-toggle="tab">我的订单</a></li>
-          <li role="presentation" class="left-nav" id="my_comments"><a href="#comments" aria-controls="messages" role="tab" data-toggle="tab">我的评价</a></li>
-          <li role="presentation" class="left-nav"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">账户余额</a></li>
         </ul>
       </div>  
       <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 right-tab-content">
@@ -193,43 +190,6 @@
               </div>
             </div>
         <!-- 个人信息 modal end -->
-        <!-- 我的订单 modal start -->
-            <div role="tabpanel" class="tab-pane" id="orders">
-               <div>
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                  <li role="presentation" class="active" id="orders_going"><a href="#ordering" aria-controls="home" role="tab" data-toggle="tab">正在进行订单</a></li>
-                  <li role="presentation" id="orders_done"><a href="#ordered" aria-controls="profile" role="tab" data-toggle="tab">历史订单</a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                  <div role="tabpanel" class="tab-pane active" id="ordering">
-                    <ul class="clearfix order-going-ul">
-                      <!-- 此处是正在进行中的列表 -->
-                    </ul>
-                  </div>
-                  <div role="tabpanel" class="tab-pane" id="ordered">
-                    <ul class="clearfix order-done-ul">
-                      <!-- 此处是已完成的订单列表 -->
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-        <!-- 我的订单 modal end -->
-            <div role="tabpanel" class="tab-pane" id="comments">
-              
-            </div>
-
-
-        <!-- 账户余额 modal start -->
-            <div role="tabpanel" class="tab-pane" id="account">
-                  <div class="balance">
-                   <!-- 此处是账户余额 -->
-                  </div> 
-            </div>
-        <!-- 账户余额 modal end -->
           </div>
       </div>
     </div>  
@@ -245,7 +205,7 @@
     <script type="text/javascript" src="third-party/upload_img/cropper/cropper.min.js"></script>
     <script type="text/javascript" src="third-party/upload_img/sitelogo/sitelogo.js"></script>
     <script type="text/javascript" src="js/userZoneShowComments.js"></script>
-    <script type="text/javascript" src="js/zone.js"></script>
+    <script type="text/javascript" src="js/adminZone.js"></script>
     <script>
     $(function(){
       function initialZone(){

@@ -43,6 +43,9 @@ $(function(){
   var id=parseInt($.cookie("uid"));
   var token=$.cookie("key");
   function getPagesInfo(data){
+    $.cookie("image_url",data.data[0].image_url);
+    // console.log(data);
+    $(".avatar-view img").attr("src",data.data[0].image_url);
     $("#name_input").attr("value",data.data[0].name);
     $("#tel_input").attr("value",data.data[0].phone);
     $("#address_input").attr("value",data.data[0].address);
