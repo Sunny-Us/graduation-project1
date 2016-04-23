@@ -52,14 +52,17 @@ $(function(){
 			});
 		}
 	});
-	if($.cookie('role')==0){
-		$('#navbar-default > div > .name').attr('href','/zone');
-	}else if($.cookie('role')==1){
-		$('#navbar-default > div > .name').attr('href','/workerZone');
-	}else if($.cookie('role')==2){
-		$('#navbar-default > div > .name').attr('href','/adminZone');
-		// $('<a class="admin-zone" href="/admin-user">主界面</a>').insertBefore('#navbar-default > div > img');
-	}
+	$('#navbar-default > div > .name').on('click',function(){
+		if($.cookie('role')==0){
+			$('#navbar-default > div > .name').attr('href','/zone');
+		}else if($.cookie('role')==1){
+			$('#navbar-default > div > .name').attr('href','/workerZone');
+		}else if($.cookie('role')==2){
+			$('#navbar-default > div > .name').attr('href','/adminZone');
+			// $('<a class="admin-zone" href="/admin-user">主界面</a>').insertBefore('#navbar-default > div > img');
+		}
+	});
+	
 	$('#navbar-default .image_url').attr('src',$.cookie('image_url'));
 	//---------------注册验证
 	$('#inputusername').on('blur',function(){
@@ -138,6 +141,6 @@ $(function(){
 		$.cookie('address',null);
 		$.cookie('balance',null);
 		$.cookie('role',null);
-		location.href="/";
+		window.location.href="/";
 	})
 });

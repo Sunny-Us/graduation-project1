@@ -25,10 +25,12 @@
         </a>
       </div>
       <div class="collapse navbar-collapse" id="navbar-default">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="signin" data-toggle="modal" data-target="#sigin">注册</li>
-          <li class="login" data-toggle="modal" data-target="#login">登录</li>
-        </ul>
+        <div class="nav navbar-nav navbar-right" style="display: none">
+          <img class="image_url" src="https://pixabay.com/static/img/profile_image_dummy.svg" alt="photo" />
+          <a class="name"></a>
+          <span>|</span>
+          <a href="/" id="quit">退出</a>
+        </div>
       </div>
     </div>
   </nav>
@@ -77,10 +79,12 @@
           
         </div>
         <div class="col-lg-8 service-info-right">
-          <section class="detail-book-time">预约时间：2016.04.11 9:00-18:00</section>
-          <section class="detail-finish-time">完成时间：2016.04.11 12:35</section>
-          <section class="detail-service-address">服务地址：北京市朝阳区芍药居**号院**号楼**单元***室</section>
-          <section class="detail-order-num">订单号：mtwx2016041111</section>
+          <section class="detail-order-price">订单价格：<span></span></section>
+          <section class="detail-book-time">预约时间：</section>
+          <section class="detail-finish-time">完成时间：</section>
+          <section class="detail-service-address">服务地址：</section>
+          <section class="detail-order-num">订单号：</section>
+          <section class="detail-recycle-price">回收价格：<input type="number" class="price-input" step="0.1">元</section>
           <!-- <section class="detail-receive-people">验收人：马小跳</section> -->
           <!-- <section class="detail-customer-phone">联系电话：</section> -->
           <!-- 已完成订单待评价 -->
@@ -176,6 +180,10 @@
         var orderStatus=parseInt(urlarr[2]);
         var orderId=parseInt(urlarr[1]);
         var token=$.cookie("key");
+        var customerId;
+        var TYPEID;
+        var BALANCE;
+        var customerToken;
         // console.log(token);
         // initialOrderDetail() start
         function initialOrderDetail(){
@@ -223,12 +231,25 @@
               success:function(data){
                 console.log("all:",data);
                 // 填充数据
+                BALANCE=data.data[0].user_id.balance;
+                customerId=data.data[0].user_id.id;
+                TYPEID=data.data[0].service_id.type_id;
+                customerToken=data.data[0].user_id.token;
+                TYPEID==3 ? function(){$(".detail-order-price").hide();$(".detail-recycle-price").show()}() : function(){$('.detail-order-price').show();$(".detail-recycle-price").hide()}(); //判断是否是回收类服务
+                switch(orderStatus){
+                  case 1:$(".price-input").prop("disabled","true");break;
+                  case 2:$(".price-input").prop("disabled","true");break;
+                  case 3:$(".price-input").removeAttr("disabled");break;
+                  case 4:$(".detail-recycle-price").hide();break;
+                }
+                $(".detail-order-price span").html(data.data[0].service_id.price);
                 $(".bread-nav-item-active").html(data.data[0].service_id.name);
                 $(".customer-name").html("客户："+data.data[0].user_id.name);
                 $(".service-tel").html("联系电话："+data.data[0].user_id.phone);
+                $(".detail-order-num").html("订单号：mtwx25498574"+orderId);
                 $(".detail-book-time").html("预约时间："+data.data[0].book_time);
                 // $("#service-data").value(data.data[0].book_time);
-                $(".detail-finish-time").html("完成时间："+data.data[0].finish_time);
+                $(".detail-finish-time").html("完成时间："+(data.data[0].finish_time=="None"?"":data.data[0].finish_time));
                 // console.log(data.data[0].service_address);
                 $(".detail-service-address").html("服务地址："+data.data[0].service_address);
                 $("#modal_service_addr").val(data.data[0].service_address);
@@ -302,6 +323,8 @@
           $.ajax({
             url:"http://127.0.0.1:8081/order",
             type:"post",
+            cache:false,
+            async:false,
             data:{
               "method":"update",
               "token":token,
@@ -324,6 +347,7 @@
             $(".line-icon").eq(2).addClass("line-icon-active");
           }else if(orderStatus==3){
             alert("订单已为‘进行中’状态");
+            window.location.href="workerOrderDetail#"+orderId+"#3";
           }else{
             alert("订单为‘已完成’状态，不可更改");
           }
@@ -331,18 +355,53 @@
         //点击“进行中”按钮 end
         //点击 “已完成”按钮 start
         $("#order_finished").on("click",function(){
-          if(orderStatus<4){
-            var status=4;
-            if($(".circle-icon").eq(2).hasClass("circle-icon-active")){
+         
+          
+          if(TYPEID==3 && parseInt(orderStatus)==3){
+            $(".price-input").val()==""?alert("请填写回收价格！"):function(){
+              var ba=parseFloat($(".price-input").val())+parseFloat(BALANCE);
+              $.ajax({
+                url:"http://127.0.0.1:8081/user/user",
+                type:"post",
+                cache:false,
+                async:false,
+                data:{"method":"update","token":customerToken,"data":JSON.stringify([{[customerId]:{"balance":ba}}])},
+                success:function(data){
+                  if(data.result){
+                    alert("已更新账户余额");
+                  }
+                }
+              });
+              var status=4;
               changeStatus(status);
               $(".circle-icon").eq(3).addClass("circle-icon-active");
-            }else{
-              alert("请先点击“进行中”按钮！");
-            }
-          }else{
-            alert("订单已为‘已完成’状态");
+            }();
           }
-         //点击 “已完成”按钮 end 
+          if(orderStatus==4){
+            alert("订单已为‘已完成’状态");
+            window.location.href="workerOrderDetail#"+orderId+"#4";
+          }
+          if(orderStatus<3){
+            alert("请先点击“进行中”按钮！");
+          }
+
+
+
+          // else{
+          //   else{
+          //      if(orderStatus<4){
+          //       var status=4;
+          //       if($(".circle-icon").eq(2).hasClass("circle-icon-active")){
+          //         changeStatus(status);
+          //         $(".circle-icon").eq(3).addClass("circle-icon-active");
+          //       }else{
+          //         alert("请先点击“进行中”按钮！");
+          //       }
+          //     }
+          //   }
+           
+          // }
+          
         });
 
       //更改订单状态 end

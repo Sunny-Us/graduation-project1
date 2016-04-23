@@ -145,9 +145,11 @@ $(function(){
 		$.ajax({
 			url:"http://127.0.0.1:8081/order",
 			type:"post",
+			cache:false,
+			async:false,
 			data:{
 				"method":"delete",
-				"data":JSON.stringify({"id":order_id}),
+				"data":JSON.stringify([order_id]),
 				"token":token
 			},
 			success:function(data){
@@ -164,6 +166,8 @@ $(function(){
 		$.ajax({
 			url:"http://127.0.0.1:8081/order",
 			type:"post",
+			cache:false,
+			async:false,
 			data:{
 				"method":"query",
 				"user_id":id,
@@ -172,90 +176,105 @@ $(function(){
 			},
 			success:function(data){
 				console.log("请求返回值:",data);
-				var listNum=data.data.length;
-				var i=0;
-				$(".order-going-ul").empty();
-				$(".order-done-ul").empty();
-				for(i=0;i<listNum;i++){
-					var status=data.data[i].status;
-					console.log("status:",status);
-					var statusDesc;
-					// var order=data.data[i].id;
-					// console.log(i,order);
-					switch(status){
-						case "1":statusDesc="已下单...";break;
-						case "2":statusDesc="已受理...";break;
-						case "3":statusDesc="进行中...";break;
-						case "4":statusDesc="已完成";break;
+				if(data.result){
+					var listNum=data.data.length;
+					var i=0;
+					$(".order-going-ul").empty();
+					$(".order-done-ul").empty();
+					for(i=0;i<listNum;i++){
+						var status=data.data[i].status;
+						console.log("status:",status);
+						var statusDesc;
+						// var order=data.data[i].id;
+						// console.log(i,order);
+						switch(status){
+							case "1":statusDesc="已下单...";break;
+							case "2":statusDesc="已受理...";break;
+							case "3":statusDesc="进行中...";break;
+							case "4":statusDesc="已完成";break;
+						}
+						var workerName;
+						if(data.data[i].worker_id.name==undefined){
+							workerName="未分配";
+						}else{
+							workerName=data.data[i].worker_id.name;
+						}
+						// console.log("workerName:",workerName);
+						$("<li class='order-list clearfix' id='list"+data.data[i].id +"' data-class='items"+ data.data[i].status +"'>"+
+	                        "<div class='row-fluid'>"+
+	                           "<section class='order-item'>"+
+	                              "<span class='order-name'>"+data.data[i].service_id.name +"</span>"+
+	                              "<span class='order-state'>"+ statusDesc +"</span>"+  
+	                              "<span class='order-time'>"+"预约时间："+data.data[i].book_time +"</span>"+
+	                              "<input type='button' value='删除' class='delete-order-btn'>"+
+	                              "<input type='button' value='修改' class='modify-order-btn'>"+
+	                              "<input type='button' value='待评价' class='evaluate-order-btn'>"+
+	                              "<input type='button' value='已评价' class='evaluated-btn'>"+
+	                              "<span class='order-people'>"+"上门师傅："+ workerName +"</span>" +
+	                            "</section>"+   
+	                        "</div>"+
+	                    "</li>").appendTo($(wrap));
+	                    var numStatus=parseInt(status);
+	                    console.log(i,data.data[i].comment_id);
+	                    if(numStatus>1 && numStatus<4){
+	                    	console.log("numStatus",numStatus);
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").hide();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").hide();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").hide();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluated-btn").hide();
+	                    }else if(numStatus == 1){
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").show();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").show();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluated-btn").hide();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").hide();
+	                    }else if(numStatus == 4 && data.data[i].comment_id =="None"){
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").hide();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").hide();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluated-btn").hide();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").show();
+	                    }else if(numStatus == 4 && data.data[i].comment_id !="None"){
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").hide();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").hide();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").hide();
+	                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluated-btn").show();
+	                    }
+	                    //删除订单
+						// $("section.order-item").on("click",".delete-order-btn",function(){
+						// 	// alert($(this));
+						// 	console.log($(this));
+						// 	var orderId=$.trim($(this).parent("section.order-item").parent("div.row-fluid").parent("li.order-list").attr("id")).slice(4);
+						// 	console.log(orderId);
+						// 	deleteOrder(orderId);
+						// });
+						//删除订单
+							$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").on("click",function(){
+								// alert($(this));
+								console.log($(this));
+								var orderId=$.trim($(this).parent("section.order-item").parent("div.row-fluid").parent("li.order-list").attr("id")).slice(4);
+								console.log(orderId);
+								deleteOrder(orderId);
+							});
+						//进入订单详情页 && 更改订单
+						$("div.row-fluid").on("click","section.order-item",function(){
+							var orderid=$.trim($(this).parent("div.row-fluid").parent("li.order-list").attr("id")).slice(4);
+							var orderstatus=$.trim($(this).parent("div.row-fluid").parent("li.order-list").attr("data-class")).slice(5);
+							window.location.href="orderDetail#"+orderid+"#"+orderstatus;
+							// window.location.href="orderDetail#1#1";
+						});
+						// $("div.row-fluid").on("click",".modify-order-btn",function(){
+						// 	window.location.href="orderDetail#"+order+"#"+status;
+						// });
+						// $("div.row-fluid").on("click",".evaluate-order-btn",function(){
+						// 	window.location.href="orderDetail#"+order+"#"+status;
+						// });
 					}
-					var workerName;
-					if(data.data[i].worker_id.name==undefined){
-						workerName="未分配";
-					}else{
-						workerName=data.data[i].worker_id.name;
-					}
-					// console.log("workerName:",workerName);
-					$("<li class='order-list' id='list"+data.data[i].id +"' data-class='items"+ data.data[i].status +"'>"+
-                        "<div class='row-fluid'>"+
-                           "<section class='order-item'>"+
-                              "<span class='order-name'>"+data.data[i].service_id.name +"</span>"+
-                              "<span class='order-state'>"+ statusDesc +"</span>"+  
-                              "<span class='order-time'>"+"预约时间："+data.data[i].book_time +"</span>"+
-                              "<input type='button' value='删除' class='delete-order-btn'>"+
-                              "<input type='button' value='修改' class='modify-order-btn'>"+
-                              "<input type='button' value='待评价' class='evaluate-order-btn'>"+
-                              "<input type='button' value='已评价' class='evaluated-btn'>"+
-                              "<span class='order-people'>"+"上门师傅："+ workerName +"</span>" +
-                            "</section>"+   
-                        "</div>"+
-                    "</li>").appendTo($(wrap));
-                    var numStatus=parseInt(status);
-                    console.log(i,data.data[i].comment_id);
-                    if(numStatus>1 && numStatus<4){
-                    	console.log("numStatus",numStatus);
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").hide();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").hide();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").hide();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluated-btn").hide();
-                    }else if(numStatus == 1){
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").show();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").show();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluated-btn").hide();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").hide();
-                    }else if(numStatus == 4 && data.data[i].comment_id =="None"){
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").hide();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").hide();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluated-btn").hide();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").show();
-                    }else if(numStatus == 4 && data.data[i].comment_id !="None"){
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".delete-order-btn").hide();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".modify-order-btn").hide();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluate-order-btn").hide();
-                    	$("#list"+data.data[i].id).children("div.row-fluid").children("section.order-item").children(".evaluated-btn").show();
-                    }
-                    //删除订单
-					$("section.order-item").on("click",".delete-order-btn",function(){
-						var orderId=$.trim($(this).parent("section.order-item").parent("div.row-fluid").parent("li.order-list").attr("id")).slice(4);
-						deleteOrder(orderId);
-					});
-					//进入订单详情页 && 更改订单
-					$("div.row-fluid").on("click",".order-item",function(){
-						var orderid=$.trim($(this).parent("div.row-fluid").parent("li.order-list").attr("id")).slice(4);
-						var orderstatus=$.trim($(this).parent("div.row-fluid").parent("li.order-list").attr("data-class")).slice(5);
-						window.location.href="orderDetail#"+orderid+"#"+orderstatus;
-						// window.location.href="orderDetail#1#1";
-					});
-					// $("div.row-fluid").on("click",".modify-order-btn",function(){
-					// 	window.location.href="orderDetail#"+order+"#"+status;
-					// });
-					// $("div.row-fluid").on("click",".evaluate-order-btn",function(){
-					// 	window.location.href="orderDetail#"+order+"#"+status;
-					// });
 				}
+				
 			}
 
 		});
 	}
+	
 	//获取订单列表 end
 
 	$("#my_orders").on("click",function(){

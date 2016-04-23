@@ -233,6 +233,7 @@
               });
             });
             /*页面初加载，获取service*/
+            // $('#balance').text($.cookie('balance'));   
             $.ajax({
               url:'http://127.0.0.1:8081/service',
               type:"POST",
@@ -250,7 +251,7 @@
                 $('.real-money span').html(parseFloat($('#service-price span').html()));
                 $('#service-phone').val($.cookie('phone'));
                 $('#service-address').val($.cookie('address'));
-                $('#balance').val($.cookie('balance'));   
+                $('#balance').text($.cookie('balance'));   
               },error:function(data){
                 console.log(err);
               }
@@ -280,7 +281,7 @@
         })
         $('input:checkbox').on('click',function(){
           if(this.checked){
-            $('.real-money span').text(parseFloat($('#service-price > span').text())-parseFloat($('#balance').val()));
+            $('.real-money span').text(parseFloat($('#service-price > span').text())-parseFloat($('#balance').text()));
           }else{
             $('.real-money span').text(parseFloat($('#service-price span').text()));
           }
@@ -292,6 +293,20 @@
 
         //提交订单
         $('#submit').on('click',function(){
+          if($('input:checkbox:checked')){
+            $.ajax({
+              url:"http://127.0.0.1:8081/user/user",
+              type:"post",
+              cache:false,
+              async:false,
+              data:{"method":"update","token":$.cookie('key'),"data":JSON.stringify([{[$.cookie('uid')]:{"balance":0.0}}])},
+              success:function(data){
+                if(data.result){
+                  $.cookie('balance','0.0');
+                }
+              }
+            });
+          }
           var dataList={
             user_id:$.cookie('uid'),
             service_id: $('#service-options > option:selected').attr('data-sid'),
@@ -310,8 +325,7 @@
             },
             success:function(data){
               if(data.result){
-                alert('提交成功！');
-                location.href="https://www.alipay.com/";
+                alert('提交成功，请等待服务人员和您联系！');
               }else{
                 alert('提交失败！');
               }
