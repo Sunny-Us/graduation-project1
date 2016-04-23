@@ -253,6 +253,7 @@
                   success:function(data){
                     data.result ? alert("修改头像成功！"):alert("修改头像失败!");
                     // this.$avatarModal.modal('hide');
+                    $.cookie("image_url",imgurl);
                     window.location.reload(true);
                   }
                 });

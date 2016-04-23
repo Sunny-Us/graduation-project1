@@ -138,5 +138,6 @@ $(function(){
 		$.cookie('address',null);
 		$.cookie('balance',null);
 		$.cookie('role',null);
+		location.href="/";
 	})
 });
