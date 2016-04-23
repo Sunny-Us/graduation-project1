@@ -17,28 +17,19 @@ function checkout(uid,modal){
     },
     success:function(data){
       if(data.result){
+        modal.find('input:radio').prop("checked",false);
         data.data.map(function(item){
-          //--------对gender值做处理
-          function gender2int(gender){
-            if(gender==0){
-              return '无';
-            }else if(gender==1){
-              return '男';
-            }else{
-              return '女';
-            }
-          }
-          var gender = gender2int(item.gender);
           modal.find('#id').val(item.id);
           modal.find('#name').val(item.name);
           modal.find('#username').val(item.email);
           modal.find('#password').val(item.password);
-          modal.find('#gender').val(gender);
+          modal.find('.gender:radio[value='+item.gender+']').prop("checked",true);
+          console.log(item.gender);
           modal.find('#phone').val(item.phone);
           modal.find('#address').val(item.address);
           modal.find('#image_url').val(item.image_url);
           modal.find('#balance').val(item.balance);
-          modal.find('.status:radio[value='+item.status+']').attr('checked','checked');
+          modal.find('.status:radio[value='+item.status+']').prop("checked",true);
         })
       }
     },
@@ -48,22 +39,12 @@ function checkout(uid,modal){
   });
 }
 function update(uid,modal){
-  function int2gender(gender){
-    if(gender=='无'){
-      return 0;
-    }else if(gender=='男'){
-      return 1;
-    }else{
-      return 2;
-    }
-  }
-  var gender=int2gender(modal.find('#gender').val());
   var postData={};
   postData.id=modal.find('#id').val();
   postData.name=modal.find('#name').val();
   postData.email=modal.find('#username').val();
   postData.password=modal.find('#password').val();
-  postData.gender=gender;
+  postData.gender=modal.find('.gender:radio:checked').val();
   postData.phone=modal.find('#phone').val();
   postData.address=modal.find('#address').val();
   postData.image_url=modal.find('#image_url').val();

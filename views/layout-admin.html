@@ -85,7 +85,16 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">性&nbsp;别<span class="importent">*</span></label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" id="gender" readonly>
+						    	<div class="col-sm-6 radio">
+	                                <label>
+	                                    <input class="gender" type="radio" name="gender-c" value="1" disabled> 男
+	                                </label>
+	                            </div>
+	                            <div class="col-sm-6 radio">
+	                                <label>
+	                                    <input class="gender" type="radio" name="gender-c" value="2" disabled> 女
+	                                </label>
+	                            </div>
 						    </div>
 						</div>
 						<div class="form-group">
@@ -115,14 +124,14 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">状&nbsp;态<span class="importent">*</span></label>
 						    <div class="col-sm-10">
-						      <div class="col-sm-6 radio">
+						      	<div class="col-sm-6 radio">
                                     <label>
-                                        <input class="status" type="radio" name="status" value="1" readonly/> 启用
+                                        <input class="status" type="radio" name="status-c" value="1" disabled> 启用
                                     </label>
                                 </div>
                                 <div class="col-sm-6 radio">
                                     <label>
-                                        <input class="status" type="radio" name="status" value="0" readonly/> 禁用
+                                        <input class="status" type="radio" name="status-c" value="0" disabled> 禁用
                                     </label>
                                 </div>
 						    </div>
@@ -147,7 +156,7 @@
 							<div class="form-group">
 								<label for="id" class="col-sm-2 control-label">编&nbsp;号<span class="importent">*</span></label>
 							    <div class="col-sm-10">
-							      <input type="text" class="form-control" id="id" >
+							      <input type="text" class="form-control" id="id" readonly>
 							    </div>
 							</div>
 							<div class="form-group">
@@ -171,7 +180,16 @@
 							<div class="form-group">
 								<label for="gender" class="col-sm-2 control-label">性&nbsp;别<span class="importent">*</span></label>
 							    <div class="col-sm-10">
-							      <input type="text" class="form-control" id="gender" >
+							    	<div class="col-sm-6 radio">
+		                                <label>
+		                                    <input class="gender" type="radio" name="gender-u" value="1"> 男
+		                                </label>
+		                            </div>
+		                            <div class="col-sm-6 radio">
+		                                <label>
+		                                    <input class="gender" type="radio" name="gender-u" value="2"> 女
+		                                </label>
+		                            </div>
 							    </div>
 							</div>
 							<div class="form-group">
@@ -203,12 +221,12 @@
 							    <div class="col-sm-10">
 							      <div class="col-sm-6 radio">
 	                                    <label>
-	                                        <input class="status" type="radio" name="gender" value="1" /> 启用
+	                                        <input class="status" type="radio" name="status-s" value="1" > 启用
 	                                    </label>
 	                                </div>
 	                                <div class="col-sm-6 radio">
 	                                    <label>
-	                                        <input class="status" type="radio" name="gender" value="0" /> 禁用
+	                                        <input class="status" type="radio" name="status-s" value="0" > 禁用
 	                                    </label>
 	                                </div>
 							    </div>
@@ -262,12 +280,12 @@
 							    <div class="col-sm-10">
 							        <div class="col-sm-6 radio">
 	                                    <label>
-	                                        <input type="radio" name="gender" value="1" /> 男
+	                                        <input type="radio" name="gender-a" value="1" /> 男
 	                                    </label>
 	                                </div>
 	                                <div class="col-sm-6 radio">
 	                                    <label>
-	                                        <input type="radio" name="gender" value="2" /> 女
+	                                        <input type="radio" name="gender-a" value="2" /> 女
 	                                    </label>
 	                                </div>
 							    </div>

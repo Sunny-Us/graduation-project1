@@ -41,20 +41,20 @@ function update(oid,postData,action){
 $(function(){
   function selectorder(modal,item){
     modal.find('#id').val(item.id);
-      modal.find('#user_id').val(item.user_id.id);
-      modal.find('#user_name').val(item.user_id.name);
-      modal.find('#service_id').val(item.service_id.id);
-      modal.find('#service_name').val(item.service_id.name);
-      modal.find('#worker_id').val(item.worker_id.id);
-      modal.find('#worker_name').val(item.worker_id.name);
-      modal.find('#service_address').val(item.service_address);
-      modal.find('.status:radio[value='+item.status+']').attr('checked','checked');
-      modal.find('#demand').val(item.demand);
-      modal.find('#comment').val(item.comment_id.score);
-      modal.find('#book_time').val(item.book_time);
-      modal.find('#order_time').val(item.order_time);
-      modal.find('#accept_time').val(item.accept_time);
-      modal.find('#finish_time').val(item.finish_time);
+    modal.find('#user_id').val(item.user_id.id);
+    modal.find('#user_name').val(item.user_id.name);
+    modal.find('#service_id').val(item.service_id.id);
+    modal.find('#service_name').val(item.service_id.name);
+    modal.find('#worker_id').val(item.worker_id.id);
+    modal.find('#worker_name').val(item.worker_id.name);
+    modal.find('#service_address').val(item.service_address);
+    modal.find('.status:radio[value='+item.status+']').attr('checked','checked');
+    modal.find('#demand').val(item.demand);
+    modal.find('#comment').val(item.comment_id.score);
+    modal.find('#book_time').val(item.book_time);
+    modal.find('#order_time').val(item.order_time);
+    modal.find('#accept_time').val(item.accept_time);
+    modal.find('#finish_time').val(item.finish_time);
   }
   //----------点击查看详情按钮
   $('#checkout').on('show.bs.modal',function(event){
